@@ -1,0 +1,11 @@
+.containerLayout {
+  border: 2px solid red;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main {
+  flex-grow: 1;
+}
