@@ -1,6 +1,6 @@
 import React from "react";
 import { Cart } from "./cart";
-import styles from "./header.module.css";
+import styles from "./header.module.scss";
 import { Logo } from "./logo";
 import { Menu } from "./menu";
 import { Searcher } from "./searcher";

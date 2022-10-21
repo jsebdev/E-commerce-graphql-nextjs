@@ -4,7 +4,8 @@ import Script from "next/script";
 
 import { gql } from "@apollo/client";
 import client from "../apollo-client";
-import { queryForCountriesMaps } from "ayudasChidas";
+import { Item } from "components/item";
+import utilStyles from "styles/utils.module.scss";
 
 export default function Home({ items }) {
   return (
@@ -26,12 +27,9 @@ export default function Home({ items }) {
         <div>
           <p>This is the home</p>
         </div>
-        <div>
+        <div className={utilStyles.itemsGrid}>
           {items.map((item) => (
-            <div key={item.id}>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
+            <Item key={item.id} item={item} />
           ))}
         </div>
       </div>
