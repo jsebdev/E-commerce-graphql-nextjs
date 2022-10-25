@@ -6,8 +6,15 @@ import { gql } from "@apollo/client";
 import client from "../apollo-client";
 import { Item } from "components/item";
 import utilStyles from "styles/utils.module.scss";
+import { itemGraphqlQueryFields } from "helpers/queries";
+import { wrapper } from "store/store";
+import { connect } from "react-redux";
+import { selectItems, setItems } from "store/itemsSlice";
 
-export default function Home({ items }) {
+function Home({ items }) {
+  // export default function Home({ items }) {
+  console.log("Home component called");
+  console.log("16: items >>>", items);
   return (
     <Layout home>
       <Head>
@@ -37,33 +44,50 @@ export default function Home({ items }) {
   );
 }
 
-export async function getServerSideProps() {
-  const query = gql`
+// export const getServerSideProps = wrapper.getServerSideProps(
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    const query = gql`
     query {
       items {
-        id
-        title
-        subtitle
-        seller {
-          user {
-            id
-            username
-          }
-        }
-        tags {
-          name
-        }
-        description
-        dateCreated
-        dateModified
-        published
+        ${itemGraphqlQueryFields}
       }
     }
   `;
-  const { data } = await client.query({ query });
-  return {
-    props: {
-      items: data.items,
-    },
-  };
-}
+    const { data } = await client.query({ query });
+    store.dispatch(setItems(data.items));
+    // store.dispatch(setItems(["test"]));
+    return {
+      props: {},
+    };
+  }
+);
+
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) => async () => {
+//     store.dispatch(setItems(["test"]));
+//     return {
+//       props: {},
+//     };
+//   }
+// );
+
+export default connect((state) => ({
+  items: selectItems(state),
+}))(Home);
+
+// export async function getServerSideProps() {
+//   const query = gql`
+//     query {
+//       items {
+//         ${itemGraphqlQueryFields}
+//       }
+//     }
+//   `;
+//   const { data } = await client.query({ query });
+//   return {
+//     props: {
+//       items: data.items,
+//     },
+//   };
+// }

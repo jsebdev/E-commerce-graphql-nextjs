@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import util from "util";
 
 export const queryForCountriesMaps = gql`
   query Countries {
@@ -9,3 +10,7 @@ export const queryForCountriesMaps = gql`
     }
   }
 `;
+
+export const printObj = (obj) => {
+  console.log(util.inspect(obj, false, null, true /* enable colors */));
+};

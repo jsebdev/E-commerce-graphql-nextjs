@@ -1,5 +1,34 @@
 .header {
-  border: 2px solid blue;
-  display: flex;
+  border-bottom: 2px solid blue;
+  display: grid;
+  grid-template-columns: 3rem 1fr 3rem 3rem;
   justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+}
+
+.headerItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+$logo-size: 2.5rem;
+
+.logoContainer {
+  width: $logo-size;
+  height: $logo-size;
+  padding: 0.2rem;
+}
+
+$button-size: 2rem;
+.cartContainer {
+  width: $button-size;
+  height: $button-size;
+  padding: 0.2rem;
+}
+.menuButtonContainer {
+  width: $button-size;
+  height: $button-size;
+  padding: 0.2rem;
 }
