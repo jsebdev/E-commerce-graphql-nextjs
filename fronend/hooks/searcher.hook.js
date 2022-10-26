@@ -3,7 +3,8 @@ import client from "apollo-client";
 import { itemGraphqlQueryFields } from "helpers/queries";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setItems } from "store/itemsSlice";
+import { setItems, setSearchText } from "store/searchSlice";
+// import { setSearchText } from "store/searchSlice";
 
 export const useSearcher = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export const useSearcher = () => {
   const handleSearch = async (event) => {
     event.preventDefault();
     console.log("the search is ", search);
+    dispatch(setSearchText(search));
     const query = gql`
     query {
       itemBySearch(searchText:"${search}") {
@@ -25,5 +27,5 @@ export const useSearcher = () => {
     setSearch(event.target.value);
   };
 
-  return { search, handleSearch, changeSearch };
+  return { search, handleSearch, changeSearch, setSearch };
 };

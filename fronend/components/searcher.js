@@ -1,10 +1,16 @@
 import { SlMagnifier } from "react-icons/sl";
 
 import styles from "./header.module.scss";
-import { useSearcher } from "./searcher.hook";
+import { useSearcher } from "hooks/searcher.hook";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import { selectSearchText } from "store/searchSlice";
 
-export const Searcher = () => {
-  const { search, handleSearch, changeSearch } = useSearcher();
+export const SearcherWithoutConnection = ({ searchText }) => {
+  const { search, handleSearch, changeSearch, setSearch } = useSearcher();
+  useEffect(() => {
+    setSearch(searchText);
+  }, [searchText]);
   return (
     <div className={styles.headerItem}>
       <form onSubmit={handleSearch}>
@@ -21,3 +27,7 @@ export const Searcher = () => {
     </div>
   );
 };
+
+export const Searcher = connect((state) => ({
+  searchText: selectSearchText(state),
+}))(SearcherWithoutConnection);

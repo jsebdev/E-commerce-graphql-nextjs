@@ -1,6 +1,5 @@
 import { Layout } from "components/layout";
 import Head from "next/head";
-import Script from "next/script";
 
 import { gql } from "@apollo/client";
 import client from "../apollo-client";
@@ -9,12 +8,13 @@ import utilStyles from "styles/utils.module.scss";
 import { itemGraphqlQueryFields } from "helpers/queries";
 import { wrapper } from "store/store";
 import { connect } from "react-redux";
-import { selectItems, setItems } from "store/itemsSlice";
+import { selectItems, selectSearchText, setItems } from "store/searchSlice";
+import { useEffect } from "react";
 
-function Home({ items }) {
-  // export default function Home({ items }) {
-  console.log("Home component called");
-  // console.log("16: items >>>", items);
+function Home({ items, searchText }) {
+  useEffect(() => {
+    console.log("searchText: ", searchText);
+  }, []);
   return (
     <Layout home>
       <Head>
@@ -65,6 +65,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 export default connect((state) => ({
   items: selectItems(state),
+  searchText: selectSearchText(state),
 }))(Home);
 
 // export async function getServerSideProps() {
