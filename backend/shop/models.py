@@ -25,9 +25,7 @@ class Item(models.Model):
 
     title = models.CharField(max_length=100, unique=True)
     subtitle = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=255, unique=True)
     description = models.TextField()
-    meta_description = models.CharField(max_length=100, blank=True)
     date_created = models.DateTimeField()
     date_modified = models.DateTimeField()
     publish_date = models.DateTimeField(blank=True, null=True)
@@ -36,9 +34,22 @@ class Item(models.Model):
     seller = models.ForeignKey(Profile, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, related_name='items')
 
+    def __str__(self):
+        return f'{self.id} {self.title}'
+
     def save(self, *args, **kwargs):
         '''On save, update timestamps'''
         if not self.id:
             self.date_created = timezone.now()
         self.date_modified = timezone.now()
         return super(Item, self).save(*args, **kwargs)
+
+    def exits(self):
+        print('checking if item exists')
+        print(self.id)
+        return self.DoesNotExist()
+
+
+# class Image(models.Model):
+#     name = models.CharField(max_length=50, default=None)
+#     img = models.ImageField(upload_to='images/', default=None)
