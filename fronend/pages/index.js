@@ -14,30 +14,21 @@ import { selectItems, setItems } from "store/itemsSlice";
 function Home({ items }) {
   // export default function Home({ items }) {
   console.log("Home component called");
-  console.log("16: items >>>", items);
+  // console.log("16: items >>>", items);
   return (
     <Layout home>
       <Head>
         <title>Next Django E-commerce baby</title>
         <link rel="icon" href="/favicon.ico" />
-        <Script
-          src="https://connect.facebook.net/en_US/sdk.js"
-          strategy="lazyOnload"
-          onLoad={() =>
-            console.log(`script loaded correctly, window.FB has been populated`)
-          }
-        />
       </Head>
 
       <div>
         <h1 className="title">The E-commerce</h1>
-        <div>
-          <p>This is the home</p>
-        </div>
         <div className={utilStyles.itemsGrid}>
           {items.map((item) => (
             <Item key={item.id} item={item} />
           ))}
+          {items.length === 0 && <p>No items found</p>}
         </div>
       </div>
     </Layout>

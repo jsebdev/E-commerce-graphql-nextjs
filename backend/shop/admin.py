@@ -16,10 +16,10 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     model = Item
-    list_display = ('id', 'title', 'subtitle', 'slug',
+    list_display = ('id', 'title', 'subtitle',
                     'publish_date', 'published')
     list_filter = ('publish_date', 'published')
-    list_editable = ('title', 'subtitle', 'slug', 'publish_date', 'published')
+    list_editable = ('title', 'subtitle', 'publish_date', 'published')
     search_fields = ('title', 'description', 'slug', 'subtitle')
     prepopulated_fields = {'slug': ('title', 'subtitle')}
     date_hierarchy = 'publish_date'
