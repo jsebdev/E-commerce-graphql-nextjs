@@ -40,46 +40,19 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     const query = gql`
     query {
-      items {
+      items (filter:true, published:true) {
         ${itemGraphqlQueryFields}
       }
     }
   `;
     const { data } = await client.query({ query });
     store.dispatch(setItems(data.items));
-    // store.dispatch(setItems(["test"]));
     return {
       props: {},
     };
   }
 );
-
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) => async () => {
-//     store.dispatch(setItems(["test"]));
-//     return {
-//       props: {},
-//     };
-//   }
-// );
-
 export default connect((state) => ({
   items: selectItems(state),
   searchText: selectSearchText(state),
 }))(Home);
-
-// export async function getServerSideProps() {
-//   const query = gql`
-//     query {
-//       items {
-//         ${itemGraphqlQueryFields}
-//       }
-//     }
-//   `;
-//   const { data } = await client.query({ query });
-//   return {
-//     props: {
-//       items: data.items,
-//     },
-//   };
-// }

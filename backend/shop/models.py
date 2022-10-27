@@ -21,14 +21,13 @@ class Tag(models.Model):
 
 class Item(models.Model):
     class Meta:
-        ordering = ['-publish_date']
+        ordering = ['-date_created']
 
     title = models.CharField(max_length=100, unique=True)
     subtitle = models.CharField(max_length=100)
     description = models.TextField()
     date_created = models.DateTimeField()
     date_modified = models.DateTimeField()
-    publish_date = models.DateTimeField(blank=True, null=True)
     published = models.BooleanField(default=False)
 
     seller = models.ForeignKey(Profile, on_delete=models.PROTECT)
@@ -43,11 +42,6 @@ class Item(models.Model):
             self.date_created = timezone.now()
         self.date_modified = timezone.now()
         return super(Item, self).save(*args, **kwargs)
-
-    def exits(self):
-        print('checking if item exists')
-        print(self.id)
-        return self.DoesNotExist()
 
 
 # class Image(models.Model):

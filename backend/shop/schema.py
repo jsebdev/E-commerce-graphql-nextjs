@@ -9,14 +9,18 @@ from . import models
 
 
 class Query(graphene.ObjectType):
-    items = graphene.List(ItemType)
+    items = graphene.List(ItemType, filter=graphene.Boolean(),
+                          published=graphene.Boolean())
     user_by_username = graphene.Field(SellerType, username=graphene.String())
     item_by_author = graphene.List(ItemType, username=graphene.String())
     item_by_tag = graphene.List(ItemType, tag=graphene.String())
     item_by_search = graphene.List(ItemType, searchText=graphene.String())
 
-    def resolve_items(root, info):
-        return models.Item.objects.prefetch_related().select_related('seller').all()
+    def resolve_items(root, info, filter=False, published=False):
+        items = models.Item.objects.prefetch_related().select_related('seller')
+        if filter is True:
+            return items.filter(published=published)
+        return items.all()
 
     def resolve_user_by_username(root, info, username):
         return models.Profile.objects.select_related('seller').get(user__username=username)

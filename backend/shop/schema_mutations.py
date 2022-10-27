@@ -14,7 +14,6 @@ class ItemCreation(graphene.Mutation):
         description = graphene.String()
         date_created = graphene.DateTime()
         date_modified = graphene.DateTime()
-        publish_date = graphene.DateTime()
         published = graphene.Boolean()
 
         seller = graphene.ID(required=True)

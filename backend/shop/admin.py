@@ -17,10 +17,9 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     model = Item
-    list_display = ('id', 'title', 'subtitle',
-                    'publish_date', 'published')
-    list_filter = ('publish_date', 'published')
-    list_editable = ('title', 'subtitle', 'publish_date', 'published')
+    list_display = ('id', 'title', 'subtitle', 'published')
+    list_filter = ('published',)
+    list_editable = ('title', 'subtitle', 'published')
     search_fields = ('title', 'description', 'subtitle')
-    date_hierarchy = 'publish_date'
+    date_hierarchy = 'date_created'
     save_on_top: bool = True
