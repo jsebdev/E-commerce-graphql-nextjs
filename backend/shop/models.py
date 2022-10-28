@@ -1,15 +1,15 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+class Profile(AbstractUser):
+    email = models.EmailField(
+        max_length=255, unique=True, blank=False, verbose_name='email')
+    USERNAME_FIELD: str = 'username'
+    EMAIL_FIELD: str = 'email'
     bio = models.CharField(blank=True, max_length=500)
-
-    def __str__(self):
-        return f'user {self.user.get_username()}'
 
 
 class Tag(models.Model):

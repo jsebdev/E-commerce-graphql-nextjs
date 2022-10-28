@@ -1,14 +1,13 @@
 from django.db.models import Q
 import graphene
+from graphql_auth.schema import UserQuery, MeQuery
 
-from shop.schema_mutations import ItemCreation
-
+from .schema_mutations import ItemCreation, AuthMutation
 from .schema_types import ItemType, SellerType, TagType, UserType
-
 from . import models
 
 
-class Query(graphene.ObjectType):
+class Query(UserQuery, MeQuery, graphene.ObjectType):
     items = graphene.List(ItemType, filter=graphene.Boolean(),
                           published=graphene.Boolean())
     user_by_username = graphene.Field(SellerType, username=graphene.String())
@@ -37,7 +36,7 @@ class Query(graphene.ObjectType):
         return objects
 
 
-class Mutations(graphene.ObjectType):
+class Mutations(AuthMutation, graphene.ObjectType):
     create_item = ItemCreation.Field()
 
 

@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
     "graphene"
-  ]
+  ],
+  "python.formatting.provider": "autopep8"
 }
