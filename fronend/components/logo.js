@@ -8,18 +8,16 @@ export const Logo = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   return (
-    <div className={styles.headerItem}>
-      <div
-        className={styles.logoContainer}
-        onClick={() => resetWebsite(dispatch, router)}
-      >
-        <Image
-          layout="responsive"
-          src="/images/store_128.png"
-          width={10}
-          height={10}
-        />
-      </div>
+    <div
+      className={styles.logoContainer}
+      onClick={() => resetWebsite(dispatch, router)}
+    >
+      <Image
+        layout="responsive"
+        src="/images/store_128.png"
+        width={10}
+        height={10}
+      />
     </div>
   );
 };

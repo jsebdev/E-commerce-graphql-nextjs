@@ -2,17 +2,12 @@
   z-index: 10;
 }
 .header {
-  border-bottom: 2px solid blue;
-  background-color: #aaf;
   display: grid;
-  grid-template-columns: 3rem 1fr 3rem 3rem;
-  justify-content: space-between;
-  align-items: center;
+  grid-template-columns: 3rem 1fr 3rem 3rem 3rem;
   padding-inline: 1rem;
-  // position: relative;
-  // @media screen (max) {
-    
-  // }
+  align-items: center;
+  justify-items: center;
+  padding-block: 0.5rem;
 }
 
 .headerItem {
@@ -30,16 +25,13 @@ $logo-size: 2.5rem;
 }
 
 $button-size: 2rem;
-.cartContainer {
-  width: $button-size;
-  height: $button-size;
-  padding: 0.2rem;
-}
-.menuButtonContainer {
+.smallHeaderButton {
   width: $button-size;
   height: $button-size;
   padding: 0.2rem;
   cursor: pointer;
+}
+.menuButtonContainer {
   position: relative;
 }
 
