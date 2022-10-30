@@ -3,10 +3,7 @@ export const itemGraphqlQueryFields = `
   title
   subtitle
   seller {
-    user {
-      id
-      username
-    }
+    username
   }
   tags {
     name

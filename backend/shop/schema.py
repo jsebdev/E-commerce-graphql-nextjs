@@ -16,6 +16,7 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
     item_by_search = graphene.List(ItemType, searchText=graphene.String())
 
     def resolve_items(root, info, filter=False, published=False):
+        print('resolving items')
         items = models.Item.objects.prefetch_related().select_related('seller')
         if filter is True:
             return items.filter(published=published)

@@ -45,13 +45,19 @@ export const getServerSideProps = wrapper.getServerSideProps(
       }
     }
   `;
-    const { data } = await client.query({ query });
-    store.dispatch(setItems(data.items));
+    try {
+      const { data } = await client.query({ query });
+      store.dispatch(setItems(data.items));
+    } catch (e) {
+      console.log("Error: ", e);
+      console.log("Error: ", e?.networkError?.result?.errors);
+    }
     return {
       props: {},
     };
   }
 );
+
 export default connect((state) => ({
   items: selectItems(state),
   searchText: selectSearchText(state),

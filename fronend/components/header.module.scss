@@ -1,10 +1,18 @@
+.headerWrapper{
+  z-index: 10;
+}
 .header {
   border-bottom: 2px solid blue;
+  background-color: #aaf;
   display: grid;
   grid-template-columns: 3rem 1fr 3rem 3rem;
   justify-content: space-between;
   align-items: center;
   padding-inline: 1rem;
+  // position: relative;
+  // @media screen (max) {
+    
+  // }
 }
 
 .headerItem {
@@ -31,4 +39,7 @@ $button-size: 2rem;
   width: $button-size;
   height: $button-size;
   padding: 0.2rem;
+  cursor: pointer;
+  position: relative;
 }
+

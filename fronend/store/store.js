@@ -1,13 +1,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { itemSlice } from "./searchSlice";
-// import { searchSlice } from "./searchSlice";
 import { createWrapper } from "next-redux-wrapper";
+import { userSlice } from "./userSlice";
 
 const makeStore = () =>
   configureStore({
     reducer: {
       [itemSlice.name]: itemSlice.reducer,
-      // [searchSlice.name]: searchSlice.reducer,
+      [userSlice.name]: userSlice.reducer,
     },
     devTools: true,
   });

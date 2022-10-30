@@ -1,18 +1,38 @@
 import React from "react";
-import Image from "next/image";
-import styles from "./header.module.scss";
+import Link from "next/link";
+import cn from "classnames";
+import styles from "./menu.module.scss";
+import { selectToken } from "store/userSlice";
+import { useSelector } from "react-redux";
 
-export const Menu = () => {
+export const Menu = ({ showMenu }) => {
+  const token = useSelector(selectToken);
   return (
-    <div className={styles.headerItem}>
-      <div className={styles.menuButtonContainer}>
-        <Image
-          layout="responsive"
-          src="/images/cheeseburger_128.png"
-          width={10}
-          height={10}
-        />
-      </div>
+    <div
+      className={cn({
+        [styles.menuWrapper]: true,
+        [styles.menuContainerOpen]: showMenu,
+      })}
+    >
+      <ul className={styles.menu}>
+        {token ? (
+          <MenuItem>Logout</MenuItem>
+        ) : (
+          <>
+            <Link href="/login">
+              <MenuItem>Login</MenuItem>
+            </Link>
+            <MenuItem>mas cosas</MenuItem>
+            <MenuItem>siii</MenuItem>
+          </>
+        )}
+      </ul>
     </div>
   );
 };
+
+// React.forwardRef is used here to avoid a bug in Next.js
+// for when a component is wrapped in a Link component
+const MenuItem = React.forwardRef(({ children }, ref) => {
+  return <li ref={ref}>{children}</li>;
+});

@@ -22,10 +22,10 @@ export const itemSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log("HYDRATE action called in items");
-      console.log("25: action >>>", action);
-      console.log("26: state.items >>>", state.items);
-      console.log("26: state.searchText >>>", state.searchText);
+      // console.log("HYDRATE action called in items");
+      // console.log("25: action >>>", action);
+      // console.log("26: state.items >>>", state.items);
+      // console.log("26: state.searchText >>>", state.searchText);
       if (state.searchText !== "") return;
       return {
         ...state,

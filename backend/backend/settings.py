@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    'corsheaders',
     'graphene_django',
     "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
     "graphql_auth",
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,7 +130,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # todo activate cors
-CORS_ORIGIN_ALLOW_ALL = False
+# CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = ('http://localhost:8080',)
 
 AUTH_USER_MODEL = "shop.Profile"
@@ -163,3 +164,5 @@ GRAPHQL_JWT = {
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+APPEND_SLASH = False
