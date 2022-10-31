@@ -1,0 +1,35 @@
+@import "styles/variables";
+
+.searcher {
+  grid-column: 1/5;
+  grid-row: 2;
+  width: 100%;
+  max-width: 600px;
+  @media screen and (min-width: $tablet-width) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  form{
+    width: 100%;
+    display: flex;
+    .searcherContainer{
+      flex-grow: 1;
+      align-items: center;
+      border-radius: 0.2rem;
+      input {
+        border: none;
+        flex-grow: 1;
+        background-color: transparent;
+        height: 100%;
+        padding-left: 0.5rem;
+        &:focus {
+          outline: none;
+        }
+      }
+      button {
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
+  }
+}

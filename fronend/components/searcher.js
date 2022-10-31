@@ -1,10 +1,21 @@
-import { SlMagnifier } from "react-icons/sl";
-
-import styles from "./header.module.scss";
+import headerStyles from "./header.module.scss";
+import searcherStyles from "./searcher.module.scss";
 import { useSearcher } from "hooks/searcher.hook";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { selectSearchText } from "store/searchSlice";
+import cn from "classnames";
+import {
+  Center,
+  Group,
+  GroupedTransition,
+  TextInput,
+  UnstyledButton,
+  useMantineTheme,
+} from "@mantine/core";
+
+import { IconBuildingStore, IconSearch } from "@tabler/icons";
+import { THEMES } from "helpers/strings";
 
 export const SearcherWithoutConnection = ({ searchText }) => {
   const { search, handleSearch, changeSearch, setSearch } = useSearcher();
@@ -12,19 +23,65 @@ export const SearcherWithoutConnection = ({ searchText }) => {
     setSearch(searchText);
   }, [searchText]);
   return (
-    <div className={styles.headerItem}>
+    <Group className={cn(headerStyles.headerItem, searcherStyles.searcher)}>
       <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search"
-          value={search}
-          onChange={changeSearch}
-        />
-        <button type="submit">
-          <SlMagnifier />
-        </button>
+        <SearcherInput value={search} onChange={changeSearch} />
       </form>
-    </div>
+    </Group>
+  );
+};
+
+const SearcherInput = ({ value, onChange }) => {
+  const theme = useMantineTheme();
+  const visibleColor =
+    theme.colorScheme === THEMES.dark
+      ? theme.colors.dark[0]
+      : theme.colors.dark[9];
+  const nonVisibleColor =
+    theme.colorScheme === THEMES.dark
+      ? theme.colors.dark[5]
+      : theme.colors.dark[0];
+  return (
+    <Group
+      spacing={0}
+      className={searcherStyles.searcherContainer}
+      sx={(theme) => ({
+        border: `1px solid ${
+          theme.colorScheme === THEMES.dark
+            ? theme.colors.dark[3]
+            : theme.colors.dark[5]
+        }`,
+      })}
+    >
+      <Center p="xs">
+        <IconBuildingStore size={18} />
+      </Center>
+      <input
+        type="text"
+        placeholder="Search"
+        value={value}
+        onChange={onChange}
+        className={searcherStyles.searcherInput}
+      />
+      <UnstyledButton
+        type="submit"
+        sx={(theme) => ({
+          borderLeft: `1px solid ${
+            theme.colorScheme === THEMES.dark
+              ? theme.colors.dark[4]
+              : theme.colors.gray[4]
+          }`,
+        })}
+        disabled={value.length === 0}
+      >
+        <Center p="sm">
+          <IconSearch
+            size={18}
+            color={value.length > 0 ? visibleColor : nonVisibleColor}
+          />
+        </Center>
+      </UnstyledButton>
+    </Group>
   );
 };
 

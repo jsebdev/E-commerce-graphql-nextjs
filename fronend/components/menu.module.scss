@@ -1,34 +1,58 @@
+@import "styles/variables";
+
+.menuButtonContainer {
+  position: relative;
+}
 
 .menuWrapper {
-  // width: 80vw;
   position: absolute;
-  // left: 0;
-  right: 0;
-  top: 100%;
+  right: -4rem;
+  top: 2.6rem;
   z-index: 11;
   transition: all 0.5s ease-in-out;
   overflow: hidden;
   cursor: auto;
-}
-
-.menu {
   width: max-content;
-  padding-block: 0.5rem;
-  padding-inline: 1rem;
+  border-radius: 0.5rem;
+}
+.menu {
+  padding-block: 0.2rem;
+  padding-inline: 0;
   li {
     list-style: none;
-    padding-block: 0.5rem;
-    padding-inline: 1rem;
+    padding-block: 0.1rem;
+    margin-inline: 0.5rem;
     cursor: pointer;
-    &:hover {
-      background-color: #aaf;
-    }
   }
 }
 
-.menuContainerOpen {
-  // bottom: -100%;
-  // bottom: initial;
-  // top: 100%;
-  // height: fit-content;
+.closeMenuLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background: transparent;
+}
+
+.onTablet {
+  display: none;
+}
+
+@media screen and (min-width: $tablet-width) {
+  .menuButtonContainer {
+    display: none;
+  }
+  .onTablet {
+    display: block;
+    grid-column: 1/5;
+    grid-row: 2;
+    width: 100%;
+    ul {
+      display: flex;
+      flex-direction: row;
+      margin: 0;
+    }
+  }
 }
