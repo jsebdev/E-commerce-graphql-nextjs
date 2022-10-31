@@ -28,7 +28,6 @@ export const useLogin = (dispatch, router) => {
       dispatch(setUsername(user.username));
       router.push("/profile");
     }
-    debugger;
     return { success, errors };
   };
   return { handleLogin };

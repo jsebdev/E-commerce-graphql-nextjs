@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
   token: null,
@@ -14,6 +15,14 @@ export const userSlice = createSlice({
     },
     setUsername: (state, action) => {
       state.username = action.payload;
+    },
+  },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.user,
+      };
     },
   },
 });
