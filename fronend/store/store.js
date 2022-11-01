@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { itemSlice } from "./slices/searchSlice";
+import { searchSlice } from "./slices/searchSlice";
 import {
   nextReduxCookieMiddleware,
   wrapMakeStore,
@@ -11,14 +11,19 @@ import { loaderSlice } from "./slices/loaderSlice";
 const makeStore = wrapMakeStore(() =>
   configureStore({
     reducer: {
-      [itemSlice.name]: itemSlice.reducer,
+      [searchSlice.name]: searchSlice.reducer,
       [userSlice.name]: userSlice.reducer,
       [loaderSlice.name]: loaderSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().prepend(
         nextReduxCookieMiddleware({
-          subtrees: [`${userSlice.name}.token`, `${userSlice.name}.username`],
+          // subtrees: [`${userSlice.name}.token`, `${userSlice.name}.username`],
+          subtrees: [
+            `${userSlice.name}.token`,
+            `${userSlice.name}.username`,
+            searchSlice.name,
+          ],
         })
       ),
     devTools: true,

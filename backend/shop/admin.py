@@ -18,7 +18,7 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     model = Item
-    list_display = ('id', 'title', 'subtitle', 'published')
+    list_display = ('id', 'title', 'subtitle', 'published', 'seller')
     list_filter = ('published',)
     list_editable = ('title', 'subtitle', 'published')
     search_fields = ('title', 'description', 'subtitle')

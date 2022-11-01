@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import client from "apollo-client";
+import { client } from "apolloClient";
 import { itemGraphqlQueryFields } from "helpers/queries";
 import React from "react";
 import { useDispatch } from "react-redux";

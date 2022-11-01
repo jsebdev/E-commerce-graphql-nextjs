@@ -1,6 +1,6 @@
 import { setToken, setUsername } from "store/slices/userSlice";
 import { gql } from "@apollo/client";
-import client from "apollo-client";
+import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 
 export const useLogin = (dispatch, router) => {

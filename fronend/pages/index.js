@@ -2,12 +2,12 @@ import { Layout } from "components/layout";
 import Head from "next/head";
 
 import { gql } from "@apollo/client";
-import client from "../apollo-client";
+import { client } from "../apolloClient";
 import { Item } from "components/item";
 import utilStyles from "styles/utils.module.scss";
 import { itemGraphqlQueryFields } from "helpers/queries";
 import { wrapper } from "store/store";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import {
   selectItems,
   selectSearchText,
@@ -16,10 +16,12 @@ import {
 import { useEffect } from "react";
 import { selectUsername } from "store/slices/userSlice";
 import { Title } from "@mantine/core";
+import { ItemsGrid } from "components/itemsGrid";
 
 function Home({ items, searchText, username }) {
   useEffect(() => {
     console.log("searchText: ", searchText);
+    console.log("23: items >>>", items);
   }, []);
   return (
     <Layout home>
@@ -27,25 +29,21 @@ function Home({ items, searchText, username }) {
         <title>Next Django E-commerce baby</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <div>
         <Title order={1} align="center" my={10}>
           {username ? `Welcome ${username}` : "The E-commerce"}
         </Title>
-        <div className={utilStyles.itemsGrid}>
-          {items.map((item) => (
-            <Item key={item.id} item={item} />
-          ))}
-          {items.length === 0 && <p>No items found</p>}
-        </div>
+        <ItemsGrid items={items} />
       </div>
     </Layout>
   );
 }
 
-// export const getServerSideProps = wrapper.getServerSideProps(
 export const getServerSideProps = wrapper.getServerSideProps(
+  // export const getStaticProps = wrapper.getStaticProps(
   (store) => async () => {
+    // const items = useSelector(selectItems);
+    // console.log("50: items >>>", items);
     const query = gql`
     query {
       items (filter:true, published:true) {
@@ -55,6 +53,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   `;
     try {
       const { data } = await client.query({ query });
+      console.log("the items: ", data.items);
       store.dispatch(setItems(data.items));
     } catch (e) {
       console.log("Error: ", e);

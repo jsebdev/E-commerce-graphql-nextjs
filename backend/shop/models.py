@@ -24,7 +24,7 @@ class Item(models.Model):
         ordering = ['-date_created']
 
     title = models.CharField(max_length=100, unique=True)
-    subtitle = models.CharField(max_length=100)
+    subtitle = models.CharField(max_length=100, default="")
     description = models.TextField()
     date_created = models.DateTimeField()
     date_modified = models.DateTimeField()

@@ -7,7 +7,7 @@ const initialState = {
 };
 
 // Actual Slice
-export const itemSlice = createSlice({
+export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
@@ -35,7 +35,7 @@ export const itemSlice = createSlice({
   },
 });
 
-export const { setItems, setSearchText } = itemSlice.actions;
+export const { setItems, setSearchText } = searchSlice.actions;
 
 export const selectItems = (state) => state.search.items;
 export const selectSearchText = (state) => state.search.searchText;

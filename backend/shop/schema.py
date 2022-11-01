@@ -11,7 +11,7 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
     items = graphene.List(ItemType, filter=graphene.Boolean(),
                           published=graphene.Boolean())
     user_by_username = graphene.Field(SellerType, username=graphene.String())
-    item_by_author = graphene.List(ItemType, username=graphene.String())
+    items_by_seller = graphene.List(ItemType, username=graphene.String())
     item_by_tag = graphene.List(ItemType, tag=graphene.String())
     item_by_search = graphene.List(ItemType, searchText=graphene.String())
 
@@ -21,6 +21,9 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
         if filter is True:
             return items.filter(published=published)
         return items.all()
+
+    def resolve_items_by_seller(root, info, username):
+        return models.Item.objects.prefetch_related('tags').select_related('seller').filter(seller__username=username)
 
     def resolve_user_by_username(root, info, username):
         return models.Profile.objects.select_related('seller').get(user__username=username)
@@ -33,7 +36,7 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
                                                                                                Q(subtitle__icontains=searchText) |
                                                                                                Q(description__icontains=searchText) |
                                                                                                Q(tags__name__icontains=searchText) |
-                                                                                               Q(seller__user__username__icontains=searchText)).distinct()
+                                                                                               Q(seller__username__icontains=searchText)).distinct()
         return objects
 
 
