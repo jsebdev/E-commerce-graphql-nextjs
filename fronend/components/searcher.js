@@ -3,7 +3,7 @@ import searcherStyles from "./searcher.module.scss";
 import { useSearcher } from "hooks/searcher.hook";
 import { connect } from "react-redux";
 import { useEffect } from "react";
-import { selectSearchText } from "store/searchSlice";
+import { selectSearchText } from "store/slices/searchSlice";
 import cn from "classnames";
 import {
   Center,

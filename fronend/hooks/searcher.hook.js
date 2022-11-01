@@ -3,7 +3,7 @@ import client from "apollo-client";
 import { itemGraphqlQueryFields } from "helpers/queries";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setItems, setSearchText } from "store/searchSlice";
+import { setItems, setSearchText } from "store/slices/searchSlice";
 // import { setSearchText } from "store/searchSlice";
 
 export const useSearcher = () => {

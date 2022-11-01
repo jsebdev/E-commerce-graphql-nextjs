@@ -2,14 +2,10 @@ import Head from "next/head";
 import styles from "./layout.module.scss";
 import { Header } from "./header";
 import { Footer } from "./footer";
-// import { selectAuthState, setAuthState } from "store/itemsSlice";
-// import { useSelector, useDispatch } from "react-redux";
 
 export const siteTitle = "Awesome Website";
 
 export const Layout = ({ children }) => {
-  // const authState = useSelector(selectAuthState);
-  // const dispatch = useDispatch();
   return (
     <div className={styles.containerLayout}>
       <Head>
@@ -26,16 +22,6 @@ export const Layout = ({ children }) => {
       <Header></Header>
       <main className={styles.main}>{children}</main>
       <Footer></Footer>
-      {/* <div>{authState ? "Logged in" : "Not Logged In"}</div>
-      <button
-        onClick={() =>
-          authState
-            ? dispatch(setAuthState(false))
-            : dispatch(setAuthState(true))
-        }
-      >
-        {authState ? "Logout" : "LogIn"}
-      </button> */}
     </div>
   );
 };

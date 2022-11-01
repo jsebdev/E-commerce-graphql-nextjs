@@ -30,3 +30,4 @@ export const userSlice = createSlice({
 export const { setToken, setUsername } = userSlice.actions;
 
 export const selectToken = (state) => state.user.token;
+export const selectUsername = (state) => state.user.username;

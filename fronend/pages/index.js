@@ -8,10 +8,16 @@ import utilStyles from "styles/utils.module.scss";
 import { itemGraphqlQueryFields } from "helpers/queries";
 import { wrapper } from "store/store";
 import { connect } from "react-redux";
-import { selectItems, selectSearchText, setItems } from "store/searchSlice";
+import {
+  selectItems,
+  selectSearchText,
+  setItems,
+} from "store/slices/searchSlice";
 import { useEffect } from "react";
+import { selectUsername } from "store/slices/userSlice";
+import { Title } from "@mantine/core";
 
-function Home({ items, searchText }) {
+function Home({ items, searchText, username }) {
   useEffect(() => {
     console.log("searchText: ", searchText);
   }, []);
@@ -23,7 +29,9 @@ function Home({ items, searchText }) {
       </Head>
 
       <div>
-        <h1 className="title">The E-commerce</h1>
+        <Title order={1} align="center" my={10}>
+          {username ? `Welcome ${username}` : "The E-commerce"}
+        </Title>
         <div className={utilStyles.itemsGrid}>
           {items.map((item) => (
             <Item key={item.id} item={item} />
@@ -61,4 +69,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
 export default connect((state) => ({
   items: selectItems(state),
   searchText: selectSearchText(state),
+  username: selectUsername(state),
 }))(Home);

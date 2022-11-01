@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import cn from "classnames";
 import menuStyles from "./menu.module.scss";
-import { selectToken } from "store/userSlice";
+import { selectToken } from "store/slices/userSlice";
 import { useSelector } from "react-redux";
 import { Center, Paper, useMantineTheme } from "@mantine/core";
 import { THEMES } from "helpers/strings";
@@ -38,7 +38,12 @@ export const Menu = ({ showMenu = false, onTablet }) => {
     >
       <ul className={menuStyles.menu}>
         {token ? (
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          <>
+            <Link href="/profile">
+              <MenuItem>My Profile</MenuItem>
+            </Link>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </>
         ) : (
           <>
             <Link href="/login">

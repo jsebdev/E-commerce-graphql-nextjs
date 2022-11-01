@@ -6,6 +6,7 @@ import { THEMES, THEME_COOKIE } from "helpers/strings";
 import { darkTheme, lightTheme } from "helpers/themes";
 import { useEffect } from "react";
 import cookies from "next-cookies";
+import { MyLoader } from "components/myLoader";
 
 export default function App({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
@@ -33,6 +34,7 @@ export default function App({ Component, ...rest }) {
       <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
         <Provider store={store}>
           <Component {...props.pageProps} />
+          <MyLoader />
         </Provider>
       </MantineProvider>
     </ColorSchemeProvider>

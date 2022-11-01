@@ -1,10 +1,12 @@
-import { setToken, setUsername } from "store/userSlice";
+import { setToken, setUsername } from "store/slices/userSlice";
 import { gql } from "@apollo/client";
 import client from "apollo-client";
+import { setLoading } from "store/slices/loaderSlice";
 
 export const useLogin = (dispatch, router) => {
   const handleLogin = async (e) => {
     e.preventDefault();
+    dispatch(setLoading(true));
     const username = e.target.username.value;
     const password = e.target.password.value;
     const mutation = gql`
@@ -28,6 +30,7 @@ export const useLogin = (dispatch, router) => {
       dispatch(setUsername(user.username));
       router.push("/profile");
     }
+    dispatch(setLoading(false));
     return { success, errors };
   };
   return { handleLogin };
@@ -35,9 +38,11 @@ export const useLogin = (dispatch, router) => {
 
 export const useLogout = (dispatch, router) => {
   const handleLogout = () => {
+    dispatch(setLoading(true));
     dispatch(setToken(null));
     dispatch(setUsername(null));
     router.push("/");
+    dispatch(setLoading(false));
   };
   return { handleLogout };
 };

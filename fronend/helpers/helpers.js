@@ -1,4 +1,4 @@
-import { setSearchText } from "store/searchSlice";
+import { setSearchText } from "store/slices/searchSlice";
 
 export const resetWebsite = (dispatch, router) => {
   dispatch(setSearchText(""));
