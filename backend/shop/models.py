@@ -25,7 +25,7 @@ class Item(models.Model):
 
     title = models.CharField(max_length=100, unique=True)
     subtitle = models.CharField(max_length=100, default="")
-    description = models.TextField()
+    description = models.TextField(default="")
     date_created = models.DateTimeField()
     date_modified = models.DateTimeField()
     published = models.BooleanField(default=False)

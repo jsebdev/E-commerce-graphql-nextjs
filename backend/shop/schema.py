@@ -15,6 +15,10 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
     item_by_tag = graphene.List(ItemType, tag=graphene.String())
     items_by_search = graphene.List(ItemType, searchText=graphene.String())
     item_by_id = graphene.Field(ItemType, id=graphene.ID())
+    tags = graphene.List(TagType)
+
+    def resolve_tags(root, info):
+        return models.Tag.objects.all()
 
     def resolve_items(root, info, filter=False, published=False):
         print('resolving items')
