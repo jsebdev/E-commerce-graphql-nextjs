@@ -1,6 +1,6 @@
 import React from "react";
 import { Center } from "@mantine/core";
-import { hoverButtonEffect } from "./componentHelpers/hoverButton";
+import { hoverButtonEffect } from "./componentHelpers/hoverButtonEffect";
 
 export const HeaderButton = ({ children, className }) => {
   return (

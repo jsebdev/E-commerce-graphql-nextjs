@@ -1,5 +1,5 @@
 import { Layout } from "components/layout";
-import { useLogin } from "hooks/login.hook";
+import { useLogin } from "hooksAndLogic/login.hook";
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch } from "react-redux";

@@ -2,8 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
-  token: null,
-  username: null,
+  user: {
+    // id: null,
+    token: null,
+    username: null,
+  },
   userItems: [],
 };
 
@@ -11,11 +14,8 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setToken: (state, action) => {
-      state.token = action.payload;
-    },
-    setUsername: (state, action) => {
-      state.username = action.payload;
+    setUser: (state, action) => {
+      state.user = action.payload;
     },
     setUserItems: (state, action) => {
       state.userItems = action.payload;
@@ -31,8 +31,10 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setToken, setUsername, setUserItems } = userSlice.actions;
+export const { setUserItems, setUser } = userSlice.actions;
 
-export const selectToken = (state) => state.user.token;
-export const selectUsername = (state) => state.user.username;
+export const selectUser = (state) => state.user.user;
+export const selectUsername = (state) => state.user.user.username;
+export const selectToken = (state) => state.user.user.token;
+// export const selectUserId = (state) => state.user.user.id;
 export const selectUserItems = (state) => state.user.userItems;

@@ -1,7 +1,7 @@
 import React from "react";
 import headerStyles from "./header.module.scss";
 import searcherStyles from "./searcher.module.scss";
-import { useSearcher } from "hooks/searcher.hook";
+import { useSearcher } from "hooksAndLogic/searcher.hook";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { selectSearchText } from "store/slices/searchSlice";

@@ -6,8 +6,8 @@ import { selectToken } from "store/slices/userSlice";
 import { useSelector } from "react-redux";
 import { Center, useMantineTheme } from "@mantine/core";
 import { THEMES_NAMES } from "helpers/strings";
-import { hoverButtonEffect } from "./componentHelpers/hoverButton";
-import { useLogout } from "hooks/login.hook";
+import { hoverButtonEffect } from "./componentHelpers/hoverButtonEffect";
+import { useLogout } from "hooksAndLogic/login.hook";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 

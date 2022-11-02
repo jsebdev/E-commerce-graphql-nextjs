@@ -1,27 +1,37 @@
-// import { UserChecker } from "components/userChecker";
 import { useRouter } from "next/router";
 import React from "react";
 import { selectToken, selectUsername } from "store/slices/userSlice";
-import { connect } from "react-redux";
-import { useProfile } from "hooks/profile.hook";
+import { connect, useDispatch } from "react-redux";
+import { useProfile } from "hooksAndLogic/profile.hook";
 import { Layout } from "components/layout";
 import { Button, Checkbox, Textarea, TextInput, Title } from "@mantine/core";
 import { DynamicUserChecker } from "components/dynamicUseChecker";
 import { useForm } from "@mantine/form";
-import { useItem } from "hooks/item.hook";
+import { useItem } from "hooksAndLogic/item.hook";
+import { TagsInput } from "components/tagsInput";
 
 const AddProduct = ({ token, username }) => {
+  const [tags, setTags] = React.useState([]);
   const router = useRouter();
   const { checkUser } = useProfile();
   checkUser({ token, username, router });
-  const { formSettings, handleAddItem, handleErrors } = useItem();
+  const { formSettings, handleAddItem, handleErrors } = useItem(
+    username,
+    useDispatch(),
+    useRouter()
+  );
   const form = useForm(formSettings);
   return (
     <Layout>
       <DynamicUserChecker condition={token && username}>
         <div>
           <Title order={3}>Add New product</Title>
-          <form onSubmit={form.onSubmit(handleAddItem, handleErrors)}>
+          <form
+            onSubmit={form.onSubmit(
+              (values) => handleAddItem(values, tags),
+              handleErrors
+            )}
+          >
             <TextInput
               withAsterisk
               id="title"
@@ -39,6 +49,7 @@ const AddProduct = ({ token, username }) => {
               id="description"
               placeholder="Description"
               label="Description"
+              withAsterisk
               {...form.getInputProps("description")}
             />
             <Checkbox
@@ -46,6 +57,7 @@ const AddProduct = ({ token, username }) => {
               label="published"
               {...form.getInputProps("published", { type: "checkbox" })}
             />
+            <TagsInput tags={tags} setTags={setTags} />
             <Button type="submit">Save</Button>
           </form>
         </div>

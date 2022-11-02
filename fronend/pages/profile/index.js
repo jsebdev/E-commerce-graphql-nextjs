@@ -3,8 +3,8 @@ import { Button, Title } from "@mantine/core";
 // import { UserChecker } from "components/userChecker";
 import { ItemsGrid } from "components/itemsGrid";
 import { Layout } from "components/layout";
-import { useProfile } from "hooks/profile.hook";
-import { useUserItems } from "hooks/user.hook";
+import { useProfile } from "hooksAndLogic/profile.hook";
+import { useUserItems } from "hooksAndLogic/user.hook";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -19,17 +19,13 @@ import { DynamicUserChecker } from "components/dynamicUseChecker";
 
 const Profile = ({ username, token, userItems }) => {
   const router = useRouter();
-  const { fetchUserItems } = useUserItems();
+  const { fetchUserItems } = useUserItems(username, useDispatch());
   const [publishedItems, setPublishedItems] = useState([]);
   const [nonPublishedItems, setNonPublishedItems] = useState([]);
-  const dispatch = useDispatch();
   const { checkUser } = useProfile();
   checkUser({ token, username, router });
   useEffect(() => {
-    console.log("26: username >>>", username);
-    console.log("27: token >>>", token);
-    console.log(username && token);
-    if (userItems.length === 0) fetchUserItems(username, { dispatch });
+    if (userItems.length === 0) fetchUserItems();
   }, []);
   useEffect(() => {
     setPublishedItems(userItems.filter((item) => item.published));

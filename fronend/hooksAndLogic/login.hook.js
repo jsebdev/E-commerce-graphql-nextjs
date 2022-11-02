@@ -1,4 +1,4 @@
-import { setToken, setUsername } from "store/slices/userSlice";
+import { setUser } from "store/slices/userSlice";
 import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
@@ -26,8 +26,7 @@ export const useLogin = (dispatch, router) => {
     const { data } = await client.mutate({ mutation });
     const { success, errors, user, token } = data.tokenAuth;
     if (success) {
-      dispatch(setToken(token));
-      dispatch(setUsername(user.username));
+      dispatch(setUser({ token, username: user.username }));
       router.push("/profile");
     }
     dispatch(setLoading(false));
@@ -39,8 +38,7 @@ export const useLogin = (dispatch, router) => {
 export const useLogout = (dispatch, router) => {
   const handleLogout = () => {
     dispatch(setLoading(true));
-    dispatch(setToken(null));
-    dispatch(setUsername(null));
+    dispatch(setUser({ token: null, username: null }));
     router.push("/");
     dispatch(setLoading(false));
   };

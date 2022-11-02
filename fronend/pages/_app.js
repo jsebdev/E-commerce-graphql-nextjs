@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { MyLoader } from "components/myLoader";
 import { MantineController } from "components/mantineController";
 
+import "styles/tagInputStyles.scss";
+
 export default function App({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
   return (

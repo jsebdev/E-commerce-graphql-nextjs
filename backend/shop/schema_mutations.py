@@ -37,7 +37,7 @@ class ItemCreation(graphene.Mutation):
     def mutate(cls, root, info, **kwargs):
         # Obtain the item's seller. It must exists already
         try:
-            seller = models.Profile.objects.get(id=kwargs.pop('seller'))
+            seller = models.Profile.objects.get(username=kwargs.pop('seller'))
         except models.Profile.DoesNotExist:
             return CreateItemFailed(error_message='Seller does not exist')
 

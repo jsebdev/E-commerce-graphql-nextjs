@@ -20,10 +20,8 @@ const makeStore = wrapMakeStore(() =>
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().prepend(
         nextReduxCookieMiddleware({
-          // subtrees: [`${userSlice.name}.token`, `${userSlice.name}.username`],
           subtrees: [
-            `${userSlice.name}.token`,
-            `${userSlice.name}.username`,
+            `${userSlice.name}.user`,
             searchSlice.name,
             themeSlice.name,
           ],

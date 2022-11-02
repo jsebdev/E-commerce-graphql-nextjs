@@ -1,12 +1,14 @@
 import { itemGraphqlQueryFields } from "helpers/queries";
 
-const { gql } = require("@apollo/client");
-const { setUserItems } = require("store/slices/userSlice");
+// const { gql } = require("@apollo/client");
+// const { setUserItems } = require("store/slices/userSlice");
+import { gql } from "@apollo/client";
+import { setUserItems } from "store/slices/userSlice";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 
-export const useUserItems = () => {
-  const fetchUserItems = async (username, { dispatch }) => {
+export const useUserItems = (username, dispatch) => {
+  const fetchUserItems = async () => {
     dispatch(setLoading(true));
     const query = gql`
     query {
@@ -16,7 +18,6 @@ export const useUserItems = () => {
     }`;
     try {
       const { data } = await client.query({ query });
-      console.log("the items: ", data.itemsBySeller);
       dispatch(setUserItems(data.itemsBySeller));
     } catch (e) {
       console.log("Error: ", e);
