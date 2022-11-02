@@ -1,7 +1,7 @@
-import { THEMES } from "./strings";
+import { THEMES_NAMES } from "./strings";
 
 export const lightTheme = {
-  colorScheme: THEMES.light,
+  colorScheme: THEMES_NAMES.light,
   colors: {
     superColor: [
       "#00ffff",
@@ -19,7 +19,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  colorScheme: THEMES.dark,
+  colorScheme: THEMES_NAMES.dark,
   colors: {
     superColor: [
       "#ff0000",

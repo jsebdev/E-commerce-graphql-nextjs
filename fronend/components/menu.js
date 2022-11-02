@@ -4,8 +4,8 @@ import cn from "classnames";
 import menuStyles from "./menu.module.scss";
 import { selectToken } from "store/slices/userSlice";
 import { useSelector } from "react-redux";
-import { Center, Paper, useMantineTheme } from "@mantine/core";
-import { THEMES } from "helpers/strings";
+import { Center, useMantineTheme } from "@mantine/core";
+import { THEMES_NAMES } from "helpers/strings";
 import { hoverButtonEffect } from "./componentHelpers/hoverButton";
 import { useLogout } from "hooks/login.hook";
 import { useDispatch } from "react-redux";
@@ -26,11 +26,11 @@ export const Menu = ({ showMenu = false, onTablet }) => {
       })}
       style={{
         backgroundColor:
-          theme.colorScheme === THEMES.dark
+          theme.colorScheme === THEMES_NAMES.dark
             ? theme.colors.dark[8]
             : theme.colors.gray[0],
         border: `1px solid ${
-          theme.colorScheme === THEMES.dark
+          theme.colorScheme === THEMES_NAMES.dark
             ? theme.colors.dark[3]
             : theme.colors.gray[5]
         }`,
@@ -59,7 +59,6 @@ export const Menu = ({ showMenu = false, onTablet }) => {
 // React.forwardRef is used here to avoid a bug in Next.js
 // for when a component is wrapped in a Link component
 const MenuItem = React.forwardRef(({ children, onClick }, ref) => {
-  const theme = useMantineTheme();
   return (
     // <li ref={ref} style={hoverButtonEffect(theme)}>
     <li ref={ref} onClick={onClick}>
@@ -70,3 +69,4 @@ const MenuItem = React.forwardRef(({ children, onClick }, ref) => {
     </li>
   );
 });
+MenuItem.displayName = "MenuItem";

@@ -1,13 +1,12 @@
+import React from "react";
 import { Layout } from "components/layout";
 import Head from "next/head";
 
 import { gql } from "@apollo/client";
 import { client } from "../apolloClient";
-import { Item } from "components/item";
-import utilStyles from "styles/utils.module.scss";
 import { itemGraphqlQueryFields } from "helpers/queries";
 import { wrapper } from "store/store";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import {
   selectItems,
   selectSearchText,

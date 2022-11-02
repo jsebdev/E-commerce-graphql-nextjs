@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Title } from "@mantine/core";
 import { UserChecker } from "components/userChecker";
 import { ItemsGrid } from "components/itemsGrid";

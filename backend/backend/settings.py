@@ -131,7 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # todo activate cors
 # CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('http://localhost:8080',)
+CORS_ORIGIN_WHITELIST = ('http://localhost:8080', 'http://localhost:3000')
 
 AUTH_USER_MODEL = "shop.Profile"
 

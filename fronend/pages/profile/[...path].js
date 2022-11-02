@@ -14,18 +14,17 @@ const ProfilePath = ({ token, username }) => {
   const { path } = router.query;
   const [option, setOption] = React.useState("");
   useEffect(() => {
+    console.log("17: path >>>", path);
     if (path.join() === ADD_PRODUCT_PATH.slice(1).join()) {
       setOption(ProfileRouterOptions.addProduct);
       return;
     }
-  });
+  }, []);
   return (
     <UserChecker condition={token && username}>
       <div>
         ProfilePath
-        {path.map((item) => (
-          <p>{item}</p>
-        ))}
+        <div> {option}</div>
       </div>
     </UserChecker>
   );

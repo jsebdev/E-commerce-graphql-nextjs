@@ -4,7 +4,7 @@ import headerStyles from "./header.module.scss";
 import { Logo } from "./logo";
 import { MenuContainer } from "./menuContainer";
 import { Searcher } from "./searcher";
-import { Paper, Center } from "@mantine/core";
+import { Paper } from "@mantine/core";
 import { ThemeSwitcher } from "./themeSwitcher";
 import { HeaderButton } from "./headerButton";
 import menuStyles from "./menu.module.scss";

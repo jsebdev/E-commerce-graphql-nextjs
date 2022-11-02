@@ -15,13 +15,13 @@ export const useSearcher = () => {
     dispatch(setSearchText(search));
     const query = gql`
     query {
-      itemBySearch(searchText:"${search}") {
+      itemsBySearch(searchText:"${search}") {
         ${itemGraphqlQueryFields}
       }
     }`;
     const { data } = await client.query({ query });
     console.log("21: data >>>", data);
-    dispatch(setItems(data.itemBySearch));
+    dispatch(setItems(data.itemsBySearch));
   };
   const changeSearch = (event) => {
     setSearch(event.target.value);

@@ -7,6 +7,7 @@ import {
 import { createWrapper } from "next-redux-wrapper";
 import { userSlice } from "./slices/userSlice";
 import { loaderSlice } from "./slices/loaderSlice";
+import { themeSlice } from "./slices/themeSlice";
 
 const makeStore = wrapMakeStore(() =>
   configureStore({
@@ -14,6 +15,7 @@ const makeStore = wrapMakeStore(() =>
       [searchSlice.name]: searchSlice.reducer,
       [userSlice.name]: userSlice.reducer,
       [loaderSlice.name]: loaderSlice.reducer,
+      [themeSlice.name]: themeSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().prepend(
@@ -23,6 +25,7 @@ const makeStore = wrapMakeStore(() =>
             `${userSlice.name}.token`,
             `${userSlice.name}.username`,
             searchSlice.name,
+            themeSlice.name,
           ],
         })
       ),

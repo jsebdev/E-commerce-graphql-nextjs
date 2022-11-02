@@ -1,3 +1,4 @@
+import React from "react";
 import headerStyles from "./header.module.scss";
 import searcherStyles from "./searcher.module.scss";
 import { useSearcher } from "hooks/searcher.hook";
@@ -5,17 +6,10 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { selectSearchText } from "store/slices/searchSlice";
 import cn from "classnames";
-import {
-  Center,
-  Group,
-  GroupedTransition,
-  TextInput,
-  UnstyledButton,
-  useMantineTheme,
-} from "@mantine/core";
+import { Center, Group, UnstyledButton, useMantineTheme } from "@mantine/core";
 
 import { IconBuildingStore, IconSearch } from "@tabler/icons";
-import { THEMES } from "helpers/strings";
+import { THEMES_NAMES } from "helpers/strings";
 
 export const SearcherWithoutConnection = ({ searchText }) => {
   const { search, handleSearch, changeSearch, setSearch } = useSearcher();
@@ -34,11 +28,11 @@ export const SearcherWithoutConnection = ({ searchText }) => {
 const SearcherInput = ({ value, onChange }) => {
   const theme = useMantineTheme();
   const visibleColor =
-    theme.colorScheme === THEMES.dark
+    theme.colorScheme === THEMES_NAMES.dark
       ? theme.colors.dark[0]
       : theme.colors.dark[9];
   const nonVisibleColor =
-    theme.colorScheme === THEMES.dark
+    theme.colorScheme === THEMES_NAMES.dark
       ? theme.colors.dark[5]
       : theme.colors.dark[0];
   return (
@@ -47,7 +41,7 @@ const SearcherInput = ({ value, onChange }) => {
       className={searcherStyles.searcherContainer}
       sx={(theme) => ({
         border: `1px solid ${
-          theme.colorScheme === THEMES.dark
+          theme.colorScheme === THEMES_NAMES.dark
             ? theme.colors.dark[3]
             : theme.colors.dark[5]
         }`,
@@ -67,7 +61,7 @@ const SearcherInput = ({ value, onChange }) => {
         type="submit"
         sx={(theme) => ({
           borderLeft: `1px solid ${
-            theme.colorScheme === THEMES.dark
+            theme.colorScheme === THEMES_NAMES.dark
               ? theme.colors.dark[4]
               : theme.colors.gray[4]
           }`,

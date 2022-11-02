@@ -18,10 +18,10 @@ export const MyLoader = () => {
   const [changingUrl, setChangingUrl] = useState(false);
 
   useEffect(() => {
-    const handleStart = (url) => {
+    const handleStart = () => {
       setChangingUrl(true);
     };
-    const handleComplete = (url) => {
+    const handleComplete = () => {
       setChangingUrl(false);
     };
     router.events.on("routeChangeStart", handleStart);

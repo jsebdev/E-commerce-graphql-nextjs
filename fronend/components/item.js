@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./item.module.scss";
 import utilStyles from "styles/utils.module.scss";
 import cn from "classnames";
-import { printObj } from "ayudasChidas";
+// import { printObj } from "ayudasChidas";
 
 export const Item = ({ item }) => {
   // console.log("the item")

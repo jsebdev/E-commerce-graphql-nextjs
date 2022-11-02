@@ -1,11 +1,12 @@
+import React from "react";
 import { useMantineColorScheme } from "@mantine/core";
-import { THEMES } from "helpers/strings";
+import { THEMES_NAMES } from "helpers/strings";
 import Image from "next/image";
 import styles from "./header.module.scss";
 
 export const ThemeSwitcher = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const isDark = colorScheme === THEMES.dark;
+  const isDark = colorScheme === THEMES_NAMES.dark;
 
   return (
     <div
