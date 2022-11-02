@@ -20,7 +20,7 @@ export const Layout = ({ children }) => {
         />
         <meta name="og:title" content={siteTitle} />
       </Head>
-      <Header></Header>
+      <Header />
       <main className={styles.main}>{children}</main>
       <Footer></Footer>
     </div>

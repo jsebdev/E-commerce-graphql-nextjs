@@ -11,7 +11,7 @@ import { useLogout } from "hooks/login.hook";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
-export const Menu = ({ showMenu = false, onTablet }) => {
+const Menu = ({ showMenu = false, onTablet }) => {
   const token = useSelector(selectToken);
   const theme = useMantineTheme();
   const dispatch = useDispatch();
@@ -60,13 +60,13 @@ export const Menu = ({ showMenu = false, onTablet }) => {
 // for when a component is wrapped in a Link component
 const MenuItem = React.forwardRef(({ children, onClick }, ref) => {
   return (
-    // <li ref={ref} style={hoverButtonEffect(theme)}>
     <li ref={ref} onClick={onClick}>
       <Center px="0.5rem" sx={(theme) => hoverButtonEffect(theme)}>
         {children}
       </Center>
-      {/* {children} */}
     </li>
   );
 });
 MenuItem.displayName = "MenuItem";
+
+export default Menu;

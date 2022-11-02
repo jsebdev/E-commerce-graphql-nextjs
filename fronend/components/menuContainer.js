@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import headerStyles from "./header.module.scss";
 import menuStyles from "./menu.module.scss";
-import { Menu } from "./menu";
 import cn from "classnames";
+import dynamic from "next/dynamic";
+
+// This loads the menu component dynamically
+// so it doesn't get loaded on the server
+const DynamicMenu = dynamic(() => import("./menu"), { ssr: false });
 
 export const MenuContainer = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -17,7 +21,7 @@ export const MenuContainer = () => {
         height={10}
       />
       {showMenu && <CloseMenuLayer />}
-      {showMenu && <Menu showMenu={showMenu} />}
+      {showMenu && <DynamicMenu showMenu={showMenu} />}
     </div>
   );
 };
