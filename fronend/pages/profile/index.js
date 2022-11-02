@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Title } from "@mantine/core";
-import { UserChecker } from "components/userChecker";
+// import { UserChecker } from "components/userChecker";
 import { ItemsGrid } from "components/itemsGrid";
 import { Layout } from "components/layout";
 import { useProfile } from "hooks/profile.hook";
@@ -14,7 +14,8 @@ import {
   selectUserItems,
   selectUsername,
 } from "store/slices/userSlice";
-import { ADD_PRODUCT_PATH } from "helpers/strings";
+import { ADD_ITEM_PATH } from "helpers/strings";
+import { DynamicUserChecker } from "components/dynamicUseChecker";
 
 const Profile = ({ username, token, userItems }) => {
   const router = useRouter();
@@ -36,12 +37,13 @@ const Profile = ({ username, token, userItems }) => {
   }, [userItems]);
   return (
     <Layout>
-      <UserChecker condition={token && username}>
+      {/* <UserChecker condition={token && username}> */}
+      <DynamicUserChecker condition={token && username}>
         <Title order={1}>hello {username}!</Title>
         {userItems.length > 0 ? (
           <>
-            <Link href={ADD_PRODUCT_PATH.join("/")}>
-              <Button>Add new Product</Button>
+            <Link href={ADD_ITEM_PATH.join("/")}>
+              <Button>Add new item</Button>
             </Link>
             <Title order={3}>Your products:</Title>
             <Title order={4}>Published:</Title>
@@ -60,12 +62,10 @@ const Profile = ({ username, token, userItems }) => {
         ) : (
           <>
             <Title order={3}>You have no products yet</Title>
-            <Link href={ADD_PRODUCT_PATH.join("/")}>
-              Add your first product
-            </Link>
+            <Link href={ADD_ITEM_PATH.join("/")}>Add your first product</Link>
           </>
         )}
-      </UserChecker>
+      </DynamicUserChecker>
     </Layout>
   );
 };

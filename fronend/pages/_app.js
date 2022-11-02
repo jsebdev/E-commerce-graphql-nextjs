@@ -2,16 +2,16 @@ import React from "react";
 import { wrapper } from "store/store";
 import { Provider } from "react-redux";
 import { MyLoader } from "components/myLoader";
-import { ThemeController } from "components/themeController";
+import { MantineController } from "components/mantineController";
 
 export default function App({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
   return (
     <Provider store={store}>
-      <ThemeController>
+      <MantineController>
         <Component {...props.pageProps} />
         <MyLoader />
-      </ThemeController>
+      </MantineController>
     </Provider>
   );
 }

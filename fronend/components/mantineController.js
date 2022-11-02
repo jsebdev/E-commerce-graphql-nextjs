@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectThemeName, toggleTheme } from "store/slices/themeSlice";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 
-export const ThemeController = ({ children }) => {
+export const MantineController = ({ children }) => {
   const dispatch = useDispatch();
   const themeName = useSelector(selectThemeName);
   const [theme, setTheme] = useState(null);
@@ -25,7 +26,7 @@ export const ThemeController = ({ children }) => {
       toggleColorScheme={toggleColorScheme}
     >
       <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
-        {children}
+        <NotificationsProvider>{children}</NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );

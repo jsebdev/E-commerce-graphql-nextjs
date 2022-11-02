@@ -7,8 +7,4 @@ export const THEME_COOKIE = "mantine-color-scheme";
 
 export const PROFILE_PATH = "profile";
 
-export const ADD_PRODUCT_PATH = [PROFILE_PATH, "add_product"];
-
-export const ProfileRouterOptions = {
-  addProduct: "addProduct",
-};
+export const ADD_ITEM_PATH = [PROFILE_PATH, "add_item"];

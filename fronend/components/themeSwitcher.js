@@ -6,7 +6,7 @@ import styles from "./header.module.scss";
 
 export const ThemeSwitcher = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const isDark = colorScheme === THEMES_NAMES.dark;
+  const isDark = colorScheme.colorScheme === THEMES_NAMES.dark;
 
   return (
     <div
