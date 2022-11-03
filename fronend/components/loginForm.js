@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import React from "react";
 
-export const LoginForm = ({ setErrorMessages }) => {
+export const LoginForm = ({ displayErrors }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { handleLogin, formSettings, handleFormErrors } = useLogin(
@@ -16,7 +16,10 @@ export const LoginForm = ({ setErrorMessages }) => {
   const login = async (e) => {
     const { success, errors } = await handleLogin(e);
     if (!success) {
-      setErrorMessages(errors?.nonFieldErrors?.map((error) => error.message));
+      const errorMessages = errors?.nonFieldErrors?.map(
+        (error) => error.message
+      );
+      displayErrors(errorMessages);
     }
   };
 

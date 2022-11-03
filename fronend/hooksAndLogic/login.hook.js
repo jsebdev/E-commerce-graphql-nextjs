@@ -3,6 +3,7 @@ import { handleFormErrors } from "helpers/utils";
 import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
+import { PROFILE_PATH } from "helpers/strings";
 
 export const useLogin = (dispatch, router) => {
   const formSettings = {
@@ -35,7 +36,7 @@ export const useLogin = (dispatch, router) => {
     const { success, errors, user, token } = data.tokenAuth;
     if (success) {
       dispatch(setUser({ token, username: user.username }));
-      router.push("/profile");
+      router.push(PROFILE_PATH);
     }
     dispatch(setLoading(false));
     return { success, errors };

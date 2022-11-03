@@ -3,44 +3,54 @@ import { handleFormErrors } from "helpers/utils";
 import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
+import { PROFILE_PATH } from "helpers/strings";
 
 export const useSignup = (dispatch, router) => {
   const formSettings = {
     initialValues: {
       username: "",
-      password: "",
+      email: "",
+      password1: "",
+      password2: "",
     },
     validate: {
       username: (value) => (value.length === 0 ? "Username is missing!" : null),
-      password: (value) => (value.length === 0 ? "Password is missing!" : null),
+      email: (value) => (value.length === 0 ? "Email is missing!" : null),
+      password1: (value) =>
+        value.length === 0 ? "Password is missing!" : null,
+      password2: (value) =>
+        value.length === 0 ? "Password verification is missing!" : null,
     },
   };
-  const handleLogin = async (values) => {
+  const handleSignup = async (values) => {
     dispatch(setLoading(true));
     const mutation = gql`
       mutation {
-        tokenAuth(username: "${values.username}", password: "${values.password}") {
-          token
+        register (email:"${values.email}",
+                  username:"${values.username}",
+                  password1: "${values.password1}",
+                  password2:"${values.password2}") {
           success
           errors
-          user {
-            username
-          }
-          unarchiving
           refreshToken
+          token
         }
       }
     `;
     const { data } = await client.mutate({ mutation });
-    const { success, errors, user, token } = data.tokenAuth;
+    // debugger;
+    const { success, errors, refreshToken, token } = data.register;
+    let errorMessages = [];
     if (success) {
-      dispatch(setUser({ token, username: user.username }));
-      router.push("/profile");
+      // dispatch(setUser({ token, username: user.username }));
+      router.push(PROFILE_PATH);
+    } else {
+      errorMessages = Object.keys(errors).map((key) => errors[key][0].message);
     }
     dispatch(setLoading(false));
-    return { success, errors };
+    return { success, errorMessages };
   };
-  return { handleLogin, formSettings, handleFormErrors };
+  return { handleSignup, formSettings, handleFormErrors };
 };
 
 export const useLogout = (dispatch, router) => {

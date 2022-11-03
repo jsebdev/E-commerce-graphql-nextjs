@@ -1,3 +1,4 @@
+import { showNotification } from "@mantine/notifications";
 import { useProfile } from "hooksAndLogic/profile.hook";
 import { useRouter } from "next/router";
 import React from "react";
@@ -15,10 +16,19 @@ export const AuthFormWrapperNoConnection = ({
   const router = useRouter();
   const { checkNoUser } = useProfile({ token, username, router });
   checkNoUser();
+  const displayErrors = (errorMessages) => {
+    setErrorMessages(errorMessages);
+    errorMessages.forEach((errorMessage) =>
+      showNotification({
+        message: errorMessage,
+        color: "red",
+      })
+    );
+  };
   return (
     <Layout home={false}>
       <DynamicUserChecker condition={!token || !username}>
-        <FormComponent setErrorMessages={setErrorMessages} />
+        <FormComponent displayErrors={displayErrors} />
         {errorMessages.length > 0 && (
           <>
             <p>Errors:</p>
