@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import { showNotification } from "@mantine/notifications";
 import { client } from "apolloClient";
 import { itemGraphqlQueryFields } from "helpers/queries";
+import { handleFormErrors } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
 import { useUserItems } from "./user.hook";
 
@@ -64,7 +65,7 @@ export const useItem = (sellerUsername, dispatch, router) => {
         });
         const { fetchUserItems } = useUserItems(sellerUsername, dispatch);
         await fetchUserItems();
-        router.push(`/profile`);
+        router.push("/profile");
       }
     } catch (e) {
       console.log("There is an error in the mutation", e);
@@ -72,14 +73,5 @@ export const useItem = (sellerUsername, dispatch, router) => {
     dispatch(setLoading(false));
   };
 
-  const handleErrors = (errors) => {
-    Object.keys(errors).forEach((key) => {
-      showNotification({
-        title: "Oh no!",
-        message: errors[key],
-        color: "red",
-      });
-    });
-  };
-  return { formSettings, handleAddItem, handleErrors };
+  return { formSettings, handleAddItem, handleFormErrors };
 };

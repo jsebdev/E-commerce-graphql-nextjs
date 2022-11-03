@@ -4,7 +4,7 @@ import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 
-export const useLogin = (dispatch, router) => {
+export const useSignup = (dispatch, router) => {
   const formSettings = {
     initialValues: {
       username: "",

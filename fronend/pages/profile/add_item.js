@@ -15,7 +15,7 @@ const AddProduct = ({ token, username }) => {
   const router = useRouter();
   const { checkUser } = useProfile();
   checkUser({ token, username, router });
-  const { formSettings, handleAddItem, handleErrors } = useItem(
+  const { formSettings, handleAddItem, handleFormErrors } = useItem(
     username,
     useDispatch(),
     useRouter()
@@ -29,7 +29,7 @@ const AddProduct = ({ token, username }) => {
           <form
             onSubmit={form.onSubmit(
               (values) => handleAddItem(values, tags),
-              handleErrors
+              handleFormErrors
             )}
           >
             <TextInput

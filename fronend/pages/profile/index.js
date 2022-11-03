@@ -22,8 +22,8 @@ const Profile = ({ username, token, userItems }) => {
   const { fetchUserItems } = useUserItems(username, useDispatch());
   const [publishedItems, setPublishedItems] = useState([]);
   const [nonPublishedItems, setNonPublishedItems] = useState([]);
-  const { checkUser } = useProfile();
-  checkUser({ token, username, router });
+  const { checkUser } = useProfile({ token, username, router });
+  checkUser();
   useEffect(() => {
     if (userItems.length === 0) fetchUserItems();
   }, []);
