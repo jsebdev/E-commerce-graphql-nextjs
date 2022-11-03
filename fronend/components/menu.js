@@ -43,17 +43,17 @@ const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
       <ul className={menuStyles.menu}>
         {token ? (
           <>
-            <Link href={PROFILE_PATH}>
+            <Link href={"/" + PROFILE_PATH}>
               <MenuItem>My Profile</MenuItem>
             </Link>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </>
         ) : (
           <>
-            <Link href={LOGIN_PATH}>
+            <Link href={"/" + LOGIN_PATH}>
               <MenuItem>Login</MenuItem>
             </Link>
-            <Link href={SIGNUP_PATH}>
+            <Link href={"/" + SIGNUP_PATH}>
               <MenuItem>Sign up</MenuItem>
             </Link>
           </>

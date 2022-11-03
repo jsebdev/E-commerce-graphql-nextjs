@@ -1,9 +1,9 @@
-import { setUser } from "store/slices/userSlice";
-import { handleFormErrors } from "helpers/utils";
+import { setActivationEmail, setUser } from "store/slices/userSlice";
+import { notifyFormErrors } from "helpers/utils";
 import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
-import { PROFILE_PATH } from "helpers/strings";
+import { ACCOUNT_CREATED_PATH, PROFILE_PATH } from "helpers/strings";
 
 export const useSignup = (dispatch, router) => {
   const formSettings = {
@@ -38,19 +38,18 @@ export const useSignup = (dispatch, router) => {
       }
     `;
     const { data } = await client.mutate({ mutation });
-    // debugger;
-    const { success, errors, refreshToken, token } = data.register;
+    const { success, errors } = data.register;
     let errorMessages = [];
     if (success) {
-      // dispatch(setUser({ token, username: user.username }));
-      router.push(PROFILE_PATH);
+      dispatch(setActivationEmail(values.email));
+      router.push(ACCOUNT_CREATED_PATH);
     } else {
       errorMessages = Object.keys(errors).map((key) => errors[key][0].message);
     }
     dispatch(setLoading(false));
     return { success, errorMessages };
   };
-  return { handleSignup, formSettings, handleFormErrors };
+  return { handleSignup, formSettings, handleFormErrors: notifyFormErrors };
 };
 
 export const useLogout = (dispatch, router) => {

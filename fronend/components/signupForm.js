@@ -26,10 +26,10 @@ export const SignUpForm = ({ displayErrors }) => {
       <Text>
         In order to create your account your emails will be requested.
       </Text>
-      <Text>but don't worry!</Text>
+      <Text>but don&apos;t worry!</Text>
       <Text>
-        This project is intended only as a demonstration. I'm not saving your
-        info anywhere for commercial purposes ;)
+        This project is intended only as a demonstration. I&apos;m not saving
+        your info anywhere for commercial purposes ;)
       </Text>
       <form onSubmit={form.onSubmit(signUp, handleFormErrors)}>
         <TextInput
@@ -56,7 +56,7 @@ export const SignUpForm = ({ displayErrors }) => {
           label="password2"
           {...form.getInputProps("password2")}
         />
-        <Button type="submit">Log In</Button>
+        <Button type="submit">Sign in</Button>
       </form>
     </>
   );

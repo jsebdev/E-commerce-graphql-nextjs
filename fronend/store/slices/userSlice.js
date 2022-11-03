@@ -8,6 +8,7 @@ const initialState = {
     username: null,
   },
   userItems: [],
+  activationEmail: null,
 };
 
 export const userSlice = createSlice({
@@ -20,6 +21,9 @@ export const userSlice = createSlice({
     setUserItems: (state, action) => {
       state.userItems = action.payload;
     },
+    setActivationEmail: (state, action) => {
+      state.activationEmail = action.payload;
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -31,10 +35,10 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserItems, setUser } = userSlice.actions;
+export const { setUserItems, setUser, setActivationEmail } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 export const selectUsername = (state) => state.user.user.username;
 export const selectToken = (state) => state.user.user.token;
-// export const selectUserId = (state) => state.user.user.id;
+export const selectActivationEmail = (state) => state.user.activationEmail;
 export const selectUserItems = (state) => state.user.userItems;

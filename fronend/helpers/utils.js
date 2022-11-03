@@ -1,10 +1,14 @@
 import { showNotification } from "@mantine/notifications";
 
-export const handleFormErrors = (errors) => {
-  Object.keys(errors).forEach((key) => {
+export const notifyFormErrors = (errors) => {
+  notifyErrors(Object.values(errors));
+};
+
+export const notifyErrors = (errors) => {
+  errors.forEach((error) => {
     showNotification({
       title: "Oh no!",
-      message: errors[key],
+      message: error,
       color: "red",
     });
   });

@@ -1,5 +1,5 @@
 import { setUser } from "store/slices/userSlice";
-import { handleFormErrors } from "helpers/utils";
+import { notifyFormErrors } from "helpers/utils";
 import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
@@ -41,7 +41,7 @@ export const useLogin = (dispatch, router) => {
     dispatch(setLoading(false));
     return { success, errors };
   };
-  return { handleLogin, formSettings, handleFormErrors };
+  return { handleLogin, formSettings, handleFormErrors: notifyFormErrors };
 };
 
 export const useLogout = (dispatch, router) => {

@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { showNotification } from "@mantine/notifications";
 import { client } from "apolloClient";
 import { itemGraphqlQueryFields } from "helpers/queries";
-import { handleFormErrors } from "helpers/utils";
+import { notifyFormErrors } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
 import { useUserItems } from "./user.hook";
 
@@ -73,5 +73,5 @@ export const useItem = (sellerUsername, dispatch, router) => {
     dispatch(setLoading(false));
   };
 
-  return { formSettings, handleAddItem, handleFormErrors };
+  return { formSettings, handleAddItem, handleFormErrors: notifyFormErrors };
 };

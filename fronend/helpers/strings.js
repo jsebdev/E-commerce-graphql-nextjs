@@ -11,3 +11,4 @@ export const ADD_ITEM_PATH = [PROFILE_PATH, "add_item"];
 
 export const SIGNUP_PATH = "signup";
 export const LOGIN_PATH = "login";
+export const ACCOUNT_CREATED_PATH = "accountCreated";
