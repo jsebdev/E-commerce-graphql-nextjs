@@ -1,13 +1,13 @@
 import React from "react";
 import { Cart } from "./cart";
-import headerStyles from "./header.module.scss";
+import headerStyles from "styles/componentsStyles/header.module.scss";
 import { Logo } from "./logo";
 import { MenuContainer } from "./menuContainer";
 import { Searcher } from "./searcher";
 import { Paper } from "@mantine/core";
 import { ThemeSwitcher } from "./themeSwitcher";
 import { HeaderButton } from "./headerButton";
-import menuStyles from "./menu.module.scss";
+import menuStyles from "styles/componentsStyles/menu.module.scss";
 import dynamic from "next/dynamic";
 
 const DynamicMenu = dynamic(() => import("./menu"), { ssr: false });

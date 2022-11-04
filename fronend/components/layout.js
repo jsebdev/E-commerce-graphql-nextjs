@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import styles from "./layout.module.scss";
+import styles from "styles/componentsStyles/layout.module.scss";
 import { Header } from "./header";
 import { Footer } from "./footer";
 

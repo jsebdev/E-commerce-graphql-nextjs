@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import headerStyles from "./header.module.scss";
-import menuStyles from "./menu.module.scss";
+import headerStyles from "styles/componentsStyles/header.module.scss";
+import menuStyles from "styles/componentsStyles/menu.module.scss";
 import cn from "classnames";
 import dynamic from "next/dynamic";
 

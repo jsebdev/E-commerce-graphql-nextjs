@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { client } from "apolloClient";
-import { Item } from "components/item";
+import { GridItem } from "components/gridItem";
+import { ItemDetails } from "components/itemDetails";
 import { Layout } from "components/layout";
 import { itemGraphqlQueryFields } from "helpers/queries";
 import React from "react";
@@ -45,7 +46,7 @@ export const getStaticProps = async (context) => {
 const ItemPage = ({ item }) => {
   return (
     <Layout>
-      <Item item={item} />
+      <ItemDetails item={item} />
     </Layout>
   );
 };

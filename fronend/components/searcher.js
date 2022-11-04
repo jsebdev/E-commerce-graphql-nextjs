@@ -1,6 +1,6 @@
 import React from "react";
-import headerStyles from "./header.module.scss";
-import searcherStyles from "./searcher.module.scss";
+import headerStyles from "styles/componentsStyles/header.module.scss";
+import searcherStyles from "styles/componentsStyles/searcher.module.scss";
 import { useSearcher } from "hooksAndLogic/searcher.hook";
 import { connect } from "react-redux";
 import { useEffect } from "react";

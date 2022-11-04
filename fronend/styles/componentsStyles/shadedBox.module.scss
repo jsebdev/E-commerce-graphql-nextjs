@@ -1,0 +1,25 @@
+@mixin backgroundExtended {
+  content: "";
+  width: 100vw;
+  position: absolute;
+  height: 100%;
+  z-index: -1;
+}
+
+.shadedBox {
+  display: flex;
+}
+
+.wide {
+  // border: 2px solid red;
+  position: relative;
+
+  &:before{
+    @include backgroundExtended;
+    left: 0;
+  }
+  &:after {
+    @include backgroundExtended;
+    right: 0;
+  }
+}

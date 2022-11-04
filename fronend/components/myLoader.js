@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectLoading } from "store/slices/loaderSlice";
-import myLoaderStyles from "./myLoader.module.scss";
+import myLoaderStyles from "styles/componentsStyles/myLoader.module.scss";
 
 // const printRoutes = (url, pathname) => {
 //   console.log("las rutas son:");

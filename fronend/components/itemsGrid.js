@@ -1,8 +1,9 @@
 import React from "react";
-import { Item } from "./item";
+import { GridItem } from "./gridItem";
 import utilStyles from "styles/utils.module.scss";
 import Link from "next/link";
-import { PROFILE_PATH } from "helpers/strings";
+import { ITEM_DISPLAY_PATH, OWN_ITEM_PATH } from "helpers/strings";
+import { createPath } from "helpers/utils";
 
 export const ItemsGrid = ({
   items,
@@ -14,10 +15,14 @@ export const ItemsGrid = ({
       {items.map((item) => (
         <Link
           key={item.id}
-          href={inHome ? `${item.id}` : `${PROFILE_PATH}/${item.id}`}
+          href={
+            inHome
+              ? createPath(ITEM_DISPLAY_PATH(item.id))
+              : createPath(OWN_ITEM_PATH(item.id))
+          }
         >
           <div>
-            <Item item={item} />
+            <GridItem item={item} />
           </div>
         </Link>
       ))}

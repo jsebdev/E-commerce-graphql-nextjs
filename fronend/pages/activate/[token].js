@@ -2,7 +2,7 @@ import { Text, Title } from "@mantine/core";
 import { Layout } from "components/layout";
 import { Loading } from "components/loading";
 import { LOGIN_PATH } from "helpers/strings";
-import { notifyErrors } from "helpers/utils";
+import { createPath, notifyErrors } from "helpers/utils";
 import { useActivateAccount } from "hooksAndLogic/activate.hook";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -35,7 +35,7 @@ const Activate = () => {
             <>
               <Title order={3}>Congratulations</Title>
               <Text>Your account has been verified</Text>
-              <Link href={"/" + LOGIN_PATH}>Login in your account</Link>
+              <Link href={createPath(LOGIN_PATH)}>Login in your account</Link>
             </>
           ) : (
             <>

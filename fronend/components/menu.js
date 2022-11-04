@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import cn from "classnames";
-import menuStyles from "./menu.module.scss";
+import menuStyles from "styles/componentsStyles/menu.module.scss";
 import { selectToken } from "store/slices/userSlice";
 import { connect, useSelector } from "react-redux";
 import { Center, useMantineTheme } from "@mantine/core";
@@ -15,6 +15,7 @@ import { hoverButtonEffect } from "./componentHelpers/hoverButtonEffect";
 import { useLogout } from "hooksAndLogic/login.hook";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { createPath } from "helpers/utils";
 
 const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
   const theme = useMantineTheme();
@@ -43,17 +44,17 @@ const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
       <ul className={menuStyles.menu}>
         {token ? (
           <>
-            <Link href={"/" + PROFILE_PATH}>
+            <Link href={createPath(PROFILE_PATH)}>
               <MenuItem>My Profile</MenuItem>
             </Link>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </>
         ) : (
           <>
-            <Link href={"/" + LOGIN_PATH}>
+            <Link href={createPath(LOGIN_PATH)}>
               <MenuItem>Login</MenuItem>
             </Link>
-            <Link href={"/" + SIGNUP_PATH}>
+            <Link href={createPath(SIGNUP_PATH)}>
               <MenuItem>Sign up</MenuItem>
             </Link>
           </>

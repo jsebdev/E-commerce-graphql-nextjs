@@ -13,3 +13,5 @@ export const notifyErrors = (errors) => {
     });
   });
 };
+
+export const createPath = (path) => `/${path.join("/")}`;

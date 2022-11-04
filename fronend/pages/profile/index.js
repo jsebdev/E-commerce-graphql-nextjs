@@ -16,6 +16,7 @@ import {
 } from "store/slices/userSlice";
 import { ADD_ITEM_PATH } from "helpers/strings";
 import { DynamicUserChecker } from "components/dynamicUseChecker";
+import { createPath } from "helpers/utils";
 
 const Profile = ({ username, token, userItems }) => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const Profile = ({ username, token, userItems }) => {
         <Title order={1}>hello {username}!</Title>
         {userItems.length > 0 ? (
           <>
-            <Link href={ADD_ITEM_PATH.join("/")}>
+            <Link href={createPath(ADD_ITEM_PATH)}>
               <Button>Add new item</Button>
             </Link>
             <Title order={3}>Your products:</Title>
@@ -58,7 +59,7 @@ const Profile = ({ username, token, userItems }) => {
         ) : (
           <>
             <Title order={3}>You have no products yet</Title>
-            <Link href={ADD_ITEM_PATH.join("/")}>Add your first product</Link>
+            <Link href={createPath(ADD_ITEM_PATH)}>Add your first product</Link>
           </>
         )}
       </DynamicUserChecker>

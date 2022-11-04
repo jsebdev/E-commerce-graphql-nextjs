@@ -13,8 +13,8 @@ import { TagsInput } from "components/tagsInput";
 const AddProduct = ({ token, username }) => {
   const [tags, setTags] = React.useState([]);
   const router = useRouter();
-  const { checkUser } = useProfile();
-  checkUser({ token, username, router });
+  const { checkUser } = useProfile({ token, username, router });
+  checkUser();
   const { formSettings, handleAddItem, handleFormErrors } = useItem(
     username,
     useDispatch(),

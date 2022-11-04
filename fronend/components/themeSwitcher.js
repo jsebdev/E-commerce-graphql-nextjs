@@ -2,7 +2,7 @@ import React from "react";
 import { useMantineColorScheme } from "@mantine/core";
 import { THEMES_NAMES } from "helpers/strings";
 import Image from "next/image";
-import styles from "./header.module.scss";
+import styles from "styles/componentsStyles/header.module.scss";
 
 export const ThemeSwitcher = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
