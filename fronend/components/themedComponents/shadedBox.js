@@ -2,11 +2,7 @@ import { Box } from "@mantine/core";
 import React from "react";
 import cn from "classnames";
 import shadedBoxStyles from "styles/componentsStyles/shadedBox.module.scss";
-
-// export const ShadedBox = forwardRef(({ children }, ref) => {
-
-const shadeBoxBackground = (theme) =>
-  theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[1];
+import { shadedBackground } from "helpers/utils";
 
 export const ShadedBox = ({ children, wide }) => {
   return (
@@ -16,12 +12,12 @@ export const ShadedBox = ({ children, wide }) => {
         [shadedBoxStyles.shadedBox]: true,
       })}
       sx={(theme) => ({
-        backgroundColor: shadeBoxBackground(theme),
+        backgroundColor: shadedBackground(theme),
         "&:before": {
-          backgroundColor: shadeBoxBackground(theme),
+          backgroundColor: shadedBackground(theme),
         },
         "&:after": {
-          backgroundColor: shadeBoxBackground(theme),
+          backgroundColor: shadedBackground(theme),
         },
       })}
     >
