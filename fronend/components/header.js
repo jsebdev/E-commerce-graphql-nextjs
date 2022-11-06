@@ -1,5 +1,5 @@
 import React from "react";
-import { Cart } from "./cart";
+import { CartIcon } from "./cartIcon";
 import headerStyles from "styles/componentsStyles/header.module.scss";
 import { Logo } from "./logo";
 import { MenuContainer } from "./menuContainer";
@@ -15,12 +15,7 @@ const DynamicMenu = dynamic(() => import("./menu"), { ssr: false });
 export const Header = () => {
   return (
     <div className={headerStyles.headerWrapper}>
-      <Paper
-        className={headerStyles.header}
-        sx={(theme) => ({
-          borderBlockEnd: `1px solid ${theme.colors.gray[5]}`,
-        })}
-      >
+      <Paper className={headerStyles.header}>
         <HeaderButton>
           <Logo />
         </HeaderButton>
@@ -29,7 +24,7 @@ export const Header = () => {
         </HeaderButton>
         <Searcher />
         <HeaderButton>
-          <Cart />
+          <CartIcon />
         </HeaderButton>
         <HeaderButton>
           <ThemeSwitcher />

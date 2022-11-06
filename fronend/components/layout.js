@@ -3,6 +3,7 @@ import Head from "next/head";
 import styles from "styles/componentsStyles/layout.module.scss";
 import { Header } from "./header";
 import { Footer } from "./footer";
+import { Container } from "@mantine/core";
 
 export const siteTitle = "Awesome Website";
 
@@ -21,7 +22,9 @@ export const Layout = ({ children }) => {
         <meta name="og:title" content={siteTitle} />
       </Head>
       <Header />
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <Container pt="1rem">{children}</Container>
+      </main>
       <Footer></Footer>
     </div>
   );

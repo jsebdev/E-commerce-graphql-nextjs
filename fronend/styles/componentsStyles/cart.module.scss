@@ -1,0 +1,20 @@
+.cartIcon {
+  position: relative;
+}
+
+.cartCounter {
+  position: absolute;
+  bottom: -8px;
+  right: -7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  width: 20px;
+  padding: 5px;
+  line-height: 0;
+  letter-spacing: 0;
+  color: white;
+  background-color: red;
+}

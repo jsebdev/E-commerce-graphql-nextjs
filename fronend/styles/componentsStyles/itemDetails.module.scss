@@ -3,7 +3,7 @@
 .imagesContainer {
   max-width: 400px;
   width: 100%;
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
 }
 
 .titleDateContainer {
@@ -21,6 +21,14 @@
       text-align: end;
     }
   }
+}
+
+.rowContainer {
+  width: 100%;
+}
+
+.leftContainer {
+  flex-grow: 1;
 }
 
 .actionsContainer {
@@ -50,3 +58,4 @@
   position: sticky;
   top: 0;
 }
+

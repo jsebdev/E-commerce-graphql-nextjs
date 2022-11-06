@@ -12,6 +12,7 @@ export const SIGNUP_PATH = ["signup"];
 export const LOGIN_PATH = ["login"];
 export const ACCOUNT_CREATED_PATH = ["accountCreated"];
 export const ITEM_DISPLAY_PATH = (itemId) => ["items", itemId];
+export const CART_PATH = ["cart"];
 
 export const shadedBoxVariants = {
   default: "default",

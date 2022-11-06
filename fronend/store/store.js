@@ -1,4 +1,4 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { searchSlice } from "./slices/searchSlice";
 import {
   nextReduxCookieMiddleware,
@@ -8,6 +8,7 @@ import { createWrapper } from "next-redux-wrapper";
 import { userSlice } from "./slices/userSlice";
 import { loaderSlice } from "./slices/loaderSlice";
 import { themeSlice } from "./slices/themeSlice";
+import { cartSlice } from "./slices/cartSlice";
 
 const makeStore = wrapMakeStore(() =>
   configureStore({
@@ -16,6 +17,7 @@ const makeStore = wrapMakeStore(() =>
       [userSlice.name]: userSlice.reducer,
       [loaderSlice.name]: loaderSlice.reducer,
       [themeSlice.name]: themeSlice.reducer,
+      [cartSlice.name]: cartSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().prepend(
@@ -24,6 +26,7 @@ const makeStore = wrapMakeStore(() =>
             `${userSlice.name}.user`,
             searchSlice.name,
             themeSlice.name,
+            cartSlice.name,
           ],
         })
       ),
