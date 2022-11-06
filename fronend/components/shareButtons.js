@@ -13,7 +13,7 @@ import {
 } from "react-share";
 import shareButtonsStyles from "styles/componentsStyles/shareButtons.module.scss";
 
-export const ShareButtons = () => {
+export const ShareButtons = ({ noWrap = "wrap" }) => {
   const router = useRouter();
   const domain = "https://www.djangoEcommerce.com";
   // useEffect(() => {
@@ -22,7 +22,7 @@ export const ShareButtons = () => {
   // }, [router]);
 
   return (
-    <Group spacing="xs" noWrap={false} align="center">
+    <Group spacing="xs" noWrap={noWrap} align="center">
       <FacebookShareButton
         url={`${domain}${router.asPath}`}
         className={shareButtonsStyles.button}

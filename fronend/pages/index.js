@@ -4,7 +4,7 @@ import Head from "next/head";
 
 import { gql } from "@apollo/client";
 import { client } from "../apolloClient";
-import { itemGraphqlQueryFields } from "helpers/queries";
+import { itemGraphqlQueryFields } from "helpers/gqlQueries";
 import { wrapper } from "store/store";
 import { connect } from "react-redux";
 import {

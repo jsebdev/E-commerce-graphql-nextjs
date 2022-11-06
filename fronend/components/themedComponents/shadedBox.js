@@ -4,11 +4,12 @@ import cn from "classnames";
 import shadedBoxStyles from "styles/componentsStyles/shadedBox.module.scss";
 import { shadedBackground } from "helpers/utils";
 
-export const ShadedBox = ({ children, wide }) => {
+const ShadedBox = ({ children, wide }) => {
   return (
     <Box
       className={cn({
         [shadedBoxStyles.wide]: wide,
+        [shadedBoxStyles.notWide]: !wide,
         [shadedBoxStyles.shadedBox]: true,
       })}
       sx={(theme) => ({
@@ -25,3 +26,5 @@ export const ShadedBox = ({ children, wide }) => {
     </Box>
   );
 };
+
+export default ShadedBox;

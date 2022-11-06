@@ -1,3 +1,52 @@
+@import "styles/variables";
+
 .imagesContainer {
   max-width: 400px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.titleDateContainer {
+  gap:0;
+  width:100%;
+  @media screen and (min-width: $tablet-width) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.datesContainer {
+  div{
+    @media screen and (min-width: $tablet-width) {
+      text-align: end;
+    }
+  }
+}
+
+.actionsContainer {
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin-block: 1rem;
+}
+
+.tagsContainer {
+}
+
+.mobileSection {
+  @media screen and (min-width: $tablet-width) {
+    display: none;
+  }
+}
+
+.tabletSection {
+  display: none;
+  @media screen and (min-width: $tablet-width) {
+    display: flex;
+  }
+}
+
+.stickySide {
+  position: sticky;
+  top: 0;
 }

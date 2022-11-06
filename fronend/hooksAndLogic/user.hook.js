@@ -1,4 +1,4 @@
-import { itemGraphqlQueryFields } from "helpers/queries";
+import { itemGraphqlQueryFields } from "helpers/gqlQueries";
 
 // const { gql } = require("@apollo/client");
 // const { setUserItems } = require("store/slices/userSlice");

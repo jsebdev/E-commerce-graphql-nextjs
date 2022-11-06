@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { showNotification } from "@mantine/notifications";
 import { client } from "apolloClient";
-import { itemGraphqlQueryFields } from "helpers/queries";
+import { itemGraphqlQueryFields } from "helpers/gqlQueries";
 import { notifyFormErrors } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
 import { useUserItems } from "./user.hook";

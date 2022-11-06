@@ -3,7 +3,7 @@ import { client } from "apolloClient";
 import { GridItem } from "components/gridItem";
 import { ItemDetails } from "components/itemDetails";
 import { Layout } from "components/layout";
-import { itemGraphqlQueryFields } from "helpers/queries";
+import { itemGraphqlQueryFields } from "helpers/gqlQueries";
 import React from "react";
 
 export const getStaticPaths = async () => {
