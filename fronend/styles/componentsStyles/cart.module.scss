@@ -1,20 +1,36 @@
-.cartIcon {
-  position: relative;
+.table {
+  display: grid;
+  grid-template-columns: 50px minmax(150px, 1fr) 100px 100px 80px 60px;
+  border: 1px solid gray;
+  overflow-x: auto;
+
+  &>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.cartCounter {
-  position: absolute;
-  bottom: -8px;
-  right: -7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  width: 20px;
-  padding: 5px;
-  line-height: 0;
-  letter-spacing: 0;
-  color: white;
-  background-color: red;
+.modal {
+  position: fixed;
+  z-index: 20;
+  height: 20%;
+  top: 25%;
+  width: 50%;
+  left: 25%;
+  padding: 2rem;
+  >div {
+    gap:0;
+    p {
+      text-align: center;
+      .itemTitle {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.message {
+  text-align: center;
+  font-weight: bold;
 }

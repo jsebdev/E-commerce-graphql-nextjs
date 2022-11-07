@@ -1,7 +1,12 @@
 import { ActionIcon, Group } from "@mantine/core";
 import React from "react";
 
-export const QuantityInput = ({ quantity, setQuantity }) => {
+export const QuantityInput = ({
+  quantity,
+  setQuantity,
+  showButtons = true,
+  min = 1,
+}) => {
   const incrementValue = () => {
     setQuantity((v) => v + 1);
   };
@@ -14,25 +19,29 @@ export const QuantityInput = ({ quantity, setQuantity }) => {
   };
   return (
     <Group noWrap="nowrap">
-      <ActionIcon
-        size={30}
-        variant="default"
-        onClick={decrementValue}
-        disabled={quantity <= 1}
-      >
-        –
-      </ActionIcon>
+      {showButtons && (
+        <ActionIcon
+          size={30}
+          variant="default"
+          onClick={decrementValue}
+          disabled={quantity <= 1}
+        >
+          –
+        </ActionIcon>
+      )}
       <input
         type="number"
         value={quantity}
-        min={1}
+        min={min}
         step={1}
         onChange={handleInputChange}
         style={{ width: "40px" }}
       />
-      <ActionIcon size={30} variant="default" onClick={incrementValue}>
-        +
-      </ActionIcon>
+      {showButtons && (
+        <ActionIcon size={30} variant="default" onClick={incrementValue}>
+          +
+        </ActionIcon>
+      )}
     </Group>
   );
 };

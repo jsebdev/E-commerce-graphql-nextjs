@@ -2,6 +2,7 @@
 
 .headerWrapper{
   z-index: 10;
+  border-bottom: 1px solid #888;
 }
 .header {
   display: grid;
@@ -10,7 +11,6 @@
   align-items: center;
   justify-items: center;
   padding-block: 0.5rem;
-  border-bottom: 1px solid #888;
 
   @media screen and (min-width: $tablet-width) {
     grid-template-columns: 3rem 1fr 3rem 3rem;

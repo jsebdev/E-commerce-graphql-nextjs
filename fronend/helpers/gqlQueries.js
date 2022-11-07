@@ -2,6 +2,7 @@ export const itemGraphqlQueryFields = `
   id
   title
   subtitle
+  price
   seller {
     username
   }

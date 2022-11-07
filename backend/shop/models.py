@@ -29,6 +29,7 @@ class Item(models.Model):
     date_created = models.DateTimeField()
     date_modified = models.DateTimeField()
     published = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     seller = models.ForeignKey(Profile, on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag, related_name='items')

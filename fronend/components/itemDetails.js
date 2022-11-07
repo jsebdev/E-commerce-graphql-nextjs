@@ -74,9 +74,13 @@ export const ItemDetails = ({ item }) => {
                 quantity={quantity}
                 setQuantity={setQuantity}
               />
-              <Link href={createPath(CART_PATH)}>
+              <Stack
+                align="center"
+                className={itemDetailsStyles.addToCartContainer}
+              >
+                <Title order={4}>${item.price * quantity}</Title>
                 <GoToCart />
-              </Link>
+              </Stack>
             </Group>
           </Group>
           <DynamicShadedBox wide={windowSize.width < tabletWidth}>
@@ -102,18 +106,19 @@ export const ItemDetails = ({ item }) => {
           )}
         >
           <Space h="lg" />
-          <Group>
-            <Stack>
+          <Group position="center">
+            <Stack align="center">
               <AddToCart
                 item={item}
                 quantity={quantity}
                 setQuantity={setQuantity}
               />
-              <GoToCart></GoToCart>
+              <Title order={4}>${item.price * quantity}</Title>
+              <GoToCart />
             </Stack>
           </Group>
-          <ShareButtons noWrap="nowrap" />
           <TagsList tags={item.tags}></TagsList>
+          <ShareButtons noWrap="nowrap" />
         </Stack>
       </Group>
     </Stack>

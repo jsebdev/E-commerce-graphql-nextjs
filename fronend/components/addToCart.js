@@ -9,7 +9,15 @@ import addToCartStyles from "styles/componentsStyles/addToCart.module.scss";
 export const AddToCart = ({ item, quantity, setQuantity }) => {
   const dispatch = useDispatch();
   const addItemHandler = () => {
-    dispatch(addItem({ id: item.id, title: item.title, quantity }));
+    dispatch(
+      addItem({
+        id: item.id,
+        title: item.title,
+        quantity,
+        price: item.price,
+        description: item.description,
+      })
+    );
     showNotification({
       message: "Item added to cart successfully",
       color: "green",

@@ -4,7 +4,7 @@ import headerStyles from "styles/componentsStyles/header.module.scss";
 import { Logo } from "./logo";
 import { MenuContainer } from "./menuContainer";
 import { Searcher } from "./searcher";
-import { Paper } from "@mantine/core";
+import { Container, Paper } from "@mantine/core";
 import { ThemeSwitcher } from "./themeSwitcher";
 import { HeaderButton } from "./headerButton";
 import menuStyles from "styles/componentsStyles/menu.module.scss";
@@ -14,8 +14,8 @@ const DynamicMenu = dynamic(() => import("./menu"), { ssr: false });
 
 export const Header = () => {
   return (
-    <div className={headerStyles.headerWrapper}>
-      <Paper className={headerStyles.header}>
+    <Paper className={headerStyles.headerWrapper}>
+      <Container className={headerStyles.header}>
         <HeaderButton>
           <Logo />
         </HeaderButton>
@@ -30,8 +30,8 @@ export const Header = () => {
           <ThemeSwitcher />
         </HeaderButton>
         <DynamicMenu onTablet={true} />
-      </Paper>
-    </div>
+      </Container>
+    </Paper>
   );
 };
 
