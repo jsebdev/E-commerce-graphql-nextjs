@@ -1,25 +1,16 @@
 import { Box } from "@mantine/core";
 import React from "react";
-import cn from "classnames";
-import shadedBoxStyles from "styles/componentsStyles/shadedBox.module.scss";
-import { shadedBackground } from "helpers/utils";
 
-const ShadedBox = ({ children, wide }) => {
+export const ShadedBox = ({ children, className }) => {
   return (
     <Box
-      className={cn({
-        [shadedBoxStyles.wide]: wide,
-        [shadedBoxStyles.notWide]: !wide,
-        [shadedBoxStyles.shadedBox]: true,
-      })}
+      className={className}
       sx={(theme) => ({
-        backgroundColor: shadedBackground(theme),
-        "&:before": {
-          backgroundColor: shadedBackground(theme),
-        },
-        "&:after": {
-          backgroundColor: shadedBackground(theme),
-        },
+        boxShadow: ` 1px 1px 2px 1px ${
+          theme.colorScheme === "dark"
+            ? theme.colors.gray[7]
+            : theme.colors.dark[0]
+        }`,
       })}
     >
       {children}
@@ -27,4 +18,22 @@ const ShadedBox = ({ children, wide }) => {
   );
 };
 
-export default ShadedBox;
+// export const ShadedBox = React.forwardRef(({ children, className }, ref) => {
+//   return (
+//     <Box
+//       ref={ref}
+//       className={className}
+//       sx={(theme) => ({
+//         boxShadow: ` 1px 1px 2px 1px ${
+//           theme.colorScheme === "dark"
+//             ? theme.colors.gray[7]
+//             : theme.colors.dark[0]
+//         }`,
+//       })}
+//     >
+//       {children}
+//     </Box>
+//   );
+// });
+
+// ShadedBox.displayName = "ShadedBox";

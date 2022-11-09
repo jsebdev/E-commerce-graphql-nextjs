@@ -18,7 +18,7 @@ import { createPath, formatDate } from "helpers/utils";
 import cn from "classnames";
 import { useWindowSize } from "hooksAndLogic/global.hooks";
 import { tabletWidth } from "helpers/varialbles";
-import { DynamicShadedBox } from "./themedComponents/dynamicShadedBox";
+import { DynamicShadedBox } from "./themedComponents/dynamicColoredBox";
 import { CART_PATH } from "helpers/strings";
 import Link from "next/link";
 import { AddToCart } from "./addToCart";

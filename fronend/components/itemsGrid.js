@@ -1,6 +1,6 @@
 import React from "react";
 import { GridItem } from "./gridItem";
-import utilStyles from "styles/utils.module.scss";
+import itemsGridStyles from "styles/componentsStyles/itemsGrid.module.scss";
 import Link from "next/link";
 import { ITEM_DISPLAY_PATH, OWN_ITEM_PATH } from "helpers/strings";
 import { createPath } from "helpers/utils";
@@ -11,7 +11,7 @@ export const ItemsGrid = ({
   inHome = true,
 }) => {
   return (
-    <div className={utilStyles.itemsGrid}>
+    <div className={itemsGridStyles.itemsGrid}>
       {items.map((item) => (
         <Link
           key={item.id}
@@ -21,9 +21,7 @@ export const ItemsGrid = ({
               : createPath(OWN_ITEM_PATH(item.id))
           }
         >
-          <div>
-            <GridItem item={item} />
-          </div>
+          <GridItem item={item} />
         </Link>
       ))}
       {items.length === 0 && <p>{notFoundMessage}</p>}

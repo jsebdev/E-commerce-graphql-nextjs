@@ -1,0 +1,40 @@
+@import "styles/variables";
+
+
+.gridItem {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.75rem;
+  list-style: none;
+  padding: 1rem;
+  margin: 0;
+  border-radius: 5px;
+  max-height: 500px;
+  overflow: hidden;
+  .itemImage {
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  .titlesBox {
+    h2,h3,h4,h5 {
+      margin: 0;
+    }
+  }
+  .descriptionContainer {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    p {
+      margin: 0;
+    }
+  }
+}
+
+
+.imageContainer {
+}
+
