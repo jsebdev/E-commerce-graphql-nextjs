@@ -1,5 +1,5 @@
 import { setUser } from "store/slices/userSlice";
-import { notifyFormErrors } from "helpers/utils";
+import { createPath, notifyFormErrors } from "helpers/utils";
 import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
@@ -36,7 +36,7 @@ export const useLogin = (dispatch, router) => {
     const { success, errors, user, token } = data.tokenAuth;
     if (success) {
       dispatch(setUser({ token, username: user.username }));
-      router.push(PROFILE_PATH);
+      router.push(createPath(PROFILE_PATH));
     }
     dispatch(setLoading(false));
     return { success, errors };

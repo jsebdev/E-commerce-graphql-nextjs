@@ -1,4 +1,4 @@
-import { Text, Title } from "@mantine/core";
+import { Button, Center, Stack, Text, Title } from "@mantine/core";
 import { Layout } from "components/layout";
 import { Loading } from "components/loading";
 import { LOGIN_PATH } from "helpers/strings";
@@ -34,16 +34,20 @@ const Activate = () => {
           {!errors ? (
             <>
               <Title order={3}>Congratulations</Title>
-              <Text>Your account has been verified</Text>
-              <Link href={createPath(LOGIN_PATH)}>Login in your account</Link>
+              <Text>Your account has been activated</Text>
+              <Link href={createPath(LOGIN_PATH)}>
+                <a>
+                  <Button>Login in your account</Button>
+                </a>
+              </Link>
             </>
           ) : (
-            <>
+            <Stack align="center">
               <Title order={3}>Ups! Something went wrong</Title>
               {errors.map((error) => (
                 <Text key={error}>{error}</Text>
               ))}
-            </>
+            </Stack>
           )}
         </>
       ) : (

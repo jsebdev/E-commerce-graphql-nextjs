@@ -23,9 +23,8 @@ class ItemCreation(graphene.Mutation):
         title = graphene.String(required=True)
         subtitle = graphene.String()
         description = graphene.String()
-        date_created = graphene.DateTime()
-        date_modified = graphene.DateTime()
         published = graphene.Boolean()
+        price = graphene.Decimal()
 
         seller = graphene.ID(required=True)
         tags = graphene.List(graphene.ID)

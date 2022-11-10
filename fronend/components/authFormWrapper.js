@@ -2,20 +2,21 @@ import { showNotification } from "@mantine/notifications";
 import { useProfile } from "hooksAndLogic/profile.hook";
 import { useRouter } from "next/router";
 import React from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { selectToken, selectUsername } from "store/slices/userSlice";
 import { DynamicUserChecker } from "./dynamicUseChecker";
 import { Layout } from "./layout";
 
-export const AuthFormWrapperNoConnection = ({
-  token,
-  username,
-  FormComponent,
-}) => {
+const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {
+  useEffect(() => {
+    console.log("17: token >>>", token);
+    console.log("18: username >>>", username);
+  });
   const [errorMessages, setErrorMessages] = React.useState([]);
   const router = useRouter();
-  const { checkNoUser } = useProfile({ token, username, router });
-  checkNoUser();
+  const { checkAlreadyLoggedIn } = useProfile({ token, username, router });
+  checkAlreadyLoggedIn();
   const displayErrors = (errorMessages) => {
     setErrorMessages(errorMessages);
     errorMessages.forEach((errorMessage) =>
@@ -42,7 +43,7 @@ export const AuthFormWrapperNoConnection = ({
   );
 };
 
-export const authFormWrapper = connect((state) => ({
+export const AuthFormWrapper = connect((state) => ({
   token: selectToken(state),
   username: selectUsername(state),
 }))(AuthFormWrapperNoConnection);

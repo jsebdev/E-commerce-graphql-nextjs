@@ -20,7 +20,7 @@ class ItemAdmin(admin.ModelAdmin):
     model = Item
     list_display = ('id', 'title', 'price', 'published',
                     'seller', 'description')
-    list_filter = ('published', 'price')
+    list_filter = ('published', 'price', 'seller')
     list_editable = ('title', 'published', 'description', 'price')
     search_fields = ('title', 'description', 'subtitle')
     date_hierarchy = 'date_created'

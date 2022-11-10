@@ -4,7 +4,14 @@ import { selectToken, selectUsername } from "store/slices/userSlice";
 import { connect, useDispatch } from "react-redux";
 import { useProfile } from "hooksAndLogic/profile.hook";
 import { Layout } from "components/layout";
-import { Button, Checkbox, Textarea, TextInput, Title } from "@mantine/core";
+import {
+  Button,
+  Checkbox,
+  NumberInput,
+  Textarea,
+  TextInput,
+  Title,
+} from "@mantine/core";
 import { DynamicUserChecker } from "components/dynamicUseChecker";
 import { useForm } from "@mantine/form";
 import { useItem } from "hooksAndLogic/item.hook";
@@ -51,6 +58,23 @@ const AddProduct = ({ token, username }) => {
               label="Description"
               withAsterisk
               {...form.getInputProps("description")}
+            />
+            <NumberInput
+              id="price"
+              placeholder="Price"
+              label="Price"
+              withAsterisk
+              parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+              formatter={(value) =>
+                !Number.isNaN(parseFloat(value))
+                  ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  : "$ "
+              }
+              hideControls
+              min={0}
+              precision={2}
+              step={0.01}
+              {...form.getInputProps("price")}
             />
             <Checkbox
               id="published"

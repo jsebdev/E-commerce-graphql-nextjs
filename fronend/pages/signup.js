@@ -1,9 +1,9 @@
 import React from "react";
-import { AuthFormWrapperNoConnection } from "components/authFormWrapper";
 import { SignUpForm } from "components/signupForm";
+import { AuthFormWrapper } from "components/authFormWrapper";
 
 const SignUp = () => {
-  return <AuthFormWrapperNoConnection FormComponent={SignUpForm} />;
+  return <AuthFormWrapper FormComponent={SignUpForm} />;
 };
 
 export default SignUp;

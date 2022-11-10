@@ -18,10 +18,10 @@ import { Title } from "@mantine/core";
 import { ItemsGrid } from "components/itemsGrid";
 
 function Home({ items, searchText, username }) {
-  useEffect(() => {
-    console.log("searchText: ", searchText);
-    console.log("23: items >>>", items);
-  }, []);
+  // useEffect(() => {
+  //   console.log("searchText: ", searchText);
+  //   console.log("23: items >>>", items);
+  // }, []);
   return (
     <Layout home>
       <Head>

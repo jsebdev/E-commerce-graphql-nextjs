@@ -1,9 +1,9 @@
 import { setActivationEmail, setUser } from "store/slices/userSlice";
-import { notifyFormErrors } from "helpers/utils";
+import { createPath, notifyFormErrors } from "helpers/utils";
 import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
-import { ACCOUNT_CREATED_PATH, PROFILE_PATH } from "helpers/strings";
+import { ACCOUNT_CREATED_PATH } from "helpers/strings";
 
 export const useSignup = (dispatch, router) => {
   const formSettings = {
@@ -42,7 +42,7 @@ export const useSignup = (dispatch, router) => {
     let errorMessages = [];
     if (success) {
       dispatch(setActivationEmail(values.email));
-      router.push(ACCOUNT_CREATED_PATH);
+      router.push(createPath(ACCOUNT_CREATED_PATH));
     } else {
       errorMessages = Object.keys(errors).map((key) => errors[key][0].message);
     }

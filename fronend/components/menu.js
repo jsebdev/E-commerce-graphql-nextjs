@@ -3,7 +3,7 @@ import Link from "next/link";
 import cn from "classnames";
 import menuStyles from "styles/componentsStyles/menu.module.scss";
 import { selectToken } from "store/slices/userSlice";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Center, useMantineTheme } from "@mantine/core";
 import {
   LOGIN_PATH,

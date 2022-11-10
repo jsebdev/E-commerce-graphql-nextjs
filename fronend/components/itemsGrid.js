@@ -13,16 +13,15 @@ export const ItemsGrid = ({
   return (
     <div className={itemsGridStyles.itemsGrid}>
       {items.map((item) => (
-        <Link
-          key={item.id}
-          href={
-            inHome
-              ? createPath(ITEM_DISPLAY_PATH(item.id))
-              : createPath(OWN_ITEM_PATH(item.id))
-          }
-        >
-          <GridItem item={item} />
-        </Link>
+        // <Link
+        //   key={item.id}
+        //   href={
+        //     inHome
+        //       ? createPath(ITEM_DISPLAY_PATH(item.id))
+        //       : createPath(OWN_ITEM_PATH(item.id))
+        //   }
+        // >
+        <GridItem key={item.id} item={item} inHome={inHome} />
       ))}
       {items.length === 0 && <p>{notFoundMessage}</p>}
     </div>

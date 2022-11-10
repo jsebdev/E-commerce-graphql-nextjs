@@ -21,6 +21,9 @@ export const userSlice = createSlice({
     setUserItems: (state, action) => {
       state.userItems = action.payload;
     },
+    addUserItem: (state, action) => {
+      state.userItems = [...state.userItems, action.payload];
+    },
     setActivationEmail: (state, action) => {
       state.activationEmail = action.payload;
     },
@@ -35,7 +38,8 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserItems, setUser, setActivationEmail } = userSlice.actions;
+export const { setUserItems, setUser, setActivationEmail, addUserItem } =
+  userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 export const selectUsername = (state) => state.user.user.username;
