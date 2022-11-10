@@ -6,10 +6,10 @@ export const ShadedBox = ({ children, className }) => {
     <Box
       className={className}
       sx={(theme) => ({
-        boxShadow: ` 1px 1px 2px 1px ${
+        boxShadow: ` 2px 2px 5px 3px ${
           theme.colorScheme === "dark"
             ? theme.colors.gray[7]
-            : theme.colors.dark[0]
+            : theme.colors.gray[2]
         }`,
       })}
     >

@@ -1,0 +1,29 @@
+@import "styles/variables";
+
+.formContainer{
+  display: flex;
+  justify-content: center;
+  .form {
+    display: grid;
+    grid-gap: 0.5rem;
+    width: 100%;
+    max-width: 600px;
+    .imageInput{
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: $tablet-width) {
+  .formContainer{
+    .form {
+      max-width: 100%;
+      grid-template-columns: 1fr [image-line] 1fr;
+      .imageInputContainer{
+        grid-column-start: image-line;
+        grid-row-start: 1;
+        grid-row-end: 6;
+      }
+    }
+  }
+}

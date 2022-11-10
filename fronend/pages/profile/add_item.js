@@ -6,7 +6,10 @@ import { useProfile } from "hooksAndLogic/profile.hook";
 import { Layout } from "components/layout";
 import {
   Button,
+  Center,
   Checkbox,
+  FileInput,
+  Group,
   NumberInput,
   Textarea,
   TextInput,
@@ -16,6 +19,8 @@ import { DynamicUserChecker } from "components/dynamicUseChecker";
 import { useForm } from "@mantine/form";
 import { useItem } from "hooksAndLogic/item.hook";
 import { TagsInput } from "components/tagsInput";
+import addItemStyles from "styles/componentsStyles/add_item.module.scss";
+import { FilePlaceholder, FileValue } from "components/fileValue";
 
 const AddProduct = ({ token, username }) => {
   const [tags, setTags] = React.useState([]);
@@ -32,58 +37,83 @@ const AddProduct = ({ token, username }) => {
     <Layout>
       <DynamicUserChecker condition={token && username}>
         <div>
-          <Title order={3}>Add New product</Title>
-          <form
-            onSubmit={form.onSubmit(
-              (values) => handleAddItem(values, tags),
-              handleFormErrors
-            )}
-          >
-            <TextInput
-              withAsterisk
-              id="title"
-              placeholder="Title"
-              label="Title"
-              {...form.getInputProps("title")}
-            />
-            <TextInput
-              id="subtitle"
-              placeholder="Sub-title"
-              label="Sub-title"
-              {...form.getInputProps("subtitle")}
-            />
-            <Textarea
-              id="description"
-              placeholder="Description"
-              label="Description"
-              withAsterisk
-              {...form.getInputProps("description")}
-            />
-            <NumberInput
-              id="price"
-              placeholder="Price"
-              label="Price"
-              withAsterisk
-              parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-              formatter={(value) =>
-                !Number.isNaN(parseFloat(value))
-                  ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  : "$ "
-              }
-              hideControls
-              min={0}
-              precision={2}
-              step={0.01}
-              {...form.getInputProps("price")}
-            />
-            <Checkbox
-              id="published"
-              label="published"
-              {...form.getInputProps("published", { type: "checkbox" })}
-            />
-            <TagsInput tags={tags} setTags={setTags} />
-            <Button type="submit">Save</Button>
-          </form>
+          <Title order={3} mb="lg">
+            Add New product
+          </Title>
+          <div className={addItemStyles.formContainer}>
+            <form
+              onSubmit={form.onSubmit(
+                (values) => handleAddItem(values, tags),
+                handleFormErrors
+              )}
+              className={addItemStyles.form}
+            >
+              <TextInput
+                withAsterisk
+                id="title"
+                placeholder="Title"
+                label="Title"
+                {...form.getInputProps("title")}
+              />
+              <TextInput
+                id="subtitle"
+                placeholder="Sub-title"
+                label="Sub-title"
+                {...form.getInputProps("subtitle")}
+              />
+              <div className={addItemStyles.imageInputContainer}>
+                <FileInput
+                  id="image"
+                  placeholder={<FilePlaceholder />}
+                  label="Image"
+                  variant="unstyled"
+                  accept="image/png,image/jpeg"
+                  // multiple
+                  valueComponent={FileValue}
+                />
+              </div>
+              <Textarea
+                id="description"
+                placeholder="Description"
+                label="Description"
+                withAsterisk
+                {...form.getInputProps("description")}
+              />
+              <NumberInput
+                id="price"
+                placeholder="Price"
+                label="Price"
+                withAsterisk
+                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                formatter={(value) =>
+                  !Number.isNaN(parseFloat(value))
+                    ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    : "$ "
+                }
+                hideControls
+                min={0}
+                precision={2}
+                step={0.01}
+                {...form.getInputProps("price")}
+              />
+              <TagsInput tags={tags} setTags={setTags} />
+              <Checkbox
+                styles={{
+                  root: {
+                    display: "flex",
+                    justifyContent: "center",
+                  },
+                }}
+                id="published"
+                label="published"
+                {...form.getInputProps("published", { type: "checkbox" })}
+                mt="md"
+              />
+              <Button type="submit" mt="lg">
+                Save
+              </Button>
+            </form>
+          </div>
         </div>
       </DynamicUserChecker>
     </Layout>

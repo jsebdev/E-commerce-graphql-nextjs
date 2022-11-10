@@ -4,7 +4,7 @@ import cn from "classnames";
 import menuStyles from "styles/componentsStyles/menu.module.scss";
 import { selectToken } from "store/slices/userSlice";
 import { connect } from "react-redux";
-import { Center, useMantineTheme } from "@mantine/core";
+import { Button, Center, useMantineTheme } from "@mantine/core";
 import {
   LOGIN_PATH,
   PROFILE_PATH,
@@ -69,9 +69,11 @@ const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
 const MenuItem = React.forwardRef(({ children, onClick }, ref) => {
   return (
     <li ref={ref} onClick={onClick}>
-      <Center px="0.5rem" sx={(theme) => hoverButtonEffect(theme)}>
+      {/* <Center px="0.5rem" sx={(theme) => hoverButtonEffect(theme)}> */}
+      <Button variant="subtle" size="md">
         {children}
-      </Center>
+      </Button>
+      {/* </Center> */}
     </li>
   );
 });

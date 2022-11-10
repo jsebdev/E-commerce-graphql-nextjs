@@ -1,8 +1,12 @@
+import { Text, useMantineColorScheme } from "@mantine/core";
+import classNames from "classnames";
+import { THEMES_NAMES } from "helpers/strings";
 import { getTags } from "hooksAndLogic/tags.logic";
 import React from "react";
 import { useEffect } from "react";
 
 import { WithContext as ReactTags } from "react-tag-input";
+import tagsInputStyles from "styles/componentsStyles/tagsInput.module.scss";
 
 const KeyCodes = {
   comma: 188,
@@ -42,26 +46,33 @@ export const TagsInput = ({ tags, setTags }) => {
     newTags.splice(newPos, 0, tag);
     setTags(newTags);
   };
-  // const handleTagClick = (index) => {
-  //   console.log("The tag at index " + index + " was clicked");
-  // };
   useEffect(async () => {
     const actualTags = await getTags();
     setSuggestions(actualTags.map((tag) => ({ id: tag.id, text: tag.name })));
   }, []);
 
+  const { colorScheme } = useMantineColorScheme();
+  const isDark = colorScheme.colorScheme === THEMES_NAMES.dark;
+
   return (
-    <ReactTags
-      tags={tags}
-      suggestions={suggestions}
-      delimiters={delimiters}
-      handleDelete={handleDelete}
-      handleAddition={handleAddition}
-      handleDrag={handleDrag}
-      // handleTagClick={handleTagClick}
-      placeholder="Click to add tags"
-      autocomplete={false}
-      inputFieldPosition="inline"
-    />
+    <div
+      className={classNames({
+        [tagsInputStyles.container]: true,
+        darkMode: isDark,
+      })}
+    >
+      <Text className={tagsInputStyles.label}>Tags</Text>
+      <ReactTags
+        tags={tags}
+        suggestions={suggestions}
+        delimiters={delimiters}
+        handleDelete={handleDelete}
+        handleAddition={handleAddition}
+        handleDrag={handleDrag}
+        placeholder="Click to add tags"
+        autocomplete={false}
+        inputFieldPosition="inline"
+      />
+    </div>
   );
 };

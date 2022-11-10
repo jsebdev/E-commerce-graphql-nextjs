@@ -1,0 +1,13 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  // flex-wrap: wrap;
+  .label{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-inline-end: 1rem;
+  }
+
+}
