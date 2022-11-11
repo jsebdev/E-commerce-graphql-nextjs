@@ -20,7 +20,7 @@ class Tag(models.Model):
 
 
 def get_image_path(instance, filename):
-    return f'images/items/{instance.id}/{filename}'
+    return f'images/items/{instance.title}/{filename}'
 
 
 class Item(models.Model):

@@ -181,3 +181,12 @@ EMAIL_PORT = 587
 
 
 APPEND_SLASH = False
+
+# MEDIA_ROOT is where the uploaded files are stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediaRoot')
+# MEDIA_URL is the URL that the browser uses to access the files in MEDIA_ROOT
+# This is done only in development
+MEDIA_URL = 'media/'
+
+# TODO
+# When serving static files in deployment use the STATIC_ROOT and STATIC_URL variables

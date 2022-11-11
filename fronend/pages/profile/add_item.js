@@ -19,24 +19,26 @@ import { useItem } from "hooksAndLogic/item.hook";
 import { TagsInput } from "components/tagsInput";
 import addItemStyles from "styles/componentsStyles/add_item.module.scss";
 import { FilePlaceholder, FileValue } from "components/fileValue";
-import { useRef } from "react";
+import { useMutation } from "@apollo/client";
+import { UploadFile } from "components/demo";
 
 const AddProduct = ({ token, username }) => {
-  // const imageInputRef = useRef(null);
   const [image, setImage] = React.useState(null);
   const [tags, setTags] = React.useState([]);
   const router = useRouter();
   const { checkUser } = useProfile({ token, username, router });
   checkUser();
-  const { formSettings, handleAddItem, handleFormErrors } = useItem(
+  const { mutation, formSettings, handleAddItem, handleFormErrors } = useItem(
     username,
     useDispatch(),
     useRouter()
   );
+  const [mutate, { data, loading, error }] = useMutation(mutation);
   const form = useForm(formSettings);
   return (
     <Layout>
       <DynamicUserChecker condition={token && username}>
+        <UploadFile></UploadFile>
         <div>
           <Title order={3} mb="lg">
             Add New product
@@ -44,7 +46,7 @@ const AddProduct = ({ token, username }) => {
           <div className={addItemStyles.formContainer}>
             <form
               onSubmit={form.onSubmit(
-                (values) => handleAddItem(values, tags, image),
+                (values) => handleAddItem(mutate, { values, tags, image }),
                 handleFormErrors
               )}
               className={addItemStyles.form}

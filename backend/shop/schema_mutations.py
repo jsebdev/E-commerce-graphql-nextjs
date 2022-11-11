@@ -25,7 +25,7 @@ class ItemCreation(graphene.Mutation):
         price = graphene.Decimal()
         image = Upload(required=False, description="Item's image")
 
-        seller = graphene.ID(required=True)
+        seller = graphene.String(required=True)
         tags = graphene.List(graphene.ID)
         newTags = graphene.List(graphene.String)
 
@@ -36,26 +36,47 @@ class ItemCreation(graphene.Mutation):
         print('printing the image:')
         print(image)
         print('image printed')
+        if (image):
+            print('image is not None')
+            kwargs['image'] = image
+        else:
+            print('image is None')
+
+        print('printing the kwargs:')
+        print(kwargs)
         # Obtain the item's seller. It must exists already
         try:
             seller = models.Profile.objects.get(username=kwargs.pop('seller'))
         except models.Profile.DoesNotExist:
             return CreateItemFailed(error_message='Seller does not exist')
 
+        print('seller obtained')
+
         # Obtain the item's tags. They must exist already
         tagsIds = kwargs.pop('tags', None)
+        print('49: tagsIds >>>', tagsIds)
         if tagsIds:
             tags = models.Tag.objects.filter(id__in=tagsIds)
 
+        print('tags obtained')
+
         # Get new tags names before item creation
         newTags = kwargs.pop('newTags', None)
+
+        print('new tags obtained')
 
         try:
             item = seller.item_set.create(**kwargs)
             if tagsIds:
                 item.tags.set(tags)
+            if image:
+                pass
+                # print('trying to save the image')
+                # item.image = image
         except Exception as e:
             return CreateItemFailed(error_message=str(e))
+
+        print('item created')
 
         if newTags:
             for t in newTags:
@@ -65,6 +86,8 @@ class ItemCreation(graphene.Mutation):
                     item.tags.add(possible_existing_tag.first())
                 else:
                     item.tags.create(name=tag)
+
+        print('new tags created')
 
         return CreateItemSuccess(item=item)
 
