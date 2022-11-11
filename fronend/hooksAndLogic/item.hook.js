@@ -27,7 +27,7 @@ export const useItem = (sellerUsername, dispatch, router) => {
     },
   };
 
-  const handleAddItem = async (values, tags) => {
+  const handleAddItem = async (values, tags, image) => {
     dispatch(setLoading(true));
     const currentTags = tags.filter((tag) => !tag.newTag);
     const newTags = tags.filter((tag) => tag.newTag);
@@ -40,6 +40,7 @@ export const useItem = (sellerUsername, dispatch, router) => {
           seller:"${sellerUsername}", 
           tags:${JSON.stringify(currentTags.map((tag) => tag.id))},
           newTags:${JSON.stringify(newTags.map((tag) => tag.text))},
+          image: "${image}",
           price:"${values.price}"
         ) {
            __typename

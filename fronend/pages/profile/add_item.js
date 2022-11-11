@@ -6,10 +6,8 @@ import { useProfile } from "hooksAndLogic/profile.hook";
 import { Layout } from "components/layout";
 import {
   Button,
-  Center,
   Checkbox,
   FileInput,
-  Group,
   NumberInput,
   Textarea,
   TextInput,
@@ -21,8 +19,11 @@ import { useItem } from "hooksAndLogic/item.hook";
 import { TagsInput } from "components/tagsInput";
 import addItemStyles from "styles/componentsStyles/add_item.module.scss";
 import { FilePlaceholder, FileValue } from "components/fileValue";
+import { useRef } from "react";
 
 const AddProduct = ({ token, username }) => {
+  // const imageInputRef = useRef(null);
+  const [image, setImage] = React.useState(null);
   const [tags, setTags] = React.useState([]);
   const router = useRouter();
   const { checkUser } = useProfile({ token, username, router });
@@ -43,7 +44,7 @@ const AddProduct = ({ token, username }) => {
           <div className={addItemStyles.formContainer}>
             <form
               onSubmit={form.onSubmit(
-                (values) => handleAddItem(values, tags),
+                (values) => handleAddItem(values, tags, image),
                 handleFormErrors
               )}
               className={addItemStyles.form}
@@ -63,6 +64,8 @@ const AddProduct = ({ token, username }) => {
               />
               <div className={addItemStyles.imageInputContainer}>
                 <FileInput
+                  value={image}
+                  onChange={setImage}
                   id="image"
                   placeholder={<FilePlaceholder />}
                   label="Image"
