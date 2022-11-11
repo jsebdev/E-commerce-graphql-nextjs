@@ -1,11 +1,9 @@
 import graphene
+from graphql_auth import mutations
+from graphene_file_upload.scalars import Upload
 
 from shop.schema_responses import CreateItemFailed, CreateItemResponse, CreateItemSuccess
-
 from . import models
-from .schema_types import ItemType, TagType, UserType, SellerType
-
-from graphql_auth import mutations
 
 
 class AuthMutation(graphene.ObjectType):
@@ -25,6 +23,7 @@ class ItemCreation(graphene.Mutation):
         description = graphene.String()
         published = graphene.Boolean()
         price = graphene.Decimal()
+        image = Upload(required=False, description="Item's image")
 
         seller = graphene.ID(required=True)
         tags = graphene.List(graphene.ID)
@@ -33,7 +32,10 @@ class ItemCreation(graphene.Mutation):
     Output = CreateItemResponse
 
     @classmethod
-    def mutate(cls, root, info, **kwargs):
+    def mutate(cls, root, info, image=None, **kwargs):
+        print('printing the image:')
+        print(image)
+        print('image printed')
         # Obtain the item's seller. It must exists already
         try:
             seller = models.Profile.objects.get(username=kwargs.pop('seller'))

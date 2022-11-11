@@ -19,20 +19,26 @@ class Tag(models.Model):
         return self.name
 
 
+def get_image_path(instance, filename):
+    return f'images/items/{instance.id}/{filename}'
+
+
 class Item(models.Model):
     class Meta:
         ordering = ['-date_created']
 
     title = models.CharField(max_length=100, unique=True)
-    subtitle = models.CharField(max_length=100, default="")
+    subtitle = models.CharField(max_length=100, default="", blank=True)
     description = models.TextField(default="", blank=True)
     date_created = models.DateTimeField()
     date_modified = models.DateTimeField()
     published = models.BooleanField(default=False)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    image = models.ImageField(upload_to=get_image_path,
+                              blank=True, default=None)
 
     seller = models.ForeignKey(Profile, on_delete=models.PROTECT)
-    tags = models.ManyToManyField(Tag, related_name='items')
+    tags = models.ManyToManyField(Tag, related_name='items', blank=True)
 
     def __str__(self):
         return f'{self.id} {self.title}'
@@ -43,7 +49,6 @@ class Item(models.Model):
             self.date_created = timezone.now()
         self.date_modified = timezone.now()
         return super(Item, self).save(*args, **kwargs)
-
 
 # class Image(models.Model):
 #     name = models.CharField(max_length=50, default=None)
