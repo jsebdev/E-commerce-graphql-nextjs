@@ -65,3 +65,7 @@ class ItemCreation(graphene.Mutation):
                     item.tags.create(name=tag)
 
         return CreateItemSuccess(item=item)
+
+
+class Mutation(AuthMutation, graphene.ObjectType):
+    create_item = ItemCreation.Field()
