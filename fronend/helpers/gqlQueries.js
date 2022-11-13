@@ -13,4 +13,5 @@ export const itemGraphqlQueryFields = `
   dateCreated
   dateModified
   published
+  image
 `;

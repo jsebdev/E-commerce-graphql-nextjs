@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { selectToken, selectUsername } from "store/slices/userSlice";
 import { DynamicUserChecker } from "./dynamicUseChecker";
 import { Layout } from "./layout";
+import authFormWrapperStyles from "styles/componentsStyles/authFormWrapper.module.scss";
 
 const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {
   useEffect(() => {
@@ -29,15 +30,19 @@ const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {
   return (
     <Layout home={false}>
       <DynamicUserChecker condition={!token || !username}>
-        <FormComponent displayErrors={displayErrors} />
-        {errorMessages.length > 0 && (
-          <>
-            <p>Errors:</p>
-            {errorMessages.map((message) => (
-              <p key={message}>{message}</p>
-            ))}
-          </>
-        )}
+        <div className={authFormWrapperStyles.page}>
+          <div className={authFormWrapperStyles.formContainer}>
+            <FormComponent displayErrors={displayErrors} />
+            {errorMessages.length > 0 && (
+              <>
+                <p>Errors:</p>
+                {errorMessages.map((message) => (
+                  <p key={message}>{message}</p>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
       </DynamicUserChecker>
     </Layout>
   );

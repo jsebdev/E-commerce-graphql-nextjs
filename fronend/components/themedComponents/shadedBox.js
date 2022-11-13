@@ -1,7 +1,17 @@
 import { Box } from "@mantine/core";
 import React from "react";
 
-export const ShadedBox = ({ children, className }) => {
+export const ShadedBox = ({ children, className, hover = false }) => {
+  const hoverStyles = (theme) =>
+    hover
+      ? {
+          boxShadow: ` 2px 2px 7px 5px ${
+            theme.colorScheme === "dark"
+              ? theme.colors.gray[7]
+              : theme.colors.gray[2]
+          }`,
+        }
+      : null;
   return (
     <Box
       className={className}
@@ -11,6 +21,7 @@ export const ShadedBox = ({ children, className }) => {
             ? theme.colors.gray[7]
             : theme.colors.gray[2]
         }`,
+        "&:hover": hoverStyles(theme),
       })}
     >
       {children}

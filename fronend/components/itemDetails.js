@@ -1,26 +1,13 @@
-import {
-  Box,
-  Button,
-  Center,
-  Container,
-  Group,
-  Space,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
-import Image from "next/image";
+import { Box, Center, Group, Space, Stack, Text, Title } from "@mantine/core";
 import React, { useState } from "react";
 import { ShareButtons } from "./shareButtons";
 import { TagsList } from "./tagsList";
 import itemDetailsStyles from "styles/componentsStyles/itemDetails.module.scss";
-import { createPath, formatDate } from "helpers/utils";
+import { formatDate, fullImagePath } from "helpers/utils";
 import cn from "classnames";
 import { useWindowSize } from "hooksAndLogic/global.hooks";
 import { tabletWidth } from "helpers/varialbles";
 import { DynamicShadedBox } from "./themedComponents/dynamicColoredBox";
-import { CART_PATH } from "helpers/strings";
-import Link from "next/link";
 import { AddToCart } from "./addToCart";
 import { GoToCart } from "./goToCart";
 
@@ -54,12 +41,16 @@ export const ItemDetails = ({ item }) => {
         <Box className={itemDetailsStyles.leftContainer}>
           <Center mb="1rem">
             <div className={itemDetailsStyles.imagesContainer}>
-              <Image
+              <img
+                className={itemDetailsStyles.image}
+                src={fullImagePath(item.image)}
+              />
+              {/* <Image
                 src="/images/profile.jpg"
                 width="100"
                 height="100"
                 layout="responsive"
-              />
+              /> */}
             </div>
           </Center>
           <Group

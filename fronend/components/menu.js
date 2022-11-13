@@ -6,6 +6,7 @@ import { selectToken } from "store/slices/userSlice";
 import { connect } from "react-redux";
 import { Button, Center, useMantineTheme } from "@mantine/core";
 import {
+  ADD_ITEM_PATH,
   LOGIN_PATH,
   PROFILE_PATH,
   SIGNUP_PATH,
@@ -48,6 +49,9 @@ const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
               <MenuItem>My Profile</MenuItem>
             </Link>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <Link href={createPath(ADD_ITEM_PATH)}>
+              <MenuItem>Add new Item</MenuItem>
+            </Link>
           </>
         ) : (
           <>

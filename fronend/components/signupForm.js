@@ -1,4 +1,4 @@
-import { Button, PasswordInput, Text, TextInput } from "@mantine/core";
+import { Box, Button, PasswordInput, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSignup } from "hooksAndLogic/signup.hook";
 import { useRouter } from "next/router";
@@ -22,15 +22,17 @@ export const SignUpForm = ({ displayErrors }) => {
   return (
     <>
       <h3>Sign Up</h3>
-      <Text>Welcome to this platform</Text>
-      <Text>
-        In order to create your account your emails will be requested.
-      </Text>
-      <Text>but don&apos;t worry!</Text>
-      <Text>
-        This project is intended only as a demonstration. I&apos;m not saving
-        your info anywhere for commercial purposes ;)
-      </Text>
+      <Box my="lg">
+        <Text>Welcome to this platform</Text>
+        <Text>
+          In order to create your account your emails will be requested.
+        </Text>
+        <Text>but don&apos;t worry!</Text>
+        <Text>
+          This project is intended only as a demonstration. I&apos;m not saving
+          your info anywhere for commercial purposes ;)
+        </Text>
+      </Box>
       <form onSubmit={form.onSubmit(signUp, handleFormErrors)}>
         <TextInput
           id="username"
@@ -56,7 +58,9 @@ export const SignUpForm = ({ displayErrors }) => {
           label="password2"
           {...form.getInputProps("password2")}
         />
-        <Button type="submit">Sign in</Button>
+        <Button type="submit" mt="lg">
+          Sign in
+        </Button>
       </form>
     </>
   );

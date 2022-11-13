@@ -5,6 +5,10 @@
   .themeBackground{
     width: 100%;
     max-width: 350px;
+    transition: all 0.1s ease-in-out;
+    &:hover {
+      transform: scale(1.005);
+    }
     .imageContainer {
       width: 100%;
       aspect-ratio: 1;

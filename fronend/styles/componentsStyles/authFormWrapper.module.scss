@@ -1,0 +1,10 @@
+@import "styles/variables";
+
+.page{
+  display: flex;
+  justify-content: center;
+  .formContainer {
+    max-width: $inputs-max-width;
+    width: 100%;
+  }
+}

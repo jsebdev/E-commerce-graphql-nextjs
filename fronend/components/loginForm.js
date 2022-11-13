@@ -39,7 +39,9 @@ export const LoginForm = ({ displayErrors }) => {
           label="password"
           {...form.getInputProps("password")}
         />
-        <Button type="submit">Log In</Button>
+        <Button type="submit" mt="lg">
+          Log In
+        </Button>
       </form>
     </>
   );

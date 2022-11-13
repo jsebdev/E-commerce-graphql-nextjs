@@ -1,6 +1,6 @@
 import { showNotification } from "@mantine/notifications";
 import { formatRelative } from "date-fns";
-import { useState } from "react";
+import { BACKEND_URL, BACKEND_MEDIA_URL } from "helpers/strings";
 
 export const notifyFormErrors = (errors) => {
   notifyErrors(Object.values(errors));
@@ -26,3 +26,13 @@ export const formatDate = (date) => {
 
 export const shadedBackground = (theme) =>
   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[1];
+
+export const fullImagePath = (imagePath) =>
+  `${BACKEND_URL}/${BACKEND_MEDIA_URL}/${imagePath}`;
+
+export const customErrorMessage = (errorMessage) => {
+  if (errorMessage === "UNIQUE constraint failed: shop_item.title") {
+    return "There is already an item with this title";
+  }
+  return errorMessage;
+};

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Center, Group, Stack, Text, Title } from "@mantine/core";
+import { Button, Center, Group, Stack, Text, Title } from "@mantine/core";
 // import { UserChecker } from "components/userChecker";
 import { ItemsGrid } from "components/itemsGrid";
 import { Layout } from "components/layout";
@@ -35,14 +35,11 @@ const Profile = ({ username, token, userItems }) => {
   return (
     <Layout>
       <DynamicUserChecker condition={token && username}>
-        {/* <Group position="apart" align="flex-start" spacing={0}> */}
         <Group position="apart" spacing="sm" mb={20}>
           <Title order={1}>Welcome {username}!</Title>
           {userItems.length > 0 && (
             <Link href={createPath(ADD_ITEM_PATH)}>
-              {/* <Center my={20}> */}
               <Button>Add new item</Button>
-              {/* </Center> */}
             </Link>
           )}
         </Group>

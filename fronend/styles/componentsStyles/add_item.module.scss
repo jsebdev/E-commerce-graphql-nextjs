@@ -8,9 +8,6 @@
     grid-gap: 0.5rem;
     width: 100%;
     max-width: 600px;
-    .imageInput{
-      width: 100%;
-    }
   }
 }
 
@@ -22,7 +19,24 @@
       .imageInputContainer{
         grid-column-start: image-line;
         grid-row-start: 1;
-        grid-row-end: 6;
+        grid-row-end: 5;
+        display: flex;
+        align-items: center;
+        .imageInput{
+          width: 100%;
+          label{
+            margin-left: 2rem;
+          }
+        }
+      }
+      .saveButton{
+        grid-column-start: 1;
+        grid-column-end: 3;
+        display: flex;
+        justify-content: center;
+        button{
+          padding-inline: 3rem;
+        }
       }
     }
   }

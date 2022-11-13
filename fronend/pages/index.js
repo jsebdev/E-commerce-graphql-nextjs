@@ -14,7 +14,7 @@ import {
 } from "store/slices/searchSlice";
 import { useEffect } from "react";
 import { selectUsername } from "store/slices/userSlice";
-import { Title } from "@mantine/core";
+import { Center, Stack, Text, Title } from "@mantine/core";
 import { ItemsGrid } from "components/itemsGrid";
 
 function Home({ items, searchText, username }) {
@@ -32,7 +32,14 @@ function Home({ items, searchText, username }) {
         <Title order={1} align="center" my={10}>
           {username ? `Welcome ${username}` : "The E-commerce"}
         </Title>
-        <ItemsGrid items={items} />
+        {items.length > 0 ? (
+          <ItemsGrid items={items} />
+        ) : (
+          <Stack align="center" mt={60}>
+            <Text>Sorry! There are no items published at the moment</Text>
+            <Text>Came back later or publish an item yourself 😉</Text>
+          </Stack>
+        )}
       </div>
     </Layout>
   );
@@ -41,8 +48,6 @@ function Home({ items, searchText, username }) {
 export const getServerSideProps = wrapper.getServerSideProps(
   // export const getStaticProps = wrapper.getStaticProps(
   (store) => async () => {
-    // const items = useSelector(selectItems);
-    // console.log("50: items >>>", items);
     const query = gql`
     query {
       items (filter:true, published:true) {

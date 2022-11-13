@@ -20,7 +20,6 @@ import { TagsInput } from "components/tagsInput";
 import addItemStyles from "styles/componentsStyles/add_item.module.scss";
 import { FilePlaceholder, FileValue } from "components/fileValue";
 import { useMutation } from "@apollo/client";
-import { UploadFile } from "components/demo";
 
 const AddProduct = ({ token, username }) => {
   const [image, setImage] = React.useState(null);
@@ -33,12 +32,11 @@ const AddProduct = ({ token, username }) => {
     useDispatch(),
     useRouter()
   );
-  const [mutate, { data, loading, error }] = useMutation(mutation);
+  const [mutate] = useMutation(mutation);
   const form = useForm(formSettings);
   return (
     <Layout>
       <DynamicUserChecker condition={token && username}>
-        <UploadFile></UploadFile>
         <div>
           <Title order={3} mb="lg">
             Add New product
@@ -66,6 +64,7 @@ const AddProduct = ({ token, username }) => {
               />
               <div className={addItemStyles.imageInputContainer}>
                 <FileInput
+                  className={addItemStyles.imageInput}
                   value={image}
                   onChange={setImage}
                   id="image"
@@ -83,6 +82,7 @@ const AddProduct = ({ token, username }) => {
                 label="Description"
                 withAsterisk
                 {...form.getInputProps("description")}
+                styles={{ input: { height: "300px" } }}
               />
               <NumberInput
                 id="price"
@@ -114,9 +114,11 @@ const AddProduct = ({ token, username }) => {
                 {...form.getInputProps("published", { type: "checkbox" })}
                 mt="md"
               />
-              <Button type="submit" mt="lg">
-                Save
-              </Button>
+              <div className={addItemStyles.saveButton}>
+                <Button type="submit" mt="lg">
+                  Save
+                </Button>
+              </div>
             </form>
           </div>
         </div>

@@ -3,22 +3,18 @@ import { resetWebsite } from "helpers/helpers";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import headerStyles from "styles/componentsStyles/header.module.scss";
+import logoStyles from "styles/componentsStyles/logo.module.scss";
+import { ActionIcon, Button } from "@mantine/core";
 
 export const Logo = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   return (
-    <div
-      className={headerStyles.logoContainer}
+    <ActionIcon
+      className={logoStyles.logoContainer}
       onClick={() => resetWebsite(dispatch, router)}
     >
-      <Image
-        layout="responsive"
-        src="/images/store_128.png"
-        width={10}
-        height={10}
-      />
-    </div>
+      <Image src="/images/store_128.png" width="100%" height="100%" />
+    </ActionIcon>
   );
 };

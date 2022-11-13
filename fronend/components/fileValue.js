@@ -6,6 +6,9 @@ import fileValueStyles from "styles/componentsStyles/fileValue.module.scss";
 import { ShadedBox } from "./themedComponents/shadedBox";
 import { THEMES_NAMES } from "helpers/strings";
 
+/**
+ * This component is the common frame component for the button and the image
+ */
 const ImageFrame = ({ children }) => (
   <div className={fileValueStyles.imageFrame}>
     <Box
@@ -17,7 +20,7 @@ const ImageFrame = ({ children }) => (
             : theme.colors.white,
       })}
     >
-      <ShadedBox className={fileValueStyles.imageContainer}>
+      <ShadedBox className={fileValueStyles.imageContainer} hover={true}>
         {children}
       </ShadedBox>
     </Box>
