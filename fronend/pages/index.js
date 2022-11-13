@@ -16,8 +16,15 @@ import { useEffect } from "react";
 import { selectUsername } from "store/slices/userSlice";
 import { Center, Stack, Text, Title } from "@mantine/core";
 import { ItemsGrid } from "components/itemsGrid";
+import { useRouter } from "next/router";
 
 function Home({ items, searchText, username }) {
+  // const router = useRouter();
+  // useEffect(() => {
+  // console.log("en el useeffect del main");
+  // router.replace(router.asPath);
+  // console.log("26: router.asPath >>>", router.asPath);
+  // }, []);
   // useEffect(() => {
   //   console.log("searchText: ", searchText);
   //   console.log("23: items >>>", items);

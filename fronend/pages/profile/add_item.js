@@ -1,6 +1,10 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { selectToken, selectUsername } from "store/slices/userSlice";
+import {
+  selectItemsFetched,
+  selectToken,
+  selectUsername,
+} from "store/slices/userSlice";
 import { connect, useDispatch } from "react-redux";
 import { useProfile } from "hooksAndLogic/profile.hook";
 import { Layout } from "components/layout";
@@ -15,13 +19,13 @@ import {
 } from "@mantine/core";
 import { DynamicUserChecker } from "components/dynamicUseChecker";
 import { useForm } from "@mantine/form";
-import { useItem } from "hooksAndLogic/item.hook";
+import { useItem } from "hooksAndLogic/addItem.hook";
 import { TagsInput } from "components/tagsInput";
 import addItemStyles from "styles/componentsStyles/add_item.module.scss";
 import { FilePlaceholder, FileValue } from "components/fileValue";
 import { useMutation } from "@apollo/client";
 
-const AddProduct = ({ token, username }) => {
+const AddProduct = ({ token, username, itemsFetched }) => {
   const [image, setImage] = React.useState(null);
   const [tags, setTags] = React.useState([]);
   const router = useRouter();
@@ -44,7 +48,8 @@ const AddProduct = ({ token, username }) => {
           <div className={addItemStyles.formContainer}>
             <form
               onSubmit={form.onSubmit(
-                (values) => handleAddItem(mutate, { values, tags, image }),
+                (values) =>
+                  handleAddItem(mutate, { values, tags, image }, itemsFetched),
                 handleFormErrors
               )}
               className={addItemStyles.form}
@@ -130,4 +135,5 @@ const AddProduct = ({ token, username }) => {
 export default connect((state) => ({
   username: selectUsername(state),
   token: selectToken(state),
+  itemsFetched: selectItemsFetched(state),
 }))(AddProduct);

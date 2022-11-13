@@ -10,7 +10,7 @@ import {
   notifyFormErrors,
 } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
-import { addUserItem } from "store/slices/userSlice";
+import { addUserItem, setItemsFetched } from "store/slices/userSlice";
 import { fetchUserItems, useUserItems } from "./user.logic";
 
 export const useItem = (sellerUsername, dispatch, router) => {
@@ -66,13 +66,14 @@ export const useItem = (sellerUsername, dispatch, router) => {
       }
     `;
 
-  const handleAddItem = async (mutate, { values, tags, image }) => {
+  const handleAddItem = async (
+    mutate,
+    { values, tags, image },
+    itemsFetched
+  ) => {
     dispatch(setLoading(true));
     const currentTags = tags.filter((tag) => !tag.newTag).map((tag) => tag.id);
     const newTags = tags.filter((tag) => tag.newTag).map((tag) => tag.text);
-
-    // debugger;
-
     mutate({
       variables: {
         title: values.title,
@@ -85,7 +86,7 @@ export const useItem = (sellerUsername, dispatch, router) => {
         price: values.price,
         image: image,
       },
-      onCompleted: (data) => {
+      onCompleted: async (data) => {
         console.log("61: data >>>", data);
         if (data.createItem.__typename === "CreateItemFailed") {
           showNotification({
@@ -100,6 +101,8 @@ export const useItem = (sellerUsername, dispatch, router) => {
             message: "Item added successfully",
             color: "green",
           });
+          if (!itemsFetched) await fetchUserItems(sellerUsername, dispatch);
+          dispatch(setItemsFetched(true));
           dispatch(addUserItem(data.createItem.item));
           router.push(createPath(PROFILE_PATH));
         }

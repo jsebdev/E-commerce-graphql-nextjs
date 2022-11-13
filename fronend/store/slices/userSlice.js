@@ -3,11 +3,11 @@ import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
   user: {
-    // id: null,
     token: null,
     username: null,
+    userItems: [],
+    itemsFetched: false,
   },
-  userItems: [],
   activationEmail: null,
 };
 
@@ -19,13 +19,16 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     setUserItems: (state, action) => {
-      state.userItems = action.payload;
+      state.user.userItems = action.payload;
     },
     addUserItem: (state, action) => {
-      state.userItems = [...state.userItems, action.payload];
+      state.user.userItems = [action.payload, ...state.user.userItems];
     },
     setActivationEmail: (state, action) => {
       state.activationEmail = action.payload;
+    },
+    setItemsFetched: (state, action) => {
+      state.user.itemsFetched = action.payload;
     },
   },
   extraReducers: {
@@ -38,11 +41,18 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUserItems, setUser, setActivationEmail, addUserItem } =
-  userSlice.actions;
+export const {
+  setUserItems,
+  setUser,
+  setActivationEmail,
+  addUserItem,
+  setItemsFetched,
+} = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 export const selectUsername = (state) => state.user.user.username;
 export const selectToken = (state) => state.user.user.token;
 export const selectActivationEmail = (state) => state.user.activationEmail;
-export const selectUserItems = (state) => state.user.userItems;
+export const selectUserItems = (state) => state.user.user.userItems || [];
+export const selectItemsFetched = (state) =>
+  state.user.user.itemsFetched || false;

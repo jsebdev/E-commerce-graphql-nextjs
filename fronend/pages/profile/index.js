@@ -10,15 +10,17 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import {
+  selectItemsFetched,
   selectToken,
   selectUserItems,
   selectUsername,
+  setItemsFetched,
 } from "store/slices/userSlice";
 import { ADD_ITEM_PATH } from "helpers/strings";
 import { DynamicUserChecker } from "components/dynamicUseChecker";
 import { createPath } from "helpers/utils";
 
-const Profile = ({ username, token, userItems }) => {
+const Profile = ({ username, token, userItems, itemsFetched }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [publishedItems, setPublishedItems] = useState([]);
@@ -26,7 +28,12 @@ const Profile = ({ username, token, userItems }) => {
   const { checkUser } = useProfile({ token, username, router });
   checkUser();
   useEffect(() => {
-    if (userItems.length === 0) fetchUserItems(username, dispatch);
+    (async () => {
+      if (!itemsFetched) {
+        await fetchUserItems(username, dispatch);
+        dispatch(setItemsFetched(true));
+      }
+    })();
   }, []);
   useEffect(() => {
     setPublishedItems(userItems.filter((item) => item.published));
@@ -86,4 +93,5 @@ export default connect((state) => ({
   username: selectUsername(state),
   token: selectToken(state),
   userItems: selectUserItems(state),
+  itemsFetched: selectItemsFetched(state),
 }))(Profile);

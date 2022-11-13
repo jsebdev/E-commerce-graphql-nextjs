@@ -7,38 +7,6 @@ import Link from "next/link";
 import { createPath, fullImagePath } from "helpers/utils";
 import { ITEM_DISPLAY_PATH, OWN_ITEM_PATH } from "helpers/strings";
 
-// export const GridItem = React.forwardRef(({ item }, ref) => {
-//   return (
-//     <div ref={ref}>
-//       <ShadedBox className={gridItemStyles.gridItem}>
-//         <div className={gridItemStyles.imageContainer}>
-//           <Image
-//             className={gridItemStyles.itemImage}
-//             src="/images/profile.jpg"
-//             layout="responsive"
-//             width={1}
-//             height={1}
-//           />
-//         </div>
-//         <Group position="apart" align="self-start">
-//           <Box className={gridItemStyles.titlesBox}>
-//             <Link href="/login">
-//               <h3>{item.title}</h3>
-//             </Link>
-//             {item.subtitle && <h4>{item.subtitle}</h4>}
-//           </Box>
-//           <Title order={5} color="grape.9">
-//             ${item.price}
-//           </Title>
-//         </Group>
-//         <div className={gridItemStyles.descriptionContainer}>
-//           <p>{item.description}</p>
-//         </div>
-//       </ShadedBox>
-//     </div>
-//   );
-// });
-
 export const GridItem = ({ item, inHome }) => {
   const itemPath = inHome
     ? createPath(ITEM_DISPLAY_PATH(item.id))
@@ -50,15 +18,10 @@ export const GridItem = ({ item, inHome }) => {
           <div className={gridItemStyles.imageContainer}>
             <img
               className={gridItemStyles.itemImage}
-              src={fullImagePath(item.image)}
+              src={
+                item.image ? fullImagePath(item.image) : "/images/no-photo.png"
+              }
             />
-            {/* <Image
-              // className={gridItemStyles.itemImage}
-              src="/images/profile.jpg"
-              layout="responsive"
-              width={1}
-              height={1}
-            /> */}
           </div>
         </Link>
         <Group position="apart" align="self-start">
