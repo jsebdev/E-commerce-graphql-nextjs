@@ -39,6 +39,8 @@ export const EditItem = ({ item, username }) => {
       image={image}
       setImage={setImage}
       savedImage={item.image}
+      editItem={true}
+      itemTitle={item.title}
     ></ItemForm>
   );
 };

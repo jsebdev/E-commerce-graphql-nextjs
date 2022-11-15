@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { Box, Group, Title } from "@mantine/core";
 import gridItemStyles from "styles/componentsStyles/gridItem.module.scss";
@@ -14,7 +13,7 @@ export const GridItem = ({ item, inHome = true }) => {
   return (
     <Box className={gridItemStyles.gridItemContainer}>
       <ShadedBox className={gridItemStyles.gridItem}>
-        <Link key={item.id} href={itemPath} legacyBehavior>
+        <Link key={item.id} href={itemPath} legacyBehavior scroll={true}>
           <a className={gridItemStyles.imageContainer}>
             <img
               className={gridItemStyles.itemImage}

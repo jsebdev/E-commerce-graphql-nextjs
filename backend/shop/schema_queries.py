@@ -33,12 +33,14 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
     def resolve_item_by_tag(root, info, tag):
         return models.Item.objects.prefetch_related('tags').select_related('seller').filter(tags__name__iexact=tag)
 
-    def resolve_items_by_search(root, info, searchText):
+    def resolve_items_by_search(root, info, searchText, filter=True, published=True):
         objects = models.Item.objects.prefetch_related('tags').select_related('seller').filter(Q(title__icontains=searchText) |
                                                                                                Q(subtitle__icontains=searchText) |
                                                                                                Q(description__icontains=searchText) |
                                                                                                Q(tags__name__icontains=searchText) |
                                                                                                Q(seller__username__icontains=searchText)).distinct()
+        if filter is True:
+            return objects.filter(published=published)
         return objects
 
     def resolve_item_by_id(root, info, id):

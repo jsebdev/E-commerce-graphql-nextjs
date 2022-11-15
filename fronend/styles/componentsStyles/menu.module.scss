@@ -19,6 +19,8 @@
   padding-block: 0.2rem;
   padding-inline: 0;
   li {
+    display: flex;
+    justify-content: center;
     list-style: none;
     padding-block: 0.1rem;
     margin-inline: 0.5rem;

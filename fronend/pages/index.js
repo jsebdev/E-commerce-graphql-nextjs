@@ -30,8 +30,14 @@ function Home({ items, searchText, username }) {
           <ItemsGrid items={items} />
         ) : (
           <Stack align="center" mt={60}>
-            <Text>Sorry! There are no items published at the moment</Text>
-            <Text>Came back later or publish an item yourself 😉</Text>
+            {searchText ? (
+              <Text>No items found for search &#39;{searchText}&#39;</Text>
+            ) : (
+              <>
+                <Text>Sorry! There are no items published at the moment</Text>
+                <Text>Came back later or publish an item yourself 😉</Text>
+              </>
+            )}
           </Stack>
         )}
       </div>

@@ -28,11 +28,13 @@ export const ItemForm = connect((state) => ({
     setImage,
     itemsFetched,
     savedImage = null,
+    editItem = false,
+    itemTitle = "No Item Title",
   }) => {
     return (
       <div>
         <Title order={3} mb="lg">
-          Add New product
+          {editItem ? itemTitle : "Add New product"}
         </Title>
         <div className={itemFormStyles.formContainer}>
           <form
@@ -56,6 +58,7 @@ export const ItemForm = connect((state) => ({
               label="Sub-title"
               {...form.getInputProps("subtitle")}
             />
+            <TagsInput tags={tags} setTags={setTags} />
             <div className={itemFormStyles.imageInputContainer}>
               <FileInput
                 className={itemFormStyles.imageInput}
@@ -95,7 +98,6 @@ export const ItemForm = connect((state) => ({
               step={0.01}
               {...form.getInputProps("price")}
             />
-            <TagsInput tags={tags} setTags={setTags} />
             <Checkbox
               styles={{
                 root: {
