@@ -44,7 +44,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     try {
       const { data } = await client.query({ query: ALL_ITEMS });
-      console.log("the items: ", data.items);
+      console.log("the first 3 items: ", data.items.slice(0, 3));
       store.dispatch(setItems(data.items));
     } catch (e) {
       console.log("Error: ", e);

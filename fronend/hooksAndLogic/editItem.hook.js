@@ -1,17 +1,25 @@
 import { gql } from "@apollo/client";
 import { showNotification } from "@mantine/notifications";
-import { itemGraphqlQueryFields, mutateAnswers } from "helpers/gqlQueries";
+import {
+  EDIT_ITEM,
+  itemGraphqlQueryFields,
+  mutateAnswers,
+} from "helpers/gqlQueries";
 import { PROFILE_PATH } from "helpers/strings";
 import { createPath, customErrorMessage } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
-import { addUserItem, setItemsFetched } from "store/slices/userSlice";
+import {
+  addUserItem,
+  modifyUserItem,
+  setItemsFetched,
+} from "store/slices/userSlice";
 import { fetchUserItems } from "./user.logic";
 
 export const useEditItem = (
   sellerUsername,
   dispatch,
   router,
-  { title, subtitle, description, price, published }
+  { id, title, subtitle, description, price, published }
 ) => {
   const formSettings = {
     initialValues: { title, subtitle, description, price, published },
@@ -25,39 +33,7 @@ export const useEditItem = (
     },
   };
 
-  const mutation = gql`
-      mutation CreateItem($title: String!,
-                          $subtitle: String!,
-                          $description: String!,
-                          $published: Boolean!,
-                          $price: Decimal!,
-                          $seller: String!,
-                          $tags: [ID!]!,
-                          $newTags: [String!]!,
-                          $image: Upload) {
-        createItem(
-          title:$title,
-          subtitle:$subtitle,
-          description:$description,
-          published:$published,, 
-          price:$price
-          seller:$seller, 
-          tags:$tags,
-          newTags:$newTags,
-          image: $image,
-        ) {
-           __typename
-          ... on ${mutateAnswers.error} {
-            errorMessage
-          }
-          ... on ${mutateAnswers.success} {
-            item {
-              ${itemGraphqlQueryFields}
-            }
-          }
-        }
-      }
-    `;
+  const mutation = EDIT_ITEM;
 
   const handleEditItem = async (
     mutate,
@@ -69,34 +45,33 @@ export const useEditItem = (
     const newTags = tags.filter((tag) => tag.newTag).map((tag) => tag.text);
     mutate({
       variables: {
+        id: id,
         title: values.title,
         subtitle: values.subtitle,
         published: values.published,
         description: values.description,
-        seller: sellerUsername,
         tags: currentTags,
         newTags: newTags,
         price: values.price,
-        image: image,
+        // image: image,
       },
-      onCompleted: async (data) => {
-        console.log("61: data >>>", data);
-        if (data.createItem.__typename === mutateAnswers.error) {
+      onCompleted: async ({ modifyItem: answer }) => {
+        if (answer.__typename === mutateAnswers.error) {
           showNotification({
             title: "Error",
-            message: customErrorMessage(data.createItem.errorMessage),
+            message: customErrorMessage(answer.errorMessage),
             color: "red",
           });
         }
-        if (data.createItem.__typename === mutateAnswers.success) {
+        if (answer.__typename === mutateAnswers.success) {
           showNotification({
             title: "Success",
-            message: "Item added successfully",
+            message: "Item modified successfully",
             color: "green",
           });
           if (!itemsFetched) await fetchUserItems(sellerUsername, dispatch);
           dispatch(setItemsFetched(true));
-          dispatch(addUserItem(data.createItem.item));
+          dispatch(modifyUserItem(answer.item));
           router.push(createPath(PROFILE_PATH));
         }
         dispatch(setLoading(false));

@@ -20,6 +20,11 @@ const EditItemPage = ({ token, username }) => {
       id: itemId,
     },
   });
+  // useEffect(() => {
+  //   console.log("24: loading >>>", loading);
+  //   console.log("25: error >>>", error);
+  //   console.log("26: data >>>", data);
+  // }, [error, loading, data]);
   if (error) {
     if (error.message === NO_ITEM_FOUND_ERROR) router.push("/404");
     else return <p>{error.message}</p>;

@@ -25,7 +25,7 @@ def get_image_path(instance, filename):
 
 class Item(models.Model):
     class Meta:
-        ordering = ['-date_created']
+        ordering = ['-date_modified']
 
     title = models.CharField(max_length=100, unique=True)
     subtitle = models.CharField(max_length=100, default="", blank=True)

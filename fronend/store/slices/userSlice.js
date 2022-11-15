@@ -24,6 +24,12 @@ export const userSlice = createSlice({
     addUserItem: (state, action) => {
       state.user.userItems = [action.payload, ...state.user.userItems];
     },
+    modifyUserItem: (state, action) => {
+      state.user.userItems = state.user.userItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+      state.user.userItems = [action.payload, ...state.user.userItems];
+    },
     setActivationEmail: (state, action) => {
       state.activationEmail = action.payload;
     },
@@ -46,6 +52,7 @@ export const {
   setUser,
   setActivationEmail,
   addUserItem,
+  modifyUserItem,
   setItemsFetched,
 } = userSlice.actions;
 

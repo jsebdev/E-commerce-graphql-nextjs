@@ -54,10 +54,43 @@ mutation CreateItem($title: String!,
     image: $image,
   ) {
     __typename
-    ... on MutateItemFailed {
+    ... on ${mutateAnswers.error} {
       errorMessage
     }
-    ... on MutateItemSuccess {
+    ... on ${mutateAnswers.success} {
+      item {
+        ${itemGraphqlQueryFields}
+      }
+    }
+  }
+}
+`;
+
+export const EDIT_ITEM = gql`
+mutation EditItem($id: ID!,
+                  $title: String!,
+                  $subtitle: String!,
+                  $description: String!,
+                  $published: Boolean!,
+                  $price: Decimal!,
+                  $tags: [ID!]!,
+                  $newTags: [String!]!,
+                  ) {
+  modifyItem(
+    id: $id,
+    title:$title,
+    subtitle:$subtitle,
+    description:$description,
+    published:$published,, 
+    price:$price
+    tags:$tags,
+    newTags:$newTags,
+  ) {
+    __typename
+    ... on ${mutateAnswers.error} {
+      errorMessage
+    }
+    ... on ${mutateAnswers.success} {
       item {
         ${itemGraphqlQueryFields}
       }
