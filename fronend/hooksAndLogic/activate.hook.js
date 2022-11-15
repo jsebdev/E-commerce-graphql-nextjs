@@ -1,25 +1,17 @@
-import { gql } from "@apollo/client";
 import { client } from "apolloClient";
+import { VERIFY_ACCOUNT } from "helpers/gqlQueries";
 import { setLoading } from "store/slices/loaderSlice";
 
 export const useActivateAccount = (dispatch) => {
   const activateAccount = async (token) => {
     dispatch(setLoading(true));
-    const mutation = gql`
-    mutation {
-      verifyAccount(token: "${token}") {
-        success
-        errors
-      }
-    }
-  `;
     let retSuccess, retErrors;
     try {
       const {
         data: {
           verifyAccount: { success, errors },
         },
-      } = await client.mutate({ mutation });
+      } = await client.mutate({ mutation: VERIFY_ACCOUNT(token) });
       if (errors) {
         retSuccess = success;
         retErrors = errors.nonFieldErrors.map((error) => error.message);

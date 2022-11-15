@@ -8,30 +8,19 @@ import {
 import { connect, useDispatch } from "react-redux";
 import { useProfile } from "hooksAndLogic/profile.hook";
 import { Layout } from "components/layout";
-import {
-  Button,
-  Checkbox,
-  FileInput,
-  NumberInput,
-  Textarea,
-  TextInput,
-  Title,
-} from "@mantine/core";
-import { DynamicUserChecker } from "components/dynamicUseChecker";
+import { DynamicLoading } from "components/dynamicLoading";
 import { useForm } from "@mantine/form";
-import { useItem } from "hooksAndLogic/addItem.hook";
-import { TagsInput } from "components/tagsInput";
-import addItemStyles from "styles/componentsStyles/add_item.module.scss";
-import { FilePlaceholder, FileValue } from "components/fileValue";
+import { useAddItem } from "hooksAndLogic/addItem.hook";
 import { useMutation } from "@apollo/client";
+import { ItemForm } from "components/itemForm";
 
-const AddProduct = ({ token, username, itemsFetched }) => {
+const AddProduct = ({ token, username }) => {
+  const { checkUser } = useProfile({ token, username, router });
+  checkUser();
   const [image, setImage] = React.useState(null);
   const [tags, setTags] = React.useState([]);
   const router = useRouter();
-  const { checkUser } = useProfile({ token, username, router });
-  checkUser();
-  const { mutation, formSettings, handleAddItem, handleFormErrors } = useItem(
+  const { mutation, formSettings, handleAddItem } = useAddItem(
     username,
     useDispatch(),
     useRouter()
@@ -40,94 +29,17 @@ const AddProduct = ({ token, username, itemsFetched }) => {
   const form = useForm(formSettings);
   return (
     <Layout>
-      <DynamicUserChecker condition={token && username}>
-        <div>
-          <Title order={3} mb="lg">
-            Add New product
-          </Title>
-          <div className={addItemStyles.formContainer}>
-            <form
-              onSubmit={form.onSubmit(
-                (values) =>
-                  handleAddItem(mutate, { values, tags, image }, itemsFetched),
-                handleFormErrors
-              )}
-              className={addItemStyles.form}
-            >
-              <TextInput
-                withAsterisk
-                id="title"
-                placeholder="Title"
-                label="Title"
-                {...form.getInputProps("title")}
-              />
-              <TextInput
-                id="subtitle"
-                placeholder="Sub-title"
-                label="Sub-title"
-                {...form.getInputProps("subtitle")}
-              />
-              <div className={addItemStyles.imageInputContainer}>
-                <FileInput
-                  className={addItemStyles.imageInput}
-                  value={image}
-                  onChange={setImage}
-                  id="image"
-                  placeholder={<FilePlaceholder />}
-                  label="Image"
-                  variant="unstyled"
-                  accept="image/png,image/jpeg"
-                  // multiple
-                  valueComponent={FileValue}
-                />
-              </div>
-              <Textarea
-                id="description"
-                placeholder="Description"
-                label="Description"
-                withAsterisk
-                {...form.getInputProps("description")}
-                styles={{ input: { height: "300px" } }}
-              />
-              <NumberInput
-                id="price"
-                placeholder="Price"
-                label="Price"
-                withAsterisk
-                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                formatter={(value) =>
-                  !Number.isNaN(parseFloat(value))
-                    ? `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                    : "$ "
-                }
-                hideControls
-                min={0}
-                precision={2}
-                step={0.01}
-                {...form.getInputProps("price")}
-              />
-              <TagsInput tags={tags} setTags={setTags} />
-              <Checkbox
-                styles={{
-                  root: {
-                    display: "flex",
-                    justifyContent: "center",
-                  },
-                }}
-                id="published"
-                label="published"
-                {...form.getInputProps("published", { type: "checkbox" })}
-                mt="md"
-              />
-              <div className={addItemStyles.saveButton}>
-                <Button type="submit" mt="lg">
-                  Save
-                </Button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </DynamicUserChecker>
+      <DynamicLoading loading={!token || !username}>
+        <ItemForm
+          form={form}
+          handleSubmit={handleAddItem}
+          mutate={mutate}
+          tags={tags}
+          setTags={setTags}
+          image={image}
+          setImage={setImage}
+        ></ItemForm>
+      </DynamicLoading>
     </Layout>
   );
 };

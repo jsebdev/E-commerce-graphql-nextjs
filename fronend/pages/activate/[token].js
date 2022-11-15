@@ -1,4 +1,4 @@
-import { Button, Center, Stack, Text, Title } from "@mantine/core";
+import { Button, Stack, Text, Title } from "@mantine/core";
 import { Layout } from "components/layout";
 import { Loading } from "components/loading";
 import { LOGIN_PATH } from "helpers/strings";

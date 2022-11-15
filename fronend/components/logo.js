@@ -1,5 +1,5 @@
 import React from "react";
-import { resetWebsite } from "helpers/helpers";
+import { resetWebsite } from "helpers/uiHelpers";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";

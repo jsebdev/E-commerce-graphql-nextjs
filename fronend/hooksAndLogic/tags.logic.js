@@ -1,18 +1,10 @@
-import { gql } from "@apollo/client";
 import { client } from "apolloClient";
+import { ALL_TAGS } from "helpers/gqlQueries";
 
 export const getTags = async () => {
-  const query = gql`
-    query {
-      tags {
-        id
-        name
-      }
-    }
-  `;
   try {
     const { data } = await client.query({
-      query,
+      query: ALL_TAGS,
     });
     return data.tags;
   } catch (e) {

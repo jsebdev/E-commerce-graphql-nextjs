@@ -1,9 +1,9 @@
 import { setActivationEmail, setUser } from "store/slices/userSlice";
 import { createPath, notifyFormErrors } from "helpers/utils";
-import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 import { ACCOUNT_CREATED_PATH } from "helpers/strings";
+import { SIGN_UP } from "helpers/gqlQueries";
 
 export const useSignup = (dispatch, router) => {
   const formSettings = {
@@ -24,20 +24,7 @@ export const useSignup = (dispatch, router) => {
   };
   const handleSignup = async (values) => {
     dispatch(setLoading(true));
-    const mutation = gql`
-      mutation {
-        register (email:"${values.email}",
-                  username:"${values.username}",
-                  password1: "${values.password1}",
-                  password2:"${values.password2}") {
-          success
-          errors
-          refreshToken
-          token
-        }
-      }
-    `;
-    const { data } = await client.mutate({ mutation });
+    const { data } = await client.mutate({ mutation: SIGN_UP(values) });
     const { success, errors } = data.register;
     let errorMessages = [];
     if (success) {

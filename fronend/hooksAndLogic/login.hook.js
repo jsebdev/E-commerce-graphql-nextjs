@@ -1,9 +1,9 @@
 import { setUser } from "store/slices/userSlice";
 import { createPath, notifyFormErrors } from "helpers/utils";
-import { gql } from "@apollo/client";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 import { PROFILE_PATH } from "helpers/strings";
+import { LOGIN } from "helpers/gqlQueries";
 
 export const useLogin = (dispatch, router) => {
   const formSettings = {
@@ -18,21 +18,7 @@ export const useLogin = (dispatch, router) => {
   };
   const handleLogin = async (values) => {
     dispatch(setLoading(true));
-    const mutation = gql`
-      mutation {
-        tokenAuth(username: "${values.username}", password: "${values.password}") {
-          token
-          success
-          errors
-          user {
-            username
-          }
-          unarchiving
-          refreshToken
-        }
-      }
-    `;
-    const { data } = await client.mutate({ mutation });
+    const { data } = await client.mutate({ mutation: LOGIN(values) });
     const { success, errors, user, token } = data.tokenAuth;
     if (success) {
       dispatch(setUser({ token, username: user.username }));

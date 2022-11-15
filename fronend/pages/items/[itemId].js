@@ -1,21 +1,12 @@
-import { gql } from "@apollo/client";
 import { client } from "apolloClient";
-import { GridItem } from "components/gridItem";
 import { ItemDetails } from "components/itemDetails";
 import { Layout } from "components/layout";
-import { itemGraphqlQueryFields } from "helpers/gqlQueries";
+import { ALL_ITEMS_IDS, ITEM_BY_ID_SERVER } from "helpers/gqlQueries";
 import React from "react";
 
 export const getStaticPaths = async () => {
-  const query = gql`
-    query {
-      items {
-        id
-      }
-    }
-  `;
   try {
-    const { data } = await client.query({ query });
+    const { data } = await client.query({ query: ALL_ITEMS_IDS });
     console.log("14: data >>>", data);
     const paths = data.items.map((item) => ({ params: { itemId: item.id } }));
     return { paths, fallback: false };
@@ -27,15 +18,8 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const itemId = context.params.itemId;
-  const query = gql`
-    query {
-      itemById(id: "${itemId}") {
-        ${itemGraphqlQueryFields}
-      }
-    }
-  `;
   try {
-    const { data } = await client.query({ query });
+    const { data } = await client.query({ query: ITEM_BY_ID_SERVER(itemId) });
     return { props: { item: data.itemById } };
   } catch (e) {
     console.log("Error: ", e);

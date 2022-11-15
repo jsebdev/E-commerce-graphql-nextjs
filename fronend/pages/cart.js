@@ -1,13 +1,11 @@
-import { Button, Center, Group, Modal, Stack, Title } from "@mantine/core";
+import { Button, Group, Modal, Stack, Title } from "@mantine/core";
 import { CartRow } from "components/cartRow";
 import { Layout } from "components/layout";
 import NonSsrWrapper from "components/nonSsrWrapper";
 import { NoPaymentMessage } from "components/noPaymentMessage";
 import { YesNoModal } from "components/yesNoModal";
-import { createPath } from "helpers/utils";
 import Link from "next/link";
 import React from "react";
-import { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { emptyCart, removeItems, selectCart } from "store/slices/cartSlice";
 import cartStyles from "styles/componentsStyles/cart.module.scss";
@@ -17,9 +15,6 @@ const Cart = ({ cart }) => {
   const [showPayModal, setShowPayModal] = React.useState(false);
   const [showEmptyModal, setShowEmptyModal] = React.useState(false);
   const [selectedItems, setSelectedItems] = React.useState([]);
-  // useEffect(() => {
-  //   console.log("16: selectedItems >>>", selectedItems);
-  // }, [selectedItems]);
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (showSelectedModal) {

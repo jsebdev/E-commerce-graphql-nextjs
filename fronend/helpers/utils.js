@@ -19,7 +19,6 @@ export const notifyErrors = (errors) => {
 export const createPath = (path) => `/${path.join("/")}`;
 
 export const formatDate = (date) => {
-  // const formatedDate = formatDistance(new Date(date), )
   const formattedDate = formatRelative(new Date(date), new Date());
   return formattedDate;
 };
@@ -36,3 +35,6 @@ export const customErrorMessage = (errorMessage) => {
   }
   return errorMessage;
 };
+
+export const itemImageSource = (image) =>
+  image ? fullImagePath(image) : "/images/no-photo.png";

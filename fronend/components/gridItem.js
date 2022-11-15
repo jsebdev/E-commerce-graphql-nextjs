@@ -4,25 +4,23 @@ import { Box, Group, Title } from "@mantine/core";
 import gridItemStyles from "styles/componentsStyles/gridItem.module.scss";
 import { ShadedBox } from "./themedComponents/shadedBox";
 import Link from "next/link";
-import { createPath, fullImagePath } from "helpers/utils";
+import { createPath, itemImageSource } from "helpers/utils";
 import { ITEM_DISPLAY_PATH, OWN_ITEM_PATH } from "helpers/strings";
 
-export const GridItem = ({ item, inHome }) => {
+export const GridItem = ({ item, inHome = true }) => {
   const itemPath = inHome
     ? createPath(ITEM_DISPLAY_PATH(item.id))
     : createPath(OWN_ITEM_PATH(item.id));
   return (
     <Box className={gridItemStyles.gridItemContainer}>
       <ShadedBox className={gridItemStyles.gridItem}>
-        <Link key={item.id} href={itemPath}>
-          <div className={gridItemStyles.imageContainer}>
+        <Link key={item.id} href={itemPath} legacyBehavior>
+          <a className={gridItemStyles.imageContainer}>
             <img
               className={gridItemStyles.itemImage}
-              src={
-                item.image ? fullImagePath(item.image) : "/images/no-photo.png"
-              }
+              src={itemImageSource(item.image)}
             />
-          </div>
+          </a>
         </Link>
         <Group position="apart" align="self-start">
           <Box className={gridItemStyles.titlesBox}>

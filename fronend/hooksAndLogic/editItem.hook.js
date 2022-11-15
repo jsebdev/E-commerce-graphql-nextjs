@@ -1,20 +1,20 @@
+import { gql } from "@apollo/client";
 import { showNotification } from "@mantine/notifications";
-import { CREATE_ITEM } from "helpers/gqlQueries";
+import { itemGraphqlQueryFields } from "helpers/gqlQueries";
 import { PROFILE_PATH } from "helpers/strings";
 import { createPath, customErrorMessage } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
 import { addUserItem, setItemsFetched } from "store/slices/userSlice";
 import { fetchUserItems } from "./user.logic";
 
-export const useAddItem = (sellerUsername, dispatch, router) => {
+export const useEditItem = (
+  sellerUsername,
+  dispatch,
+  router,
+  { title, subtitle, description, price, published }
+) => {
   const formSettings = {
-    initialValues: {
-      title: "",
-      subtitle: "",
-      description: "",
-      price: 0,
-      published: true,
-    },
+    initialValues: { title, subtitle, description, price, published },
     validate: {
       title: (value) =>
         value.length < 3 ? "Title must be at least 3 characters long" : null,
@@ -25,9 +25,41 @@ export const useAddItem = (sellerUsername, dispatch, router) => {
     },
   };
 
-  const mutation = CREATE_ITEM;
+  const mutation = gql`
+      mutation CreateItem($title: String!,
+                          $subtitle: String!,
+                          $description: String!,
+                          $published: Boolean!,
+                          $price: Decimal!,
+                          $seller: String!,
+                          $tags: [ID!]!,
+                          $newTags: [String!]!,
+                          $image: Upload) {
+        createItem(
+          title:$title,
+          subtitle:$subtitle,
+          description:$description,
+          published:$published,, 
+          price:$price
+          seller:$seller, 
+          tags:$tags,
+          newTags:$newTags,
+          image: $image,
+        ) {
+           __typename
+          ... on CreateItemFailed {
+            errorMessage
+          }
+          ... on CreateItemSuccess {
+            item {
+              ${itemGraphqlQueryFields}
+            }
+          }
+        }
+      }
+    `;
 
-  const handleAddItem = async (
+  const handleEditItem = async (
     mutate,
     { values, tags, image },
     itemsFetched
@@ -79,6 +111,6 @@ export const useAddItem = (sellerUsername, dispatch, router) => {
   return {
     mutation,
     formSettings,
-    handleAddItem,
+    handleEditItem,
   };
 };

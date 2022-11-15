@@ -5,7 +5,7 @@ import React from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { selectToken, selectUsername } from "store/slices/userSlice";
-import { DynamicUserChecker } from "./dynamicUseChecker";
+import { DynamicLoading } from "./dynamicLoading";
 import { Layout } from "./layout";
 import authFormWrapperStyles from "styles/componentsStyles/authFormWrapper.module.scss";
 
@@ -29,7 +29,7 @@ const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {
   };
   return (
     <Layout home={false}>
-      <DynamicUserChecker condition={!token || !username}>
+      <DynamicLoading loading={token && username}>
         <div className={authFormWrapperStyles.page}>
           <div className={authFormWrapperStyles.formContainer}>
             <FormComponent displayErrors={displayErrors} />
@@ -43,7 +43,7 @@ const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {
             )}
           </div>
         </div>
-      </DynamicUserChecker>
+      </DynamicLoading>
     </Layout>
   );
 };

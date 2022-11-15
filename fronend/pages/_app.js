@@ -10,7 +10,6 @@ import "styles/tagInputStyles.scss";
 
 export default function App({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
-  console.log("13: client >>>", client);
   return (
     <Provider store={store}>
       <ApolloProvider client={client}>

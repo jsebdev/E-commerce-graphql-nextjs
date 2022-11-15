@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import { ShareButtons } from "./shareButtons";
 import { TagsList } from "./tagsList";
 import itemDetailsStyles from "styles/componentsStyles/itemDetails.module.scss";
-import { formatDate, fullImagePath } from "helpers/utils";
+import { formatDate, itemImageSource } from "helpers/utils";
 import cn from "classnames";
 import { useWindowSize } from "hooksAndLogic/global.hooks";
 import { tabletWidth } from "helpers/varialbles";
 import { DynamicShadedBox } from "./themedComponents/dynamicColoredBox";
 import { AddToCart } from "./addToCart";
 import { GoToCart } from "./goToCart";
+import { ShadedBox } from "./themedComponents/shadedBox";
 
 export const ItemDetails = ({ item }) => {
   const { windowSize } = useWindowSize();
@@ -40,18 +41,12 @@ export const ItemDetails = ({ item }) => {
       >
         <Box className={itemDetailsStyles.leftContainer}>
           <Center mb="1rem">
-            <div className={itemDetailsStyles.imagesContainer}>
+            <ShadedBox className={itemDetailsStyles.imagesContainer}>
               <img
                 className={itemDetailsStyles.image}
-                src={fullImagePath(item.image)}
+                src={itemImageSource(item.image)}
               />
-              {/* <Image
-                src="/images/profile.jpg"
-                width="100"
-                height="100"
-                layout="responsive"
-              /> */}
-            </div>
+            </ShadedBox>
           </Center>
           <Group
             className={cn(

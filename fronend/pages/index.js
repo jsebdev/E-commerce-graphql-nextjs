@@ -2,9 +2,8 @@ import React from "react";
 import { Layout } from "components/layout";
 import Head from "next/head";
 
-import { gql } from "@apollo/client";
 import { client } from "../apolloClient";
-import { itemGraphqlQueryFields } from "helpers/gqlQueries";
+import { ALL_ITEMS } from "helpers/gqlQueries";
 import { wrapper } from "store/store";
 import { connect } from "react-redux";
 import {
@@ -12,23 +11,11 @@ import {
   selectSearchText,
   setItems,
 } from "store/slices/searchSlice";
-import { useEffect } from "react";
 import { selectUsername } from "store/slices/userSlice";
-import { Center, Stack, Text, Title } from "@mantine/core";
+import { Stack, Text, Title } from "@mantine/core";
 import { ItemsGrid } from "components/itemsGrid";
-import { useRouter } from "next/router";
 
 function Home({ items, searchText, username }) {
-  // const router = useRouter();
-  // useEffect(() => {
-  // console.log("en el useeffect del main");
-  // router.replace(router.asPath);
-  // console.log("26: router.asPath >>>", router.asPath);
-  // }, []);
-  // useEffect(() => {
-  //   console.log("searchText: ", searchText);
-  //   console.log("23: items >>>", items);
-  // }, []);
   return (
     <Layout home>
       <Head>
@@ -55,15 +42,8 @@ function Home({ items, searchText, username }) {
 export const getServerSideProps = wrapper.getServerSideProps(
   // export const getStaticProps = wrapper.getStaticProps(
   (store) => async () => {
-    const query = gql`
-    query {
-      items (filter:true, published:true) {
-        ${itemGraphqlQueryFields}
-      }
-    }
-  `;
     try {
-      const { data } = await client.query({ query });
+      const { data } = await client.query({ query: ALL_ITEMS });
       console.log("the items: ", data.items);
       store.dispatch(setItems(data.items));
     } catch (e) {

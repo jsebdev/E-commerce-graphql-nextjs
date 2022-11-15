@@ -21,9 +21,9 @@ export const TagsInput = ({ tags, setTags }) => {
   const [suggestions, setSuggestions] = React.useState([]);
   const handleAddition = (tag) => {
     tag = { ...tag, text: tag.text.toLowerCase() };
-    if (tags.map((tag) => tag.text).includes(tag.text)) {
-      return;
-    }
+    // check if tag already exists.
+    if (tags.map((tag) => tag.text).includes(tag.text)) return;
+    //check if tag is in suggestions
     if (
       suggestions.map((suggestedTag) => suggestedTag.text).includes(tag.text)
     ) {
@@ -36,7 +36,7 @@ export const TagsInput = ({ tags, setTags }) => {
       ]);
       return;
     }
-    console.log("tag does not exist in suggestions");
+    // if not in suggestions, add it as a new tag
     setTags([...tags, { ...tag, newTag: true }]);
   };
   useEffect(() => {}, [tags]);
