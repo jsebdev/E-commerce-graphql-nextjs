@@ -3,14 +3,14 @@ import graphene
 from shop.schema_types import ItemType
 
 
-class CreateItemFailed(graphene.ObjectType):
+class MutateItemFailed(graphene.ObjectType):
     error_message = graphene.String()
 
 
-class CreateItemSuccess(graphene.ObjectType):
+class MutateItemSuccess(graphene.ObjectType):
     item = graphene.Field(ItemType, required=True)
 
 
-class CreateItemResponse(graphene.Union):
+class MutateItemResponse(graphene.Union):
     class Meta:
-        types = (CreateItemFailed, CreateItemSuccess)
+        types = (MutateItemFailed, MutateItemSuccess)

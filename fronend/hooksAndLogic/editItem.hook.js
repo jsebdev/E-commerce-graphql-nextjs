@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { showNotification } from "@mantine/notifications";
-import { itemGraphqlQueryFields } from "helpers/gqlQueries";
+import { itemGraphqlQueryFields, mutateAnswers } from "helpers/gqlQueries";
 import { PROFILE_PATH } from "helpers/strings";
 import { createPath, customErrorMessage } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
@@ -47,10 +47,10 @@ export const useEditItem = (
           image: $image,
         ) {
            __typename
-          ... on CreateItemFailed {
+          ... on ${mutateAnswers.error} {
             errorMessage
           }
-          ... on CreateItemSuccess {
+          ... on ${mutateAnswers.success} {
             item {
               ${itemGraphqlQueryFields}
             }
@@ -81,14 +81,14 @@ export const useEditItem = (
       },
       onCompleted: async (data) => {
         console.log("61: data >>>", data);
-        if (data.createItem.__typename === "CreateItemFailed") {
+        if (data.createItem.__typename === mutateAnswers.error) {
           showNotification({
             title: "Error",
             message: customErrorMessage(data.createItem.errorMessage),
             color: "red",
           });
         }
-        if (data.createItem.__typename === "CreateItemSuccess") {
+        if (data.createItem.__typename === mutateAnswers.success) {
           showNotification({
             title: "Success",
             message: "Item added successfully",

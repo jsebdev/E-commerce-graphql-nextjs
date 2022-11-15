@@ -1,5 +1,5 @@
 import { showNotification } from "@mantine/notifications";
-import { CREATE_ITEM } from "helpers/gqlQueries";
+import { CREATE_ITEM, mutateAnswers } from "helpers/gqlQueries";
 import { PROFILE_PATH } from "helpers/strings";
 import { createPath, customErrorMessage } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
@@ -48,15 +48,14 @@ export const useAddItem = (sellerUsername, dispatch, router) => {
         image: image,
       },
       onCompleted: async (data) => {
-        console.log("61: data >>>", data);
-        if (data.createItem.__typename === "CreateItemFailed") {
+        if (data.createItem.__typename === mutateAnswers.error) {
           showNotification({
             title: "Error",
             message: customErrorMessage(data.createItem.errorMessage),
             color: "red",
           });
         }
-        if (data.createItem.__typename === "CreateItemSuccess") {
+        if (data.createItem.__typename === mutateAnswers.success) {
           showNotification({
             title: "Success",
             message: "Item added successfully",

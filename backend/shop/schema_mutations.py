@@ -2,7 +2,7 @@ import graphene
 from graphql_auth import mutations
 from graphene_file_upload.scalars import Upload
 
-from shop.schema_responses import CreateItemFailed, CreateItemResponse, CreateItemSuccess
+from shop.schema_responses import MutateItemFailed, MutateItemResponse, MutateItemSuccess
 from . import models
 
 
@@ -29,54 +29,33 @@ class ItemCreation(graphene.Mutation):
         tags = graphene.List(graphene.ID)
         newTags = graphene.List(graphene.String)
 
-    Output = CreateItemResponse
+    Output = MutateItemResponse
 
     @classmethod
     def mutate(cls, root, info, image=None, **kwargs):
-        print('printing the image:')
-        print(image)
-        print('image printed')
         if (image):
-            print('image is not None')
             kwargs['image'] = image
-        else:
-            print('image is None')
 
-        print('printing the kwargs:')
-        print(kwargs)
         # Obtain the item's seller. It must exists already
         try:
             seller = models.Profile.objects.get(username=kwargs.pop('seller'))
         except models.Profile.DoesNotExist:
-            return CreateItemFailed(error_message='Seller does not exist')
-
-        print('seller obtained')
+            return MutateItemFailed(error_message='Seller does not exist')
 
         # Obtain the item's tags. They must exist already
         tagsIds = kwargs.pop('tags', None)
-        print('49: tagsIds >>>', tagsIds)
         if tagsIds:
             tags = models.Tag.objects.filter(id__in=tagsIds)
 
-        print('tags obtained')
-
         # Get new tags names before item creation
         newTags = kwargs.pop('newTags', None)
-
-        print('new tags obtained')
 
         try:
             item = seller.item_set.create(**kwargs)
             if tagsIds:
                 item.tags.set(tags)
-            if image:
-                pass
-                # print('trying to save the image')
-                # item.image = image
         except Exception as e:
-            return CreateItemFailed(error_message=str(e))
-
-        print('item created')
+            return MutateItemFailed(error_message=str(e))
 
         if newTags:
             for t in newTags:
@@ -87,10 +66,70 @@ class ItemCreation(graphene.Mutation):
                 else:
                     item.tags.create(name=tag)
 
-        print('new tags created')
+        return MutateItemSuccess(item=item)
 
-        return CreateItemSuccess(item=item)
+
+class ItemModification(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+        title = graphene.String(required=False)
+        subtitle = graphene.String()
+        description = graphene.String()
+        published = graphene.Boolean()
+        price = graphene.Decimal()
+        image = Upload(required=False, description="Item's image")
+
+        tags = graphene.List(graphene.ID)
+        newTags = graphene.List(graphene.String)
+
+    Output = MutateItemResponse
+
+    @classmethod
+    def mutate(cls, root, info, image=None, **kwargs):
+        # if (image):
+        #     kwargs['image'] = image
+
+        # Obtain the item's tags. They must exist already
+        tagsIds = kwargs.pop('tags', None)
+        if tagsIds:
+            tags = models.Tag.objects.filter(id__in=tagsIds)
+
+        # Get new tags names before item creation
+        newTags = kwargs.pop('newTags', None)
+
+        try:
+            item = models.Item.objects.get(id=kwargs.pop('id'))
+        except Exception as e:
+            return MutateItemFailed(error_message=str(e))
+
+        item.title = kwargs.pop('title', item.title)
+        item.subtitle = kwargs.pop('subtitle', item.subtitle)
+        item.description = kwargs.pop('description', item.description)
+        item.published = kwargs.pop('published', item.published)
+        item.price = kwargs.pop('price', item.price)
+
+        # Remove all tags
+        if tagsIds or newTags:
+            item.tags.clear()
+        item.tags.clear()
+        # Add new tags
+        if tagsIds:
+            item.tags.set(tags)
+        # Create tags that didn't exist
+        if newTags:
+            for t in newTags:
+                tag = t.lower()
+                possible_existing_tag = models.Tag.objects.filter(name=tag)
+                if possible_existing_tag.exists():
+                    item.tags.add(possible_existing_tag.first())
+                else:
+                    item.tags.create(name=tag)
+
+        item.save()
+
+        return MutateItemSuccess(item=item)
 
 
 class Mutation(AuthMutation, graphene.ObjectType):
     create_item = ItemCreation.Field()
+    modify_item = ItemModification.Field()

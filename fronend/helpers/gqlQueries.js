@@ -1,5 +1,10 @@
 import { gql } from "@apollo/client";
 
+export const mutateAnswers = {
+  success: "MutateItemSuccess",
+  error: "MutateItemFailed",
+};
+
 export const itemGraphqlQueryFields = `
   id
   title
@@ -49,10 +54,10 @@ mutation CreateItem($title: String!,
     image: $image,
   ) {
     __typename
-    ... on CreateItemFailed {
+    ... on MutateItemFailed {
       errorMessage
     }
-    ... on CreateItemSuccess {
+    ... on MutateItemSuccess {
       item {
         ${itemGraphqlQueryFields}
       }
