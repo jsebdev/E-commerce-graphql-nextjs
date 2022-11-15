@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
+from .constants import IMAGES_PATH
+from .helpers import get_image_format, fix_spaces
 
 
 class Profile(AbstractUser):
@@ -20,7 +22,8 @@ class Tag(models.Model):
 
 
 def get_image_path(instance, filename):
-    return f'images/items/{instance.title}/{filename}'
+    fixed_title = fix_spaces(instance.title)
+    return f'{IMAGES_PATH}{fixed_title}/{fixed_title}.{get_image_format(filename)}'
 
 
 class Item(models.Model):

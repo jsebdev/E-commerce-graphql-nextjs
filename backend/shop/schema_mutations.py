@@ -1,9 +1,19 @@
+import os
+
+from django.conf import settings
+from django.core.files import File
+from django.core.files.storage import default_storage
+
 import graphene
 from graphql_auth import mutations
 from graphene_file_upload.scalars import Upload
 
+from pathlib import Path
+
 from shop.schema_responses import MutateItemFailed, MutateItemResponse, MutateItemSuccess
 from . import models
+from .constants import IMAGES_PATH
+from .helpers import get_image_format, fix_spaces, replace_format
 
 
 class AuthMutation(graphene.ObjectType):
@@ -86,9 +96,6 @@ class ItemModification(graphene.Mutation):
 
     @classmethod
     def mutate(cls, root, info, image=None, **kwargs):
-        # if (image):
-        #     kwargs['image'] = image
-
         # Obtain the item's tags. They must exist already
         tagsIds = kwargs.pop('tags', None)
         if tagsIds:
@@ -102,7 +109,26 @@ class ItemModification(graphene.Mutation):
         except Exception as e:
             return MutateItemFailed(error_message=str(e))
 
-        item.title = kwargs.pop('title', item.title)
+        new_title = kwargs.pop('title', None)
+        if new_title and new_title != item.title:
+            item.title = new_title
+            if item.image:
+                initial_path = item.image.path
+                fixed_title = fix_spaces(new_title)
+                new_filename = f'{fixed_title}.{get_image_format(initial_path)}'
+                new_name = f'{IMAGES_PATH}{fixed_title}/{new_filename}'
+                new_path = f'{settings.MEDIA_ROOT}/{new_name}'
+                new_directory = f'{settings.MEDIA_ROOT}/{IMAGES_PATH}{fixed_title}'
+                old_directory = Path(initial_path).parent
+                os.mkdir(new_directory)
+                # print('106: item.image.name >>>', item.image.name)
+                # print('110: initial_path >>>', initial_path)
+                # print('111: new_path >>>', new_path)
+                # print('122: new_name >>>', new_name)
+                os.replace(initial_path, new_path)
+                os.rmdir(old_directory)
+                item.image.name = new_name
+
         item.subtitle = kwargs.pop('subtitle', item.subtitle)
         item.description = kwargs.pop('description', item.description)
         item.published = kwargs.pop('published', item.published)
@@ -124,6 +150,35 @@ class ItemModification(graphene.Mutation):
                     item.tags.add(possible_existing_tag.first())
                 else:
                     item.tags.create(name=tag)
+
+        if (image):
+            file = File(image)
+            if item.image:
+                print('therre is an image already')
+                print(item.image.path)
+                print(image)
+                print(type(image))
+                print('157: file.name >>>', file.name)
+                format = get_image_format(file.name)
+                print('163: format >>>', format)
+                print(type(file))
+                try:
+                    os.remove(item.image.path)
+                except Exception as e:
+                    print(e)
+                path = default_storage.save(
+                    replace_format(item.image.path, format), file)
+                item.image.name = replace_format(item.image.name, format)
+            else:
+                fixed_title = fix_spaces(item.title)
+                new_filename = f'{fixed_title}.{get_image_format(file.name)}'
+                new_name = f'{IMAGES_PATH}{fixed_title}/{new_filename}'
+                new_path = f'{settings.MEDIA_ROOT}/{new_name}'
+                path = default_storage.save(new_path, file)
+                item.image.name = new_name
+            print('new image saved in ', path)
+        else:
+            print('no image was sent')
 
         item.save()
 

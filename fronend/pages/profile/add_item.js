@@ -15,11 +15,11 @@ import { useMutation } from "@apollo/client";
 import { ItemForm } from "components/itemForm";
 
 const AddProduct = ({ token, username }) => {
+  const router = useRouter();
   const { checkUser } = useProfile({ token, username, router });
   checkUser();
   const [image, setImage] = React.useState(null);
   const [tags, setTags] = React.useState([]);
-  const router = useRouter();
   const { mutation, formSettings, handleAddItem } = useAddItem(
     username,
     useDispatch(),

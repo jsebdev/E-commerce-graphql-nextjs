@@ -53,7 +53,7 @@ export const useEditItem = (
         tags: currentTags,
         newTags: newTags,
         price: values.price,
-        // image: image,
+        image: image,
       },
       onCompleted: async ({ modifyItem: answer }) => {
         if (answer.__typename === mutateAnswers.error) {

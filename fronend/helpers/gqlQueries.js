@@ -75,7 +75,7 @@ mutation EditItem($id: ID!,
                   $price: Decimal!,
                   $tags: [ID!]!,
                   $newTags: [String!]!,
-                  ) {
+                  $image: Upload) {
   modifyItem(
     id: $id,
     title:$title,
@@ -85,6 +85,7 @@ mutation EditItem($id: ID!,
     price:$price
     tags:$tags,
     newTags:$newTags,
+    image:$image
   ) {
     __typename
     ... on ${mutateAnswers.error} {
