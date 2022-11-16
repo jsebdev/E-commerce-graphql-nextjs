@@ -1,7 +1,7 @@
 import { Box, Center, Group, Space, Stack, Text, Title } from "@mantine/core";
 import React, { useState } from "react";
 import { ShareButtons } from "./shareButtons";
-import { TagsList } from "./tagsList";
+import { ItemTagsList } from "./itemTagsList";
 import itemDetailsStyles from "styles/componentsStyles/itemDetails.module.scss";
 import { formatDate, itemImageSource, roundPrice } from "helpers/utils";
 import cn from "classnames";
@@ -81,7 +81,7 @@ export const ItemDetails = ({ item }) => {
             </Stack>
           </DynamicShadedBox>
           <Stack className={itemDetailsStyles.mobileSection}>
-            <TagsList tags={item.tags}></TagsList>
+            <ItemTagsList tags={item.tags}></ItemTagsList>
             <ShareButtons />
           </Stack>
         </Box>
@@ -103,7 +103,7 @@ export const ItemDetails = ({ item }) => {
               <GoToCart />
             </Stack>
           </Group>
-          <TagsList tags={item.tags}></TagsList>
+          <ItemTagsList tags={item.tags}></ItemTagsList>
           <ShareButtons noWrap="nowrap" />
         </Stack>
       </Group>

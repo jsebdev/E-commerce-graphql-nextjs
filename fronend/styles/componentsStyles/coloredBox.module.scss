@@ -6,12 +6,12 @@
   z-index: -1;
 }
 
-.shadedBox {
-  display: flex;
+.coloredBox {
 }
 
 .wide {
   // border: 2px solid red;
+  display: flex;
   position: relative;
 
   &:before{

@@ -9,6 +9,7 @@ import {
   ADD_ITEM_PATH,
   LOGIN_PATH,
   PROFILE_PATH,
+  SEARCH_TAGS_PATH,
   SIGNUP_PATH,
   THEMES_NAMES,
 } from "helpers/strings";
@@ -48,12 +49,18 @@ const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
               <MenuItem>My Profile</MenuItem>
             </Link>
             <Link href={createPath(ADD_ITEM_PATH)}>
-              <MenuItem>Add new Item</MenuItem>
+              <MenuItem>Add New Item</MenuItem>
+            </Link>
+            <Link href={createPath(SEARCH_TAGS_PATH)}>
+              <MenuItem>Search Tags</MenuItem>
             </Link>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </>
         ) : (
           <>
+            <Link href={createPath(SEARCH_TAGS_PATH)}>
+              <MenuItem>Search Tags</MenuItem>
+            </Link>
             <Link href={createPath(LOGIN_PATH)}>
               <MenuItem>Login</MenuItem>
             </Link>

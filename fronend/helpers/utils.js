@@ -40,3 +40,19 @@ export const itemImageSource = (image) =>
   image ? fullImagePath(image) : "/images/no-photo.png";
 
 export const roundPrice = (price) => Math.round(price * 100) / 100;
+
+export const allTagsWidthContainer = (tags) => {
+  const n = tags.length;
+  const base = 900;
+  const widthIncrement = 60;
+  const tagsIncrement = 6;
+  const breakpoint = 60;
+  if (n < breakpoint) {
+    return parsePixels(base);
+  } else {
+    const overload = n - breakpoint;
+    return parsePixels(base + (overload * widthIncrement) / tagsIncrement);
+  }
+};
+
+const parsePixels = (pixels) => `${pixels}px`;

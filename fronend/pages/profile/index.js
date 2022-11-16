@@ -76,7 +76,7 @@ const Profile = ({ username, token, userItems, itemsFetched }) => {
             )}
           </>
         ) : (
-          <Stack align="center">
+          <Stack align="center" mt={100}>
             <Title order={3}>You have no products yet</Title>
             <Link href={createPath(ADD_ITEM_PATH)}>
               <Button>Add your first product</Button>

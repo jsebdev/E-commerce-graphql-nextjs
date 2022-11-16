@@ -1,4 +1,13 @@
-import { Box, Button, Group, Modal, Stack, Text, Title } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  Modal,
+  Space,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
 import { CartRow } from "components/cartRow";
 import { Layout } from "components/layout";
 import NonSsrWrapper from "components/nonSsrWrapper";
@@ -117,6 +126,7 @@ const Cart = ({ token, username, cart, cartTotal }) => {
                 <Link href={createPath(LOGIN_PATH)}>Log in</Link> or{" "}
                 <Link href={createPath(SIGNUP_PATH)}>create an account</Link>
               </Text>
+              <Space h={30}></Space>
             </Stack>
           )}
         </Modal>

@@ -13,6 +13,7 @@ export const ACCOUNT_CREATED_PATH = ["accountCreated"];
 export const ITEM_DISPLAY_PATH = (itemId) => ["items", itemId];
 export const OWN_ITEM_PATH = (itemId) => [...PROFILE_PATH, "item", itemId];
 export const CART_PATH = ["cart"];
+export const SEARCH_TAGS_PATH = ["searchTags"];
 
 export const shadedBoxVariants = {
   default: "default",

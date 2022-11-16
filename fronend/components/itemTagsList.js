@@ -1,9 +1,9 @@
 import { Center, Group, Stack, Text } from "@mantine/core";
 import { shadedBackground } from "helpers/utils";
 import React from "react";
-import tagListStyles from "styles/componentsStyles/tagList.module.scss";
+import itemTagListStyles from "styles/componentsStyles/itemTagList.module.scss";
 
-export const TagsList = ({ tags = [], className }) => {
+export const ItemTagsList = ({ tags = [], className }) => {
   return (
     <Stack spacing={0} my="1rem" className={className}>
       <Text mb={5}>Tags:</Text>
@@ -13,7 +13,7 @@ export const TagsList = ({ tags = [], className }) => {
             sx={(theme) => ({
               backgroundColor: shadedBackground(theme),
             })}
-            className={tagListStyles.tag}
+            className={itemTagListStyles.tag}
             key={tag.name}
           >
             {tag.name}
