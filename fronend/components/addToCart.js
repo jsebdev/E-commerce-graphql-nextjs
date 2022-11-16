@@ -16,6 +16,7 @@ export const AddToCart = ({ item, quantity, setQuantity }) => {
         quantity,
         price: item.price,
         description: item.description,
+        image: item.image,
       })
     );
     showNotification({

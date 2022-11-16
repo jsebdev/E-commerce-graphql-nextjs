@@ -20,6 +20,7 @@ import cartStyles from "styles/componentsStyles/cart.module.scss";
 import { BsFillTrashFill } from "react-icons/bs";
 import Image from "next/image";
 import { YesNoModal } from "./yesNoModal";
+import { itemImageSource } from "helpers/utils";
 
 export const CartRow = ({ item, index, setSelectedItems, selected }) => {
   const quantity = useSelector(selectCartItem(item.id)).quantity;
@@ -52,7 +53,9 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
         <Title order={5}>{item.title}</Title>
       </RowCell>
       <RowCell>
-        <Image src="/images/profile.jpg" width="100" height="100" />
+        <Box p={1}>
+          <img className={cartStyles.image} src={itemImageSource(item.image)} />
+        </Box>
       </RowCell>
       <RowCell>
         <QuantityInput

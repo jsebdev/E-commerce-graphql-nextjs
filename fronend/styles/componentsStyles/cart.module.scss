@@ -8,6 +8,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    .image {
+      width: 100px;
+      aspect-ratio: 1;
+    }
   }
 }
 
