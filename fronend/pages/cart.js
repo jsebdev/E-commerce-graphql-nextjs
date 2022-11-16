@@ -1,10 +1,11 @@
-import { Button, Group, Modal, Stack, Title } from "@mantine/core";
+import { Box, Button, Group, Modal, Stack, Text, Title } from "@mantine/core";
 import { CartRow } from "components/cartRow";
 import { Layout } from "components/layout";
 import NonSsrWrapper from "components/nonSsrWrapper";
 import { NoPaymentMessage } from "components/noPaymentMessage";
 import { YesNoModal } from "components/yesNoModal";
-import { roundPrice } from "helpers/utils";
+import { LOGIN_PATH, SIGNUP_PATH } from "helpers/strings";
+import { createPath, roundPrice } from "helpers/utils";
 import Link from "next/link";
 import React from "react";
 import { connect, useDispatch } from "react-redux";
@@ -14,9 +15,10 @@ import {
   selectCart,
   selectCartTotal,
 } from "store/slices/cartSlice";
+import { selectToken, selectUsername } from "store/slices/userSlice";
 import cartStyles from "styles/componentsStyles/cart.module.scss";
 
-const Cart = ({ cart, cartTotal }) => {
+const Cart = ({ token, username, cart, cartTotal }) => {
   const [showSelectedModal, setShowSelectedModal] = React.useState(false);
   const [showPayModal, setShowPayModal] = React.useState(false);
   const [showEmptyModal, setShowEmptyModal] = React.useState(false);
@@ -102,9 +104,21 @@ const Cart = ({ cart, cartTotal }) => {
         <Modal
           opened={showPayModal}
           onClose={() => setShowPayModal(false)}
-          withCloseButton={false}
+          // withCloseButton={false}
+          centered
         >
-          <NoPaymentMessage></NoPaymentMessage>
+          {token && username ? (
+            <NoPaymentMessage />
+          ) : (
+            <Stack align="center">
+              <Title order={3}>Ups!</Title>
+              <Text>You need to be logged in to pay</Text>
+              <Text>
+                <Link href={createPath(LOGIN_PATH)}>Log in</Link> or{" "}
+                <Link href={createPath(SIGNUP_PATH)}>create an account</Link>
+              </Text>
+            </Stack>
+          )}
         </Modal>
       </NonSsrWrapper>
     </Layout>
@@ -114,4 +128,6 @@ const Cart = ({ cart, cartTotal }) => {
 export default connect((state) => ({
   cart: selectCart(state),
   cartTotal: selectCartTotal(state),
+  token: selectToken(state),
+  username: selectUsername(state),
 }))(Cart);

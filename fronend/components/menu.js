@@ -12,7 +12,6 @@ import {
   SIGNUP_PATH,
   THEMES_NAMES,
 } from "helpers/strings";
-import { hoverButtonEffect } from "./componentHelpers/hoverButtonEffect";
 import { useLogout } from "hooksAndLogic/login.hook";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -48,10 +47,10 @@ const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
             <Link href={createPath(PROFILE_PATH)}>
               <MenuItem>My Profile</MenuItem>
             </Link>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
             <Link href={createPath(ADD_ITEM_PATH)}>
               <MenuItem>Add new Item</MenuItem>
             </Link>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </>
         ) : (
           <>

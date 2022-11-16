@@ -17,7 +17,7 @@ import {
 } from "store/slices/cartSlice";
 import { QuantityInput } from "./quantityInput";
 import cartStyles from "styles/componentsStyles/cart.module.scss";
-import { BsFillTrashFill } from "react-icons/bs";
+import { IconTrash } from "@tabler/icons";
 import { YesNoModal } from "./yesNoModal";
 import { itemImageSource, roundPrice } from "helpers/utils";
 
@@ -51,7 +51,7 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
   };
   return (
     <>
-      <RowCell>
+      <RowCell className={cartStyles.checkboxContainer}>
         <input type="checkbox" onChange={handleSelect} checked={selected} />
       </RowCell>
       <RowCell>
@@ -72,13 +72,13 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
         ></QuantityInput>
       </RowCell>
       <RowCell>${roundPrice(item.price * item.quantity)}</RowCell>
-      <RowCell>
+      <RowCell className={cartStyles.deleteButtonContainer}>
         <ActionIcon
           size={30}
           variant="default"
           onClick={() => setShowModal(true)}
         >
-          <BsFillTrashFill />
+          <IconTrash />
         </ActionIcon>
       </RowCell>
       <YesNoModal
@@ -99,9 +99,10 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
 // This function returns a react component that renders a table cell
 // with its respective background color depending on the index and theme
 const rowCellConstructor = (index) => {
-  const rowCell = ({ children }) => {
+  const rowCell = ({ children, className }) => {
     return (
       <Box
+        className={className}
         sx={
           index % 2 === 0
             ? (theme) => ({

@@ -14,7 +14,7 @@ export const QuantityInput = ({
     setQuantity((v) => v + 1);
   };
   const decrementValue = () => {
-    if (quantity > 1) setQuantity((v) => v - 1);
+    if (quantity > min) setQuantity((v) => v - 1);
   };
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -30,7 +30,7 @@ export const QuantityInput = ({
           size={30}
           variant="default"
           onClick={decrementValue}
-          disabled={quantity <= 1}
+          disabled={quantity <= min}
         >
           –
         </ActionIcon>

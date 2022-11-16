@@ -3,7 +3,16 @@
   grid-template-columns: 50px minmax(150px, 1fr) 100px 100px 80px 60px;
   border: 1px solid gray;
   overflow-x: auto;
-
+  .checkboxContainer {
+    padding-inline-start: 2rem;
+    input{
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .deleteButtonContainer {
+    padding-inline-end: 2rem;
+  }
   &>div {
     display: flex;
     justify-content: center;
@@ -16,22 +25,10 @@
   }
 }
 
-.modal {
-  position: fixed;
-  z-index: 20;
-  height: 20%;
-  top: 25%;
-  width: 50%;
-  left: 25%;
-  padding: 2rem;
-  >div {
-    gap:0;
-    p {
-      text-align: center;
-      .itemTitle {
-        font-weight: bold;
-      }
-    }
+.question {
+  text-align: center;
+  .itemTitle {
+    font-weight: bold;
   }
 }
 
