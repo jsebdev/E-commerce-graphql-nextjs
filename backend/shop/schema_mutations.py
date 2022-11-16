@@ -10,7 +10,7 @@ from graphene_file_upload.scalars import Upload
 
 from pathlib import Path
 
-from shop.schema_responses import MutateItemFailed, MutateItemResponse, MutateItemSuccess
+from shop.schema_responses import MutateItemFailed, MutateItemResponse, MutateItemSuccess, DeleteItemSuccess
 from . import models
 from .constants import IMAGES_PATH
 from .helpers import get_image_format, fix_spaces, replace_format
@@ -121,10 +121,6 @@ class ItemModification(graphene.Mutation):
                 new_directory = f'{settings.MEDIA_ROOT}/{IMAGES_PATH}{fixed_title}'
                 old_directory = Path(initial_path).parent
                 os.mkdir(new_directory)
-                # print('106: item.image.name >>>', item.image.name)
-                # print('110: initial_path >>>', initial_path)
-                # print('111: new_path >>>', new_path)
-                # print('122: new_name >>>', new_name)
                 os.replace(initial_path, new_path)
                 os.rmdir(old_directory)
                 item.image.name = new_name
@@ -154,14 +150,14 @@ class ItemModification(graphene.Mutation):
         if (image):
             file = File(image)
             if item.image:
-                print('therre is an image already')
-                print(item.image.path)
-                print(image)
-                print(type(image))
-                print('157: file.name >>>', file.name)
+                # print('therre is an image already')
+                # print(item.image.path)
+                # print(image)
+                # print(type(image))
+                # print('157: file.name >>>', file.name)
                 format = get_image_format(file.name)
-                print('163: format >>>', format)
-                print(type(file))
+                # print('163: format >>>', format)
+                # print(type(file))
                 try:
                     os.remove(item.image.path)
                 except Exception as e:
@@ -185,6 +181,31 @@ class ItemModification(graphene.Mutation):
         return MutateItemSuccess(item=item)
 
 
+class ItemDeletion(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+
+    Output = MutateItemResponse
+
+    @classmethod
+    def mutate(cls, root, info, id):
+        # get the item
+        try:
+            item = models.Item.objects.get(id=id)
+        except Exception as e:
+            return MutateItemFailed(error_message=str(e))
+        if item.image:
+            try:
+                os.remove(item.image.path)
+                os.rmdir(Path(item.image.path).parent)
+            except Exception as e:
+                print(e)
+        item.delete()
+
+        return DeleteItemSuccess(success=True)
+
+
 class Mutation(AuthMutation, graphene.ObjectType):
     create_item = ItemCreation.Field()
     modify_item = ItemModification.Field()
+    delete_item = ItemDeletion.Field()

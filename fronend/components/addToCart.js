@@ -2,7 +2,7 @@ import { Button, Stack } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addItem } from "store/slices/cartSlice";
+import { addCartItem } from "store/slices/cartSlice";
 import { QuantityInput } from "./quantityInput";
 import addToCartStyles from "styles/componentsStyles/addToCart.module.scss";
 
@@ -10,7 +10,7 @@ export const AddToCart = ({ item, quantity, setQuantity }) => {
   const dispatch = useDispatch();
   const addItemHandler = () => {
     dispatch(
-      addItem({
+      addCartItem({
         id: item.id,
         title: item.title,
         quantity,

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ShareButtons } from "./shareButtons";
 import { TagsList } from "./tagsList";
 import itemDetailsStyles from "styles/componentsStyles/itemDetails.module.scss";
-import { formatDate, itemImageSource } from "helpers/utils";
+import { formatDate, itemImageSource, roundPrice } from "helpers/utils";
 import cn from "classnames";
 import { useWindowSize } from "hooksAndLogic/global.hooks";
 import { tabletWidth } from "helpers/varialbles";
@@ -64,7 +64,7 @@ export const ItemDetails = ({ item }) => {
                 align="center"
                 className={itemDetailsStyles.addToCartContainer}
               >
-                <Title order={4}>${item.price * quantity}</Title>
+                <Title order={4}>${roundPrice(item.price * quantity)}</Title>
                 <GoToCart />
               </Stack>
             </Group>

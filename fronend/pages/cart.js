@@ -4,13 +4,19 @@ import { Layout } from "components/layout";
 import NonSsrWrapper from "components/nonSsrWrapper";
 import { NoPaymentMessage } from "components/noPaymentMessage";
 import { YesNoModal } from "components/yesNoModal";
+import { roundPrice } from "helpers/utils";
 import Link from "next/link";
 import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { emptyCart, removeItems, selectCart } from "store/slices/cartSlice";
+import {
+  emptyCart,
+  removeCartItems,
+  selectCart,
+  selectCartTotal,
+} from "store/slices/cartSlice";
 import cartStyles from "styles/componentsStyles/cart.module.scss";
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, cartTotal }) => {
   const [showSelectedModal, setShowSelectedModal] = React.useState(false);
   const [showPayModal, setShowPayModal] = React.useState(false);
   const [showEmptyModal, setShowEmptyModal] = React.useState(false);
@@ -18,7 +24,7 @@ const Cart = ({ cart }) => {
   const dispatch = useDispatch();
   const deleteItems = () => {
     if (showSelectedModal) {
-      dispatch(removeItems(selectedItems));
+      dispatch(removeCartItems(selectedItems));
       setSelectedItems([]);
     } else dispatch(emptyCart());
     setShowSelectedModal(false);
@@ -60,7 +66,10 @@ const Cart = ({ cart }) => {
                 />
               ))}
             </div>
-            <Group my={10}>
+            <Group position="center" mt={20}>
+              <Title order={3}>Total: {roundPrice(cartTotal)}</Title>
+            </Group>
+            <Group my={10} position="center">
               <Button onClick={() => setShowPayModal(true)}>Go pay</Button>
               <Button color="red" onClick={() => setShowEmptyModal(true)}>
                 Empty cart
@@ -68,30 +77,28 @@ const Cart = ({ cart }) => {
             </Group>
           </>
         )}
-        {(showSelectedModal || showEmptyModal) && (
-          <YesNoModal
-            onYes={deleteItems}
-            onNot={() => {
-              setShowSelectedModal(false);
-              setShowEmptyModal(false);
-            }}
-          >
-            {showSelectedModal ? (
-              <p>
-                Are you sure you want to delete{" "}
-                {cart.reduce(
-                  (count, item) =>
-                    count +
-                    (selectedItems.includes(item.id) ? item.quantity : 0),
-                  0
-                )}{" "}
-                items?
-              </p>
-            ) : (
-              <p>Are you sure you want to empty your cart?</p>
-            )}
-          </YesNoModal>
-        )}
+        <YesNoModal
+          opened={showSelectedModal || showEmptyModal}
+          onYes={deleteItems}
+          onNot={() => {
+            setShowSelectedModal(false);
+            setShowEmptyModal(false);
+          }}
+        >
+          {showSelectedModal ? (
+            <p>
+              Are you sure you want to delete{" "}
+              {cart.reduce(
+                (count, item) =>
+                  count + (selectedItems.includes(item.id) ? item.quantity : 0),
+                0
+              )}{" "}
+              items?
+            </p>
+          ) : (
+            <p>Are you sure you want to empty your cart?</p>
+          )}
+        </YesNoModal>
         <Modal
           opened={showPayModal}
           onClose={() => setShowPayModal(false)}
@@ -104,4 +111,7 @@ const Cart = ({ cart }) => {
   );
 };
 
-export default connect((state) => ({ cart: selectCart(state) }))(Cart);
+export default connect((state) => ({
+  cart: selectCart(state),
+  cartTotal: selectCartTotal(state),
+}))(Cart);

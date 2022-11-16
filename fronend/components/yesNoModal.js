@@ -1,13 +1,13 @@
-import { Button, Group, Modal, Paper, Stack } from "@mantine/core";
+import { Button, Group, Modal, Stack } from "@mantine/core";
 import React from "react";
 // import yesNoModalStyles from "styles/componentsStyles/yesNoModal.module.scss";
 
 /**
  *  children must be a p tag with the text to be displayed
  */
-export const YesNoModal = ({ children, onYes, onNot }) => {
+export const YesNoModal = ({ opened, children, onYes, onNot }) => {
   return (
-    <Modal opened={true} withCloseButton={false} centered>
+    <Modal opened={opened} withCloseButton={false} centered onClose={onNot}>
       <Stack align="center" spacing="md">
         {children}
         <Group>

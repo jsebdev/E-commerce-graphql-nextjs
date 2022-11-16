@@ -12,7 +12,7 @@ export const cartSlice = createSlice({
     setCart: (state, action) => {
       state.cart = action.payload;
     },
-    addItem: (state, action) => {
+    addCartItem: (state, action) => {
       const possibleItem = state.cart.find(
         (item) => item.id === action.payload.id
       );
@@ -24,10 +24,18 @@ export const cartSlice = createSlice({
       }
       state.cart = [...state.cart, action.payload];
     },
-    removeItem: (state, action) => {
+    updateCartItem: (state, action) => {
+      const possibleItem = state.cart.find(
+        (item) => item.id === action.payload.id
+      );
+      if (possibleItem) {
+        Object.assign(possibleItem, action.payload);
+      }
+    },
+    removeCartItem: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
-    removeItems: (state, action) => {
+    removeCartItems: (state, action) => {
       state.cart = state.cart.filter(
         (item) => !action.payload.includes(item.id)
       );
@@ -35,7 +43,7 @@ export const cartSlice = createSlice({
     emptyCart: (state) => {
       state.cart = [];
     },
-    updateQuantity: (state, action) => {
+    updateCartQuantity: (state, action) => {
       const possibleItem = state.cart.find(
         (item) => item.id === action.payload.id
       );
@@ -56,11 +64,12 @@ export const cartSlice = createSlice({
 
 export const {
   setCart,
-  addItem,
-  removeItem,
+  addCartItem,
+  removeCartItem,
   emptyCart,
-  updateQuantity,
-  removeItems,
+  updateCartQuantity,
+  removeCartItems,
+  updateCartItem,
 } = cartSlice.actions;
 
 export const selectCart = (state) => state[cartSlice.name].cart;
@@ -68,3 +77,8 @@ export const selectCartItem = (id) => (state) =>
   state[cartSlice.name].cart.find((item) => item.id === id);
 export const selectCartCount = (state) =>
   state[cartSlice.name].cart.reduce((prev, curr) => prev + curr.quantity, 0);
+export const selectCartTotal = (state) =>
+  state[cartSlice.name].cart.reduce(
+    (prev, curr) => prev + curr.price * curr.quantity,
+    0
+  );

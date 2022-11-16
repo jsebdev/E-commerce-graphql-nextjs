@@ -1,8 +1,9 @@
 import { gql } from "@apollo/client";
 
 export const mutateAnswers = {
-  success: "MutateItemSuccess",
+  editSuccess: "MutateItemSuccess",
   error: "MutateItemFailed",
+  deleteSuccess: "DeleteItemSuccess",
 };
 
 export const itemGraphqlQueryFields = `
@@ -57,7 +58,7 @@ mutation CreateItem($title: String!,
     ... on ${mutateAnswers.error} {
       errorMessage
     }
-    ... on ${mutateAnswers.success} {
+    ... on ${mutateAnswers.editSuccess} {
       item {
         ${itemGraphqlQueryFields}
       }
@@ -91,7 +92,7 @@ mutation EditItem($id: ID!,
     ... on ${mutateAnswers.error} {
       errorMessage
     }
-    ... on ${mutateAnswers.success} {
+    ... on ${mutateAnswers.editSuccess} {
       item {
         ${itemGraphqlQueryFields}
       }
@@ -184,3 +185,17 @@ query {
     ${itemGraphqlQueryFields}
   }
 }`;
+
+export const DELETE_ITEM = gql`
+  mutation DeleteItem($id: ID!) {
+    deleteItem(id: $id) {
+      __typename
+      ... on MutateItemFailed {
+        errorMessage
+      }
+      ... on DeleteItemSuccess {
+        success
+      }
+    }
+  }
+`;

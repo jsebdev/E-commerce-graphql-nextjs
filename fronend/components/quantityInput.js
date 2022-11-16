@@ -1,11 +1,14 @@
-import { ActionIcon, Group } from "@mantine/core";
 import React from "react";
+import { ActionIcon, Group } from "@mantine/core";
+import classNames from "classnames";
+import quantityInputStyles from "styles/componentsStyles/quantityInput.module.scss";
 
 export const QuantityInput = ({
   quantity,
   setQuantity,
   showButtons = true,
   min = 1,
+  vertical = false,
 }) => {
   const incrementValue = () => {
     setQuantity((v) => v + 1);
@@ -18,7 +21,10 @@ export const QuantityInput = ({
     setQuantity(parseInt(value));
   };
   return (
-    <Group noWrap="nowrap">
+    <Group
+      noWrap="nowrap"
+      className={classNames({ [quantityInputStyles.vertical]: vertical })}
+    >
       {showButtons && (
         <ActionIcon
           size={30}
@@ -35,7 +41,7 @@ export const QuantityInput = ({
         min={min}
         step={1}
         onChange={handleInputChange}
-        style={{ width: "40px" }}
+        className={quantityInputStyles.input}
       />
       {showButtons && (
         <ActionIcon size={30} variant="default" onClick={incrementValue}>

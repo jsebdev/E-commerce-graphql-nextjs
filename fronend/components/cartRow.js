@@ -11,31 +11,36 @@ import {
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  removeItem,
+  removeCartItem,
   selectCartItem,
-  updateQuantity,
+  updateCartQuantity,
 } from "store/slices/cartSlice";
 import { QuantityInput } from "./quantityInput";
 import cartStyles from "styles/componentsStyles/cart.module.scss";
 import { BsFillTrashFill } from "react-icons/bs";
-import Image from "next/image";
 import { YesNoModal } from "./yesNoModal";
-import { itemImageSource } from "helpers/utils";
+import { itemImageSource, roundPrice } from "helpers/utils";
 
 export const CartRow = ({ item, index, setSelectedItems, selected }) => {
   const quantity = useSelector(selectCartItem(item.id)).quantity;
   const dispatch = useDispatch();
-  const setQuantity = (quantity) => {
-    if (quantity === 0) {
+  const setQuantity = (quantitySetter) => {
+    let quantityValue;
+    if (typeof quantitySetter === "function") {
+      quantityValue = quantitySetter(quantity);
+    } else if (typeof quantitySetter === "number") {
+      quantityValue = quantitySetter;
+    }
+    if (quantityValue === 0) {
       setShowModal(true);
       return;
     }
-    dispatch(updateQuantity({ id: item.id, quantity }));
+    dispatch(updateCartQuantity({ id: item.id, quantity: quantityValue }));
   };
   const RowCell = rowCellConstructor(index);
   const [showModal, setShowModal] = React.useState(false);
   const deleteItem = () => {
-    dispatch(removeItem(item.id));
+    dispatch(removeCartItem(item.id));
   };
   const handleSelect = (e) => {
     if (e.target.checked) {
@@ -61,11 +66,12 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
         <QuantityInput
           quantity={quantity}
           setQuantity={setQuantity}
-          showButtons={false}
+          showButtons={true}
+          vertical={true}
           min={0}
         ></QuantityInput>
       </RowCell>
-      <RowCell>${item.price * item.quantity}</RowCell>
+      <RowCell>${roundPrice(item.price * item.quantity)}</RowCell>
       <RowCell>
         <ActionIcon
           size={30}
@@ -75,15 +81,17 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
           <BsFillTrashFill />
         </ActionIcon>
       </RowCell>
-      {showModal && (
-        <YesNoModal onNot={() => setShowModal(false)} onYes={deleteItem}>
-          <p className={cartStyles.question}>
-            Are you sure to delete{" "}
-            <span className={cartStyles.itemTitle}>{item.title}</span> from your
-            cart?
-          </p>
-        </YesNoModal>
-      )}
+      <YesNoModal
+        onNot={() => setShowModal(false)}
+        onYes={deleteItem}
+        opened={showModal}
+      >
+        <p className={cartStyles.question}>
+          Are you sure to delete{" "}
+          <span className={cartStyles.itemTitle}>{item.title}</span> from your
+          cart?
+        </p>
+      </YesNoModal>
     </>
   );
 };

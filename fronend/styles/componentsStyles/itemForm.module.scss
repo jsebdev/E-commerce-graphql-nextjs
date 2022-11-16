@@ -8,6 +8,12 @@
     grid-gap: 0.5rem;
     width: 100%;
     max-width: 600px;
+    .buttonsContainer{
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-block-start: 0.5rem;
+    }
   }
 }
 
@@ -29,11 +35,9 @@
           }
         }
       }
-      .saveButton{
+      .buttonsContainer{
         grid-column-start: 1;
         grid-column-end: 3;
-        display: flex;
-        justify-content: center;
         button{
           padding-inline: 3rem;
         }

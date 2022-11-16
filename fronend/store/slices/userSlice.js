@@ -5,6 +5,8 @@ const initialState = {
   user: {
     token: null,
     username: null,
+  },
+  userItems: {
     userItems: [],
     itemsFetched: false,
   },
@@ -19,22 +21,33 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     setUserItems: (state, action) => {
-      state.user.userItems = action.payload;
+      state.userItems.userItems = action.payload;
     },
     addUserItem: (state, action) => {
-      state.user.userItems = [action.payload, ...state.user.userItems];
+      state.userItems.userItems = [
+        action.payload,
+        ...state.userItems.userItems,
+      ];
     },
     modifyUserItem: (state, action) => {
-      state.user.userItems = state.user.userItems.filter(
+      state.userItems.userItems = state.userItems.userItems.filter(
         (item) => item.id !== action.payload.id
       );
-      state.user.userItems = [action.payload, ...state.user.userItems];
+      state.userItems.userItems = [
+        action.payload,
+        ...state.userItems.userItems,
+      ];
+    },
+    deleteUserItem: (state, action) => {
+      state.userItems.userItems = state.userItems.userItems.filter(
+        (item) => item.id !== action.payload
+      );
     },
     setActivationEmail: (state, action) => {
       state.activationEmail = action.payload;
     },
     setItemsFetched: (state, action) => {
-      state.user.itemsFetched = action.payload;
+      state.userItems.itemsFetched = action.payload;
     },
   },
   extraReducers: {
@@ -54,12 +67,13 @@ export const {
   addUserItem,
   modifyUserItem,
   setItemsFetched,
+  deleteUserItem,
 } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 export const selectUsername = (state) => state.user.user.username;
 export const selectToken = (state) => state.user.user.token;
 export const selectActivationEmail = (state) => state.user.activationEmail;
-export const selectUserItems = (state) => state.user.user.userItems || [];
+export const selectUserItems = (state) => state.user.userItems.userItems || [];
 export const selectItemsFetched = (state) =>
-  state.user.user.itemsFetched || false;
+  state.user.userItems.itemsFetched || false;

@@ -38,3 +38,5 @@ export const customErrorMessage = (errorMessage) => {
 
 export const itemImageSource = (image) =>
   image ? fullImagePath(image) : "/images/no-photo.png";
+
+export const roundPrice = (price) => Math.round(price * 100) / 100;

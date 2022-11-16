@@ -55,7 +55,7 @@ export const useAddItem = (sellerUsername, dispatch, router) => {
             color: "red",
           });
         }
-        if (data.createItem.__typename === mutateAnswers.success) {
+        if (data.createItem.__typename === mutateAnswers.editSuccess) {
           showNotification({
             title: "Success",
             message: "Item added successfully",

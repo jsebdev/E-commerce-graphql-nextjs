@@ -11,6 +11,10 @@ class MutateItemSuccess(graphene.ObjectType):
     item = graphene.Field(ItemType, required=True)
 
 
+class DeleteItemSuccess(graphene.ObjectType):
+    success = graphene.Boolean()
+
+
 class MutateItemResponse(graphene.Union):
     class Meta:
-        types = (MutateItemFailed, MutateItemSuccess)
+        types = (MutateItemFailed, MutateItemSuccess, DeleteItemSuccess)

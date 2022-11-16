@@ -1,0 +1,14 @@
+
+.input{
+  width: 60px;
+  text-align: center;
+  padding-inline-start: 0.5rem;
+}
+
+.vertical {
+  flex-direction: column-reverse;
+  gap: 0.1rem;
+  button {
+    width: 100%;
+  }
+}
