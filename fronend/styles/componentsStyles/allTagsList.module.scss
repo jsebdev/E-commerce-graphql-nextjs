@@ -1,0 +1,23 @@
+.allTagsScroll{
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.3rem;
+  transform-style: preserve-3d;
+  border-radius: 5px;
+  .allTagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    min-width: 100%;
+    transform: translateZ(-10px);
+    .tag {
+      display: flex;
+      flex-wrap: nowrap;
+      width: fit-content;
+      padding-inline: 0.5rem;
+      padding-block: 0.1rem;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+  }
+}

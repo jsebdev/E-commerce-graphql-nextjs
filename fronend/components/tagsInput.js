@@ -1,7 +1,8 @@
 import { Text, useMantineColorScheme } from "@mantine/core";
 import classNames from "classnames";
 import { THEMES_NAMES } from "helpers/strings";
-import { getTags } from "hooksAndLogic/tags.logic";
+import { getTags } from "hooksAndLogic/fetchTags.logic";
+import { handleTagAddition, tagB2F } from "hooksAndLogic/inputTags.logic";
 import React from "react";
 import { useEffect } from "react";
 
@@ -19,27 +20,6 @@ export const TagsInput = ({ tags, setTags }) => {
     setTags(tags.filter((tag, index) => index !== i));
   };
   const [suggestions, setSuggestions] = React.useState([]);
-  const handleAddition = (tag) => {
-    tag = { ...tag, text: tag.text.toLowerCase() };
-    // check if tag already exists.
-    if (tags.map((tag) => tag.text).includes(tag.text)) return;
-    //check if tag is in suggestions
-    if (
-      suggestions.map((suggestedTag) => suggestedTag.text).includes(tag.text)
-    ) {
-      setTags([
-        ...tags,
-        {
-          ...suggestions.find((suggestedTag) => suggestedTag.text === tag.text),
-          newTag: false,
-        },
-      ]);
-      return;
-    }
-    // if not in suggestions, add it as a new tag
-    setTags([...tags, { ...tag, newTag: true }]);
-  };
-  useEffect(() => {}, [tags]);
   const handleDrag = (tag, currPos, newPos) => {
     const newTags = tags.slice();
     newTags.splice(currPos, 1);
@@ -48,7 +28,7 @@ export const TagsInput = ({ tags, setTags }) => {
   };
   useEffect(async () => {
     const actualTags = await getTags();
-    setSuggestions(actualTags.map((tag) => ({ id: tag.id, text: tag.name })));
+    setSuggestions(actualTags.map(tagB2F));
   }, []);
 
   const { colorScheme } = useMantineColorScheme();
@@ -67,7 +47,9 @@ export const TagsInput = ({ tags, setTags }) => {
         suggestions={suggestions}
         delimiters={delimiters}
         handleDelete={handleDelete}
-        handleAddition={handleAddition}
+        handleAddition={(tag) =>
+          handleTagAddition(tag, tags, setTags, suggestions)
+        }
         handleDrag={handleDrag}
         placeholder="Click to add tags"
         autocomplete={false}

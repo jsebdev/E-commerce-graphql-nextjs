@@ -1,76 +1,34 @@
-import { Box, Center } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
+import { AllTagsList } from "components/allTagsList";
 import { Layout } from "components/layout";
 import NonSsrWrapper from "components/nonSsrWrapper";
-import ColoredBox from "components/themedComponents/coloredBox";
-import { ShadedBox } from "components/themedComponents/shadedBox";
-import { allTagsWidthContainer, shadedBackground } from "helpers/utils";
-import { getTags } from "hooksAndLogic/tags.logic";
-import React, { useEffect, useState } from "react";
-import { useRef } from "react";
-import searchTagsStyles from "styles/componentsStyles/searchTags.module.scss";
+import { TagsInput } from "components/tagsInput";
+import React from "react";
+import { connect } from "react-redux";
+import { selectSearchTags, setSearchTags } from "store/slices/searchTagsSlice";
 
-const SearchTag = () => {
-  const [allTags, setAllTags] = React.useState([]);
-  useEffect(async () => {
-    const actualTags = await getTags();
-    setAllTags(actualTags.map((tag) => ({ id: tag.id, text: tag.name })));
-  }, []);
-  // const [n, sn] = useState(1);
+const SearchTag = connect(
+  (state) => ({
+    searchTags: selectSearchTags(state),
+  }),
+  (dispatch) => ({
+    setTags: (tags) => dispatch(setSearchTags(tags)),
+  })
+)(({ searchTags, setTags }) => {
   return (
     <NonSsrWrapper>
       <Layout>
         <h1>Search tag</h1>
-        {/* <p>{allTags.length}</p> */}
-        {/* <input
-          type="number"
-          value={n}
-          onChange={(e) => {
-            sn(Number.parseInt(e.target.value));
-          }}
-          placeholder={0}
-          min={0}
-        /> */}
-        {/* <p>
-          width: {allTagsWidthContainer(allTags.slice(0, Number.parseInt(n)))}
-        </p> */}
-        <div className={searchTagsStyles.parent}>
-          I am the parent
-          <div className={searchTagsStyles.child}>
-            I am the child, but I want to be behind my parent
-          </div>
-        </div>
-
-        <Box
-          className={searchTagsStyles.allTagsScroll}
-          sx={(theme) => ({
-            border: `2px solid ${
-              theme.colorScheme === "dark" ? "white" : "black"
-            }`,
-          })}
-        >
-          <Box
-            className={searchTagsStyles.allTagsContainer}
-            sx={{
-              width: allTagsWidthContainer(allTags),
-            }}
-          >
-            {allTags.map((tag) => (
-              <Center
-                sx={(theme) => ({
-                  backgroundColor: shadedBackground(theme),
-                })}
-                className={searchTagsStyles.tag}
-                key={tag.id}
-              >
-                {tag.text}
-                {console.log(tag)}
-              </Center>
-            ))}
-          </Box>
-        </Box>
+        <Text>
+          Click or tap in any tag to add it to the tags list or write it
+          yourself
+        </Text>
+        <AllTagsList selectedTags={searchTags} setSelectedTags={setTags} />
+        <TagsInput tags={searchTags} setTags={setTags} />
+        <Button variant="outline">Search</Button>
       </Layout>
     </NonSsrWrapper>
   );
-};
+});
 
 export default SearchTag;

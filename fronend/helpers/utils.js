@@ -26,6 +26,12 @@ export const formatDate = (date) => {
 export const shadedBackground = (theme) =>
   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[1];
 
+export const dimmedShadedBackground = (theme) =>
+  theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[0];
+
+export const dimmedTextShaded = (theme) =>
+  theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[1];
+
 export const fullImagePath = (imagePath) =>
   `${BACKEND_URL}/${BACKEND_MEDIA_URL}/${imagePath}`;
 
@@ -41,18 +47,19 @@ export const itemImageSource = (image) =>
 
 export const roundPrice = (price) => Math.round(price * 100) / 100;
 
-export const allTagsWidthContainer = (tags) => {
+export const allTagsWidthContainer = (tags, windowWidth) => {
   const n = tags.length;
-  const base = 900;
   const widthIncrement = 60;
   const tagsIncrement = 6;
-  const breakpoint = 60;
+  const breakpoint = (tagsIncrement * windowWidth) / widthIncrement;
   if (n < breakpoint) {
-    return parsePixels(base);
+    return "100%";
   } else {
     const overload = n - breakpoint;
-    return parsePixels(base + (overload * widthIncrement) / tagsIncrement);
+    return parsePixels(
+      windowWidth + (overload * widthIncrement) / tagsIncrement
+    );
   }
 };
 
-const parsePixels = (pixels) => `${pixels}px`;
+const parsePixels = (pixels) => `${Math.round(pixels * 100) / 100}px`;
