@@ -146,9 +146,13 @@ mutation {
 }
 `;
 
-export const ALL_TAGS = gql`
-  query {
-    tags {
+export const TAGS_QUERY = gql`
+  query Tags($filter: Boolean, $withItems: Boolean, $withPublished: Boolean) {
+    tags(
+      filter: $filter
+      withItems: $withItems
+      withPublished: $withPublished
+    ) {
       id
       name
     }
@@ -196,6 +200,14 @@ export const DELETE_ITEM = gql`
       ... on DeleteItemSuccess {
         success
       }
+    }
+  }
+`;
+
+export const ITEMS_BY_TAGS = gql`
+  query ItemsByTags($tagsIds: [ID!]!) {
+    itemsByTags(tagsIds: $tagsIds) {
+      ${itemGraphqlQueryFields}
     }
   }
 `;

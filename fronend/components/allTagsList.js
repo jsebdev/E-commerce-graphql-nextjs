@@ -1,4 +1,4 @@
-import { Box, Center, Text, useMantineTheme } from "@mantine/core";
+import { Box, Text } from "@mantine/core";
 import {
   allTagsWidthContainer,
   dimmedTextShaded,
@@ -6,25 +6,33 @@ import {
   shadedBackground,
 } from "helpers/utils";
 import { useWindowSize } from "hooksAndLogic/global.hooks";
-import { getTags } from "hooksAndLogic/fetchTags.logic";
 import React, { useEffect } from "react";
 import allTagsListStyles from "styles/componentsStyles/allTagsList.module.scss";
-import { handleTagAddition, tagB2F } from "hooksAndLogic/inputTags.logic";
+import { handleTagAddition, tagB2F } from "hooksAndLogic/tagsInput.logic";
+import { useFetchTags } from "hooksAndLogic/fetchTags.hook";
 
 export const AllTagsList = ({ selectedTags, setSelectedTags }) => {
   const selectedTagsIds = selectedTags.map((tag) => tag.id);
-  console.log("16: selectedTags >>>", selectedTags);
   const [allTags, setAllTags] = React.useState([]);
   const {
     windowSize: { width: windowWidth },
   } = useWindowSize();
+  const { data, loading, error } = useFetchTags({ filter: true });
   useEffect(async () => {
-    const actualTags = await getTags();
-    setAllTags(actualTags.map(tagB2F));
-  }, []);
-  useEffect(() => {
-    // console.log("24: allTags >>>", allTags);
-  }, [allTags]);
+    if (error) {
+      console.log("error getting tags for suggestions >>>", error);
+      return;
+    }
+    if (loading) {
+      console.log("loading tags for suggestions");
+      return;
+    }
+    if (data) setAllTags(data.tags.map(tagB2F));
+    else {
+      console.log("no tags found");
+      console.log("45: allTags >>>", data);
+    }
+  }, [data, error]);
   return (
     <Box
       className={allTagsListStyles.allTagsScroll}

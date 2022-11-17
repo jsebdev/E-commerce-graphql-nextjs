@@ -1,8 +1,8 @@
 import { Text, useMantineColorScheme } from "@mantine/core";
 import classNames from "classnames";
 import { THEMES_NAMES } from "helpers/strings";
-import { getTags } from "hooksAndLogic/fetchTags.logic";
-import { handleTagAddition, tagB2F } from "hooksAndLogic/inputTags.logic";
+import { useFetchTags } from "hooksAndLogic/fetchTags.hook";
+import { handleTagAddition, tagB2F } from "hooksAndLogic/tagsInput.logic";
 import React from "react";
 import { useEffect } from "react";
 
@@ -26,10 +26,22 @@ export const TagsInput = ({ tags, setTags }) => {
     newTags.splice(newPos, 0, tag);
     setTags(newTags);
   };
+  const { data, loading, error } = useFetchTags();
   useEffect(async () => {
-    const actualTags = await getTags();
-    setSuggestions(actualTags.map(tagB2F));
-  }, []);
+    if (error) {
+      console.log("error getting tags for suggestions >>>", error);
+      return;
+    }
+    if (loading) {
+      console.log("loading tags for suggestions");
+      return;
+    }
+    if (data) setSuggestions(data.tags.map(tagB2F));
+    else {
+      console.log("no tags found");
+      console.log("45: allTags >>>", data);
+    }
+  }, [data, error]);
 
   const { colorScheme } = useMantineColorScheme();
   const isDark = colorScheme.colorScheme === THEMES_NAMES.dark;
@@ -41,7 +53,10 @@ export const TagsInput = ({ tags, setTags }) => {
         darkMode: isDark,
       })}
     >
-      <Text className={tagsInputStyles.label}>Tags</Text>
+      <Text className={tagsInputStyles.label}>Tags:</Text>
+      <Text color="dimmed" size="xs">
+        Separate tags with commas or pressing enter
+      </Text>
       <ReactTags
         tags={tags}
         suggestions={suggestions}
@@ -51,7 +66,7 @@ export const TagsInput = ({ tags, setTags }) => {
           handleTagAddition(tag, tags, setTags, suggestions)
         }
         handleDrag={handleDrag}
-        placeholder="Click to add tags"
+        placeholder="Add tags"
         autocomplete={false}
         inputFieldPosition="inline"
       />

@@ -26,7 +26,9 @@ export const userSlice = createSlice({
     addUserItem: (state, action) => {
       state.userItems.userItems = [
         action.payload,
-        ...state.userItems.userItems,
+        ...state.userItems.userItems.filter(
+          (item) => item.id !== action.payload.id
+        ),
       ];
     },
     modifyUserItem: (state, action) => {

@@ -1,5 +1,4 @@
 export const handleTagAddition = (tag, tags, setTags, suggestions) => {
-  debugger;
   tag = { ...tag, text: tag.text.toLowerCase() };
   // check if tag already exists.
   if (tags.map((tag) => tag.text).includes(tag.text)) return;

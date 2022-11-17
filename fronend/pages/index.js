@@ -7,13 +7,14 @@ import { ALL_ITEMS } from "helpers/gqlQueries";
 import { wrapper } from "store/store";
 import { connect } from "react-redux";
 import {
-  selectItems,
+  selectSearchItems,
   selectSearchText,
   setItems,
 } from "store/slices/searchSlice";
 import { selectUsername } from "store/slices/userSlice";
 import { Stack, Text, Title } from "@mantine/core";
 import { ItemsGrid } from "components/itemsGrid";
+import { NoItemsPublished } from "components/noItemsPublished";
 
 function Home({ items, searchText, username }) {
   return (
@@ -33,10 +34,7 @@ function Home({ items, searchText, username }) {
             {searchText ? (
               <Text>No items found for search &#39;{searchText}&#39;</Text>
             ) : (
-              <>
-                <Text>Sorry! There are no items published at the moment</Text>
-                <Text>Came back later or publish an item yourself 😉</Text>
-              </>
+              <NoItemsPublished />
             )}
           </Stack>
         )}
@@ -63,7 +61,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 export default connect((state) => ({
-  items: selectItems(state),
+  items: selectSearchItems(state),
   searchText: selectSearchText(state),
   username: selectUsername(state),
 }))(Home);
