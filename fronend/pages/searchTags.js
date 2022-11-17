@@ -72,11 +72,7 @@ const SearchTag = connect(
         unsetSearchOnRender();
       }
     }, []);
-    useEffect(() => {
-      console.log("43: loading >>>", loading);
-      console.log("44: error >>>", error);
-      console.log("45: data >>>", data);
-    }, [loading, error, data]);
+    useEffect(() => getItems(), [searchTags]);
     useEffect(() => {
       if (data) {
         console.log("setting items by tags");
@@ -85,9 +81,6 @@ const SearchTag = connect(
       if (loading) setLoading(true);
       else setLoading(false);
     }, [data, loading, error]);
-    // useEffect(() => {
-    //   console.log("31: itemsByTags >>>", itemsByTags);
-    // }, [itemsByTags]);
     return (
       <NonSsrWrapper>
         <Layout>
@@ -105,8 +98,6 @@ const SearchTag = connect(
             <Button
               variant="outline"
               onClick={() => {
-                // setItemsFetched(true);
-
                 getItems();
               }}
             >
