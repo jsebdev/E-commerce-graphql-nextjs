@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import {
-  selectItemsFetched,
+  selectUserItemsFetched,
   selectToken,
   selectUserItems,
   selectUsername,
@@ -29,6 +29,7 @@ const Profile = ({ username, token, userItems, itemsFetched }) => {
   useEffect(() => {
     (async () => {
       if (!itemsFetched) {
+        console.log("fetching items in profile page");
         await fetchUserItems(username, dispatch);
         dispatch(setItemsFetched(true));
       }
@@ -92,5 +93,5 @@ export default connect((state) => ({
   username: selectUsername(state),
   token: selectToken(state),
   userItems: selectUserItems(state),
-  itemsFetched: selectItemsFetched(state),
+  itemsFetched: selectUserItemsFetched(state),
 }))(Profile);

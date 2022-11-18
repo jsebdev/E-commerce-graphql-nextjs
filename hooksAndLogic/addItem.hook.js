@@ -61,7 +61,11 @@ export const useAddItem = (sellerUsername, dispatch, router) => {
             message: "Item added successfully",
             color: "green",
           });
-          if (!itemsFetched) await fetchUserItems(sellerUsername, dispatch);
+          console.log("64: itemsFetched >>>", itemsFetched);
+          if (!itemsFetched) {
+            console.log("fetching items in add item hook");
+            await fetchUserItems(sellerUsername, dispatch);
+          }
           dispatch(setItemsFetched(true));
           dispatch(addUserItem(data.createItem.item));
           router.push(createPath(PROFILE_PATH));

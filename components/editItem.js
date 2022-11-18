@@ -6,12 +6,12 @@ import { useMutation } from "@apollo/client";
 import { useForm } from "@mantine/form";
 import { useEditItem } from "hooksAndLogic/editItem.hook";
 import { useEffect } from "react";
-import { selectItemsFetched } from "store/slices/userSlice";
+import { selectUserItemsFetched } from "store/slices/userSlice";
 
 // todo - redirect to 404 when id not found
 
 export const EditItem = connect((state) => ({
-  itemsFetched: selectItemsFetched(state),
+  itemsFetched: selectUserItemsFetched(state),
 }))(({ item, username, itemsFetched }) => {
   const router = useRouter();
   const {

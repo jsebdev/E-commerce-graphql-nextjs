@@ -77,5 +77,5 @@ export const selectUsername = (state) => state.user.user.username;
 export const selectToken = (state) => state.user.user.token;
 export const selectActivationEmail = (state) => state.user.activationEmail;
 export const selectUserItems = (state) => state.user.userItems.userItems || [];
-export const selectItemsFetched = (state) =>
+export const selectUserItemsFetched = (state) =>
   state.user.userItems.itemsFetched || false;

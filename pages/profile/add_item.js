@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import {
-  selectItemsFetched,
+  selectUserItemsFetched,
   selectToken,
   selectUsername,
 } from "store/slices/userSlice";
@@ -47,5 +47,5 @@ const AddProduct = ({ token, username }) => {
 export default connect((state) => ({
   username: selectUsername(state),
   token: selectToken(state),
-  itemsFetched: selectItemsFetched(state),
+  itemsFetched: selectUserItemsFetched(state),
 }))(AddProduct);

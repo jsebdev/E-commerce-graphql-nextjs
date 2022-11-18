@@ -99,6 +99,7 @@ export const useEditItem = (
             color: "green",
           });
           if (!itemsFetched) {
+            console.log("fetching items in edit item hook");
             await fetchUserItems(sellerUsername, dispatch);
             dispatch(setItemsFetched(true));
           }
