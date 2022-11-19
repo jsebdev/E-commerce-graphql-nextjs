@@ -1,6 +1,6 @@
-import { Center, Group } from "@mantine/core";
+import { Group } from "@mantine/core";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   FacebookIcon,
   FacebookShareButton,

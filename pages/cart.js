@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Group,
-  Modal,
-  Space,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Button, Group, Modal, Space, Stack, Text, Title } from "@mantine/core";
 import { CartRow } from "components/cartRow";
 import { Layout } from "components/layout";
 import NonSsrWrapper from "components/nonSsrWrapper";
@@ -50,7 +41,7 @@ const Cart = ({ token, username, cart, cartTotal }) => {
         {cart.length === 0 ? (
           <Stack align="center">
             <p className={cartStyles.message}>
-              Uh oh! Look's like your card is empty
+              Uh oh! Look&apos;s like your card is empty
             </p>
             <Link href="/">
               <Button>Go to Home</Button>

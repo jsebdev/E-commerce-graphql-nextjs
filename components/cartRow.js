@@ -1,13 +1,4 @@
-import {
-  Box,
-  Title,
-  ActionIcon,
-  Center,
-  Paper,
-  Group,
-  Stack,
-  Button,
-} from "@mantine/core";
+import { Box, Title, ActionIcon } from "@mantine/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {

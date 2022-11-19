@@ -47,8 +47,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
   // export const getStaticProps = wrapper.getStaticProps(
   (store) => async () => {
     try {
-      const { data } = await client.query({ query: ALL_ITEMS });
-      console.log("the first 3 items: ", data.items.slice(0, 3));
+      const { data } = await client.query({
+        query: ALL_ITEMS,
+        fetchPolicy: "no-cache",
+      });
+      // console.log(new Date());
+      // console.log("the first 3 items: ", data.items.slice(0, 3));
       store.dispatch(setItems(data.items));
     } catch (e) {
       console.log("Error: ", e);

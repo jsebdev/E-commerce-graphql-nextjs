@@ -62,7 +62,7 @@ const Profile = ({ username, token, userItems, itemsFetched }) => {
               <ItemsGrid items={publishedItems} inHome={false} />
             ) : (
               <Center>
-                <Text>You don't have any published item.</Text>
+                <Text>You don&apos;t have any published item.</Text>
               </Center>
             )}
             <Title order={4} mt={40}>
@@ -72,7 +72,7 @@ const Profile = ({ username, token, userItems, itemsFetched }) => {
               <ItemsGrid items={nonPublishedItems} inHome={false} />
             ) : (
               <Center>
-                <Text>You don't have any non published item.</Text>
+                <Text>You do&apos;t have any non published item.</Text>
               </Center>
             )}
           </>

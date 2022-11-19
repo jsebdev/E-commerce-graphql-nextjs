@@ -11,10 +11,21 @@ import { DynamicShadedBox } from "./themedComponents/dynamicColoredBox";
 import { AddToCart } from "./addToCart";
 import { GoToCart } from "./goToCart";
 import { ShadedBox } from "./themedComponents/shadedBox";
+import { useRouter } from "next/router";
+import { Loading } from "./loading";
 
 export const ItemDetails = ({ item }) => {
   const { windowSize } = useWindowSize();
   const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
+  if (item === null) {
+    try {
+      router.push("/404");
+    } catch (e) {
+      console.log("ItemDetails error: ", e);
+    }
+    return <Loading />;
+  }
   return (
     <Stack spacing={0} align="center">
       <Stack className={itemDetailsStyles.titleDateContainer}>

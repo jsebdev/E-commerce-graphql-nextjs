@@ -1,5 +1,5 @@
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { Button, Space, Stack, Text, Title } from "@mantine/core";
+import { useLazyQuery } from "@apollo/client";
+import { Button, Space, Text, Title } from "@mantine/core";
 import { AllTagsList } from "components/allTagsList";
 import { ItemsGrid } from "components/itemsGrid";
 import { Layout } from "components/layout";

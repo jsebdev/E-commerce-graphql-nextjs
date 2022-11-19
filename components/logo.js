@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import logoStyles from "styles/componentsStyles/logo.module.scss";
-import { ActionIcon, Button } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 
 export const Logo = () => {
   const dispatch = useDispatch();

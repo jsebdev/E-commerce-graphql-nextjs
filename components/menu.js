@@ -4,7 +4,7 @@ import cn from "classnames";
 import menuStyles from "styles/componentsStyles/menu.module.scss";
 import { selectToken } from "store/slices/userSlice";
 import { connect } from "react-redux";
-import { Button, Center, useMantineTheme } from "@mantine/core";
+import { Button, useMantineTheme } from "@mantine/core";
 import {
   ADD_ITEM_PATH,
   LOGIN_PATH,
