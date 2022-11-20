@@ -20,9 +20,8 @@ export const shadedBoxVariants = {
   wide: "wide",
 };
 
-// export const BACKEND_URL = "http://localhost:8000";
-export const BACKEND_URL = "http://127.0.0.1:8000";
 export const BACKEND_MEDIA_URL = "media";
+export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
 
 // Errors
 export const NO_ITEM_FOUND_ERROR = "Item matching query does not exist.";
