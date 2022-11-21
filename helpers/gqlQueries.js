@@ -140,8 +140,6 @@ mutation {
             password2:"${values.password2}") {
     success
     errors
-    refreshToken
-    token
   }
 }
 `;
