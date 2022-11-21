@@ -49,13 +49,13 @@ export const SignUpForm = ({ displayErrors }) => {
         <PasswordInput
           id="password1"
           placeholder="password1"
-          label="password1"
+          label="Password"
           {...form.getInputProps("password1")}
         />
         <PasswordInput
           id="password2"
           placeholder="password2"
-          label="password2"
+          label="Repeat password"
           {...form.getInputProps("password2")}
         />
         <Button type="submit" mt="lg">
