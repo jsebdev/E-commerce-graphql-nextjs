@@ -1,4 +1,4 @@
-import { Button, Group, Text, useMantineColorScheme } from "@mantine/core";
+import { Button, Text, useMantineColorScheme } from "@mantine/core";
 import classNames from "classnames";
 import { THEMES_NAMES } from "helpers/strings";
 import { useFetchTags } from "hooksAndLogic/fetchTags.hook";
@@ -20,7 +20,7 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 export const TagsInput = ({ tags, setTags }) => {
-  const handleAdditionOut = (e) => {
+  const handleAdditionOut = () => {
     const input = document.querySelector(
       "#inputContainer > div > div > div > input"
     );
