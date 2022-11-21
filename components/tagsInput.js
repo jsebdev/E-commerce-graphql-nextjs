@@ -1,8 +1,12 @@
-import { Text, useMantineColorScheme } from "@mantine/core";
+import { Button, Group, Text, useMantineColorScheme } from "@mantine/core";
 import classNames from "classnames";
 import { THEMES_NAMES } from "helpers/strings";
 import { useFetchTags } from "hooksAndLogic/fetchTags.hook";
-import { handleTagAddition, tagB2F } from "hooksAndLogic/tagsInput.logic";
+import {
+  createRawTag,
+  handleTagAddition,
+  tagB2F,
+} from "hooksAndLogic/tagsInput.logic";
 import React from "react";
 import { useEffect } from "react";
 
@@ -16,6 +20,14 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 export const TagsInput = ({ tags, setTags }) => {
+  const handleAdditionOut = (e) => {
+    const input = document.querySelector(
+      "#inputContainer > div > div > div > input"
+    );
+    handleTagAddition(createRawTag(input.value), tags, setTags, suggestions);
+    input.value = "";
+    // debugger;
+  };
   const handleDelete = (i) => {
     setTags(tags.filter((tag, index) => index !== i));
   };
@@ -55,21 +67,26 @@ export const TagsInput = ({ tags, setTags }) => {
     >
       <Text className={tagsInputStyles.label}>Tags:</Text>
       <Text color="dimmed" size="xs">
-        Separate tags with commas or pressing enter
+        Separate tags with commas, pressing enter or pressing on the button
       </Text>
-      <ReactTags
-        tags={tags}
-        suggestions={suggestions}
-        delimiters={delimiters}
-        handleDelete={handleDelete}
-        handleAddition={(tag) =>
-          handleTagAddition(tag, tags, setTags, suggestions)
-        }
-        handleDrag={handleDrag}
-        placeholder="Add tags"
-        autocomplete={false}
-        inputFieldPosition="inline"
-      />
+      <div className={tagsInputStyles.inputContainer} id="inputContainer">
+        <ReactTags
+          tags={tags}
+          suggestions={suggestions}
+          delimiters={delimiters}
+          handleDelete={handleDelete}
+          handleAddition={(tag) =>
+            handleTagAddition(tag, tags, setTags, suggestions)
+          }
+          handleDrag={handleDrag}
+          placeholder="Add tags"
+          autocomplete={false}
+          inputFieldPosition="inline"
+        />
+        <Button variant="outline" size="xs" onClick={handleAdditionOut}>
+          Add tag
+        </Button>
+      </div>
     </div>
   );
 };

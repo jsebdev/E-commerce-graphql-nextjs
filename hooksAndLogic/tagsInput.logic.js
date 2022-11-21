@@ -1,4 +1,5 @@
 export const handleTagAddition = (tag, tags, setTags, suggestions) => {
+  console.log("2: tag >>>", tag);
   tag = { ...tag, text: tag.text.toLowerCase() };
   // check if tag already exists.
   if (tags.map((tag) => tag.text).includes(tag.text)) return;
@@ -52,3 +53,8 @@ const numberToLetters = (number) => {
   }
   return letters;
 };
+
+export const createRawTag = (tagText) => ({
+  id: tagText,
+  text: tagText,
+});

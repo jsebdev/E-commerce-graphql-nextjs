@@ -9,5 +9,12 @@
     font-weight: 500;
     margin-inline-end: 1rem;
   }
-
+  .inputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    // align-items: center;
+  }
 }
