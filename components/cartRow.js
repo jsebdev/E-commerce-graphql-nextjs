@@ -10,8 +10,11 @@ import { QuantityInput } from "./quantityInput";
 import cartStyles from "styles/componentsStyles/cart.module.scss";
 import { IconTrash } from "@tabler/icons";
 import { YesNoModal } from "./yesNoModal";
-import { roundPrice } from "helpers/utils";
+import { createPath, roundPrice } from "helpers/utils";
 import { ImageStore } from "./imageStore";
+import Link from "next/link";
+import { ITEM_DISPLAY_PATH } from "helpers/strings";
+import utilStyles from "styles/utils.module.scss";
 
 export const CartRow = ({ item, index, setSelectedItems, selected }) => {
   const quantity = useSelector(selectCartItem(item.id)).quantity;
@@ -47,7 +50,9 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
         <input type="checkbox" onChange={handleSelect} checked={selected} />
       </RowCell>
       <RowCell>
-        <Title order={5}>{item.title}</Title>
+        <Link href={createPath(ITEM_DISPLAY_PATH(item.id))} scroll>
+          <Title order={5}>{item.title}</Title>
+        </Link>
       </RowCell>
       <RowCell>
         <Box p={2} className={cartStyles.image}>

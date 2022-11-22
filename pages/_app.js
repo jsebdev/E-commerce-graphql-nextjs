@@ -7,6 +7,7 @@ import { client } from "apolloClient";
 import { ApolloProvider } from "@apollo/client";
 
 import "styles/tagInputStyles.scss";
+import "styles/global.scss";
 
 export default function App({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);

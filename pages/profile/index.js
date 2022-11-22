@@ -72,7 +72,7 @@ const Profile = ({ username, token, userItems, itemsFetched }) => {
               <ItemsGrid items={nonPublishedItems} inHome={false} />
             ) : (
               <Center>
-                <Text>You do&apos;t have any non published item.</Text>
+                <Text>You don&apos;t have any non published item.</Text>
               </Center>
             )}
           </>
