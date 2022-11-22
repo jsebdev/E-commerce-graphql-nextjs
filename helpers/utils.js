@@ -28,11 +28,11 @@ export const formatDate = (date) => {
 export const shadedBackground = (theme) =>
   theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[1];
 
-export const dimmedShadedBackground = (theme) =>
-  theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[0];
+export const highlightedShadedBackground = (theme) =>
+  theme.colorScheme === "dark" ? theme.colors.gray[4] : theme.colors.dark[3];
 
-export const dimmedTextShaded = (theme) =>
-  theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[1];
+export const highlightedTextShaded = (theme) =>
+  theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[1];
 
 export const fullImagePath = (imagePath) =>
   `${BACKEND_URL}/${BACKEND_MEDIA_URL}/${imagePath}`;

@@ -1,8 +1,8 @@
 import { Box, Text } from "@mantine/core";
 import {
   allTagsWidthContainer,
-  dimmedTextShaded,
-  dimmedShadedBackground,
+  highlightedTextShaded,
+  highlightedShadedBackground,
   shadedBackground,
 } from "helpers/utils";
 import { useWindowSize } from "hooksAndLogic/global.hooks";
@@ -57,10 +57,10 @@ export const AllTagsList = ({ selectedTags, setSelectedTags }) => {
             }
             sx={(theme) => ({
               backgroundColor: selectedTagsIds.includes(tag.id)
-                ? dimmedShadedBackground(theme)
+                ? highlightedShadedBackground(theme)
                 : shadedBackground(theme),
               color: selectedTagsIds.includes(tag.id)
-                ? dimmedTextShaded(theme)
+                ? highlightedTextShaded(theme)
                 : null,
             })}
             className={allTagsListStyles.tag}
