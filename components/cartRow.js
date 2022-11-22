@@ -10,7 +10,8 @@ import { QuantityInput } from "./quantityInput";
 import cartStyles from "styles/componentsStyles/cart.module.scss";
 import { IconTrash } from "@tabler/icons";
 import { YesNoModal } from "./yesNoModal";
-import { itemImageSource, roundPrice } from "helpers/utils";
+import { roundPrice } from "helpers/utils";
+import { ImageStore } from "./imageStore";
 
 export const CartRow = ({ item, index, setSelectedItems, selected }) => {
   const quantity = useSelector(selectCartItem(item.id)).quantity;
@@ -49,8 +50,9 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
         <Title order={5}>{item.title}</Title>
       </RowCell>
       <RowCell>
-        <Box p={1}>
-          <img className={cartStyles.image} src={itemImageSource(item.image)} />
+        <Box p={2} className={cartStyles.image}>
+          {/* <img className={cartStyles.image} src={itemImageSource(item.image)} /> */}
+          <ImageStore image={item.image} />
         </Box>
       </RowCell>
       <RowCell>

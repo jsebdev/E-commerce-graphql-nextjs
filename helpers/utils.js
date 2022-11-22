@@ -35,15 +35,19 @@ export const dimmedTextShaded = (theme) =>
 export const fullImagePath = (imagePath) =>
   `${BACKEND_URL}/${BACKEND_MEDIA_URL}/${imagePath}`;
 
+export const myImageLoader = ({ src, width, quality }) => {
+  return src ? fullImagePath(src) : "/images/no-photo.png";
+};
+
+export const itemImageSource = (image) =>
+  image ? fullImagePath(image) : "/images/no-photo.png";
+
 export const customErrorMessage = (errorMessage) => {
   if (errorMessage === "UNIQUE constraint failed: shop_item.title") {
     return "There is already an item with this title";
   }
   return errorMessage;
 };
-
-export const itemImageSource = (image) =>
-  image ? fullImagePath(image) : "/images/no-photo.png";
 
 export const roundPrice = (price) => Math.round(price * 100) / 100;
 
@@ -63,3 +67,10 @@ export const allTagsWidthContainer = (tags, windowWidth) => {
 };
 
 const parsePixels = (pixels) => `${Math.round(pixels * 100) / 100}px`;
+
+export const printObjLog = (obj, tag = "NoTag") => {
+  if (process.env.NEXT_PUBLIC_SHOW_LOGS === "1") {
+    if (tag) console.log(tag);
+    console.log(obj);
+  }
+};

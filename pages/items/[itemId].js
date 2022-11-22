@@ -1,24 +1,24 @@
 import { client } from "apolloClient";
 import { ItemDetails } from "components/itemDetails";
 import { Layout } from "components/layout";
-import { ALL_ITEMS_IDS, ITEM_BY_ID_SERVER } from "helpers/gqlQueries";
+import { ITEM_BY_ID_SERVER } from "helpers/gqlQueries";
 import React from "react";
 
-export const getStaticPaths = async () => {
-  const fallback = "blocking";
-  try {
-    const { data } = await client.query({ query: ALL_ITEMS_IDS });
-    console.log("14: data >>>", data);
-    const paths = data.items.map((item) => ({ params: { itemId: item.id } }));
-    return { paths, fallback };
-  } catch (e) {
-    console.log("getStaticPaths error: ", e);
-    console.log("Error: ", e?.networkError?.result?.errors);
-  }
-  return { paths: [], fallback };
-};
+// export const getStaticPaths = async () => {
+//   const fallback = "blocking";
+//   try {
+//     const { data } = await client.query({ query: ALL_ITEMS_IDS });
+//     console.log("14: data >>>", data);
+//     const paths = data.items.map((item) => ({ params: { itemId: item.id } }));
+//     return { paths, fallback };
+//   } catch (e) {
+//     console.log("getStaticPaths error: ", e);
+//     console.log("Error: ", e?.networkError?.result?.errors);
+//   }
+//   return { paths: [], fallback };
+// };
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const itemId = context.params.itemId;
   try {
     const { data } = await client.query({

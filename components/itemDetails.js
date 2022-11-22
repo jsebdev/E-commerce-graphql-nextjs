@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ShareButtons } from "./shareButtons";
 import { ItemTagsList } from "./itemTagsList";
 import itemDetailsStyles from "styles/componentsStyles/itemDetails.module.scss";
-import { formatDate, itemImageSource, roundPrice } from "helpers/utils";
+import { formatDate, printObjLog, roundPrice } from "helpers/utils";
 import cn from "classnames";
 import { useWindowSize } from "hooksAndLogic/global.hooks";
 import { tabletWidth } from "helpers/varialbles";
@@ -13,11 +13,16 @@ import { GoToCart } from "./goToCart";
 import { ShadedBox } from "./themedComponents/shadedBox";
 import { useRouter } from "next/router";
 import { Loading } from "./loading";
+import { useEffect } from "react";
+import { ImageStore } from "./imageStore";
 
 export const ItemDetails = ({ item }) => {
   const { windowSize } = useWindowSize();
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
+  useEffect(() => {
+    printObjLog(item, "item in itemDetails");
+  }, [item]);
   if (item === null) {
     try {
       router.push("/404");
@@ -53,10 +58,11 @@ export const ItemDetails = ({ item }) => {
         <Box className={itemDetailsStyles.leftContainer}>
           <Center mb="1rem">
             <ShadedBox className={itemDetailsStyles.imagesContainer}>
-              <img
+              {/* <img
                 className={itemDetailsStyles.image}
                 src={itemImageSource(item.image)}
-              />
+              /> */}
+              <ImageStore image={item.image} />
             </ShadedBox>
           </Center>
           <Group

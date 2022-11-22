@@ -5,7 +5,8 @@ import React from "react";
 import fileValueStyles from "styles/componentsStyles/fileValue.module.scss";
 import { ShadedBox } from "./themedComponents/shadedBox";
 import { THEMES_NAMES } from "helpers/strings";
-import { itemImageSource } from "helpers/utils";
+import { ImageStore } from "./imageStore";
+import classNames from "classnames";
 
 /**
  * This component is the common frame component for the button and the image
@@ -63,9 +64,15 @@ export const FileValue = ({ value }) => {
 export const FilePlaceholder = ({ savedImage = null }) => {
   return (
     <ImageFrame>
-      <div className={fileValueStyles.placeholderContainer}>
+      <div
+        className={classNames({
+          [fileValueStyles.placeholderContainer]: true,
+          [fileValueStyles.iconPlaceholder]: !savedImage,
+        })}
+      >
         {savedImage ? (
-          <img src={itemImageSource(savedImage)} />
+          // <img src={itemImageSource(savedImage)} />
+          <ImageStore image={savedImage} />
         ) : (
           <>
             <Text>Upload Image</Text>
