@@ -7,6 +7,7 @@ import { ShadedBox } from "./themedComponents/shadedBox";
 import { THEMES_NAMES } from "helpers/strings";
 import { ImageStore } from "./imageStore";
 import classNames from "classnames";
+import Image from "next/image";
 
 /**
  * This component is the common frame component for the button and the image
@@ -41,7 +42,19 @@ function Value({ file }) {
 
   return (
     <ImageFrame>
-      <img src={image} alt="image" />
+      <>
+        {/* <img src={image} alt="image" /> */}
+        {image && (
+          <Image
+            src={image}
+            alt="image"
+            width="100"
+            height="100"
+            layout="responsive"
+            objectFit="cover"
+          />
+        )}
+      </>
     </ImageFrame>
   );
 }

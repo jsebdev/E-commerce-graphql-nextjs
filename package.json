@@ -30,6 +30,7 @@
     "sass": "^1.55.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^13.0.4",
     "eslint": "^8.26.0",
     "eslint-plugin-react": "^7.31.10"
   }

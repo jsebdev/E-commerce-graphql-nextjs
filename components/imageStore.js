@@ -8,12 +8,12 @@ export const ImageStore = ({ image }) => {
   }, [image]);
   return image ? (
     <Image
-      loader={myImageLoader}
-      src={image}
+      src={myImageLoader({ src: image })}
       layout="responsive"
       width="100"
       height="100"
       objectFit="cover"
+      // placeholder="blur"
     />
   ) : (
     <Image
@@ -22,6 +22,7 @@ export const ImageStore = ({ image }) => {
       width="100"
       height="100"
       objectFit="cover"
+      // placeholder="blur"
     />
   );
 };
