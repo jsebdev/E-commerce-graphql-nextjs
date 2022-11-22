@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ShareButtons } from "./shareButtons";
 import { ItemTagsList } from "./itemTagsList";
 import itemDetailsStyles from "styles/componentsStyles/itemDetails.module.scss";
-import { formatDate, printObjLog, roundPrice } from "helpers/utils";
+import { createPath, formatDate, printObjLog, roundPrice } from "helpers/utils";
 import cn from "classnames";
 import { useWindowSize } from "hooksAndLogic/global.hooks";
 import { tabletWidth } from "helpers/varialbles";
@@ -15,8 +15,14 @@ import { useRouter } from "next/router";
 import { Loading } from "./loading";
 import { useEffect } from "react";
 import { ImageStore } from "./imageStore";
+import { connect } from "react-redux";
+import { selectUsername } from "store/slices/userSlice";
+import Link from "next/link";
+import { OWN_ITEM_PATH } from "helpers/strings";
 
-export const ItemDetails = ({ item }) => {
+export const ItemDetails = connect((state) => ({
+  username: selectUsername(state),
+}))(({ item, username }) => {
   const { windowSize } = useWindowSize();
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
@@ -48,6 +54,7 @@ export const ItemDetails = ({ item }) => {
           <Text color="dimmed" size="sm">
             Last modified: {formatDate(item.dateModified)}
           </Text>
+          <Space h="md"></Space>
         </Box>
       </Stack>
       <Group
@@ -65,6 +72,17 @@ export const ItemDetails = ({ item }) => {
               <ImageStore image={item.image} />
             </ShadedBox>
           </Center>
+          {item.seller.username == username && (
+            <Text color="dimmed" size="sm">
+              This item is yours! want to{" "}
+              <Link
+                href={createPath(OWN_ITEM_PATH(item.id))}
+                className={itemDetailsStyles.editLink}
+              >
+                edit it?
+              </Link>
+            </Text>
+          )}
           <Group
             className={cn(
               itemDetailsStyles.actionsContainer,
@@ -126,4 +144,4 @@ export const ItemDetails = ({ item }) => {
       </Group>
     </Stack>
   );
-};
+});

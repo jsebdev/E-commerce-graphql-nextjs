@@ -18,10 +18,15 @@ const AccountCreated = ({ email }) => {
       </Text>
       <Alert
         icon={
-          <Image src="/images/owl_64.png" width={64} height={64} alt="advice" />
+          <Image src="/images/owl_64.png" width={35} height={35} alt="advice" />
         }
         title="A piece of ancient wisdom"
         color="yellow"
+        styles={{
+          icon: {
+            width: "30px",
+          },
+        }}
       >
         Check again.... It is quite possible that the email is in the spam
         folder

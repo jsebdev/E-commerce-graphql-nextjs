@@ -28,13 +28,13 @@ export const LoginForm = ({ displayErrors }) => {
       <h3>Log in</h3>
       <form onSubmit={form.onSubmit(login, handleFormErrors)}>
         <TextInput
-          id="username"
+          id="Username"
           placeholder="username"
           label="username"
           {...form.getInputProps("username")}
         />
         <PasswordInput
-          id="password"
+          id="Password"
           placeholder="password"
           label="password"
           {...form.getInputProps("password")}

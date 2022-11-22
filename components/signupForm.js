@@ -37,13 +37,13 @@ export const SignUpForm = ({ displayErrors }) => {
         <TextInput
           id="username"
           placeholder="username"
-          label="username"
+          label="Username"
           {...form.getInputProps("username")}
         />
         <TextInput
           id="email"
           placeholder="email"
-          label="email"
+          label="Email"
           {...form.getInputProps("email")}
         />
         <PasswordInput

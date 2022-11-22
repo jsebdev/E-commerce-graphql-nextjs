@@ -39,9 +39,7 @@ const Activate = () => {
               <Title order={3}>Congratulations</Title>
               <Text>Your account has been activated</Text>
               <Link href={createPath(LOGIN_PATH)}>
-                <a>
-                  <Button>Login in your account</Button>
-                </a>
+                <Button>Login in your account</Button>
               </Link>
             </Stack>
           ) : (
