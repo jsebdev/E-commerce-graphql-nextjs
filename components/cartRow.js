@@ -14,7 +14,6 @@ import { createPath, roundPrice } from "helpers/utils";
 import { ImageStore } from "./imageStore";
 import Link from "next/link";
 import { ITEM_DISPLAY_PATH } from "helpers/strings";
-import utilStyles from "styles/utils.module.scss";
 
 export const CartRow = ({ item, index, setSelectedItems, selected }) => {
   const quantity = useSelector(selectCartItem(item.id)).quantity;

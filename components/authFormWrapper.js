@@ -8,6 +8,8 @@ import { selectToken, selectUsername } from "store/slices/userSlice";
 import { DynamicLoading } from "./dynamicLoading";
 import { Layout } from "./layout";
 import authFormWrapperStyles from "styles/componentsStyles/authFormWrapper.module.scss";
+import { Alert, Box } from "@mantine/core";
+import { IconAlertCircle } from "@tabler/icons";
 
 const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {
   // useEffect(() => {
@@ -34,12 +36,19 @@ const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {
           <div className={authFormWrapperStyles.formContainer}>
             <FormComponent displayErrors={displayErrors} />
             {errorMessages.length > 0 && (
-              <>
-                <p>Errors:</p>
+              <Box my="lg">
                 {errorMessages.map((message) => (
-                  <p key={message}>{message}</p>
+                  <Alert
+                    my="sm"
+                    icon={<IconAlertCircle size={16} />}
+                    title="Don't panic but..."
+                    color="red"
+                    key={message}
+                  >
+                    {message}
+                  </Alert>
                 ))}
-              </>
+              </Box>
             )}
           </div>
         </div>
