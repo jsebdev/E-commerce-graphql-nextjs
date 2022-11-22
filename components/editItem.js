@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import { useForm } from "@mantine/form";
 import { useEditItem } from "hooksAndLogic/editItem.hook";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { selectUserItemsFetched } from "store/slices/userSlice";
 
 // todo - redirect to 404 when id not found
@@ -29,9 +29,9 @@ export const EditItem = connect((state) => ({
   const [deleteMutate] = useMutation(deleteMutation);
   const form = useForm(formSettings);
 
-  useEffect(() => {
-    console.log("27: item >>>", item);
-  }, []);
+  // useEffect(() => {
+  //   console.log("27: item >>>", item);
+  // }, []);
 
   return (
     <ItemForm

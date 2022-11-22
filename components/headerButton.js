@@ -7,6 +7,7 @@ export const HeaderButton = ({ children, className }) => {
     <Center
       className={className}
       p="0.3rem"
+      m="0.5rem"
       sx={(theme) => ({ ...hoverButtonEffect(theme) })}
     >
       {children}

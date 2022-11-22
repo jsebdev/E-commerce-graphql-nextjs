@@ -17,7 +17,9 @@ const AccountCreated = ({ email }) => {
         <span className={accountCreatedStyles.email}>{email}</span>.
       </Text>
       <Alert
-        icon={<Image src="/images/owl_64.png" width={64} height={64} />}
+        icon={
+          <Image src="/images/owl_64.png" width={64} height={64} alt="advice" />
+        }
         title="A piece of ancient wisdom"
         color="yellow"
       >

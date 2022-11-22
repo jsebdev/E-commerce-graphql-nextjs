@@ -39,7 +39,7 @@ export const TagsInput = ({ tags, setTags }) => {
     setTags(newTags);
   };
   const { data, loading, error } = useFetchTags();
-  useEffect(async () => {
+  useEffect(() => {
     if (error) {
       console.log("error getting tags for suggestions >>>", error);
       return;

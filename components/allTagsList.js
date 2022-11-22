@@ -18,7 +18,7 @@ export const AllTagsList = ({ selectedTags, setSelectedTags }) => {
     windowSize: { width: windowWidth },
   } = useWindowSize();
   const { data, loading, error } = useFetchTags({ filter: true });
-  useEffect(async () => {
+  useEffect(() => {
     if (error) {
       console.log("error getting tags for suggestions >>>", error);
       return;

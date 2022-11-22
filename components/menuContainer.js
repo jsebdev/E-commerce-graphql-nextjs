@@ -14,12 +14,7 @@ export const MenuContainer = () => {
   const toggleMenu = () => setShowMenu((s) => !s);
   return (
     <div className={cn(headerStyles.smallHeaderButton)} onClick={toggleMenu}>
-      <Image
-        layout="responsive"
-        src="/images/cheeseburger_128.png"
-        width={10}
-        height={10}
-      />
+      <Image src="/images/cheeseburger_128.png" fill alt="menu" sizes="25vw" />
       {showMenu && <CloseMenuLayer />}
       {showMenu && <DynamicMenu showMenu={showMenu} />}
     </div>

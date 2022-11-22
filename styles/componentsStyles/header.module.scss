@@ -25,6 +25,7 @@
 
 $button-size: 2rem;
 .smallHeaderButton {
+  position: relative;
   width: $button-size;
   height: $button-size;
   padding: 0.2rem;

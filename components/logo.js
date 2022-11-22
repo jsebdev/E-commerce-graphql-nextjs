@@ -14,7 +14,7 @@ export const Logo = () => {
       className={logoStyles.logoContainer}
       onClick={() => resetWebsite(dispatch, router)}
     >
-      <Image src="/images/store_128.png" width="100%" height="100%" />
+      <Image src="/images/store_128.png" fill={true} alt="logo" sizes="25vw" />
     </ActionIcon>
   );
 };

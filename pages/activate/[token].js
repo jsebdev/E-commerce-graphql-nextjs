@@ -18,14 +18,16 @@ const Activate = () => {
   const { token } = router.query;
   const dispatch = useDispatch();
   const { activateAccount } = useActivateAccount(dispatch);
-  useEffect(async () => {
-    if (!token) return;
-    const { errors } = await activateAccount(token);
-    if (errors) {
-      notifyErrors(errors);
-      setErrors(errors);
-    }
-    setFetched(true);
+  useEffect(() => {
+    (async () => {
+      if (!token) return;
+      const { errors } = await activateAccount(token);
+      if (errors) {
+        notifyErrors(errors);
+        setErrors(errors);
+      }
+      setFetched(true);
+    })();
   }, [token]);
   return (
     <Layout>

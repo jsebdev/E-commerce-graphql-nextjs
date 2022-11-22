@@ -15,17 +15,23 @@ export const ThemeSwitcher = () => {
     >
       {isDark ? (
         <Image
-          layout="responsive"
+          // layout="responsive"
+          fill
           src="/images/sun_64.png"
-          width={20}
-          height={20}
+          // width={20}
+          // height={20}
+          alt="sun"
+          sizes="25vw"
         />
       ) : (
         <Image
-          layout="responsive"
+          // layout="responsive"
+          fill
           src="/images/moon_64.png"
-          width={20}
-          height={20}
+          // width={20}
+          // height={20}
+          alt="moon"
+          sizes="25vw"
         />
       )}
     </div>

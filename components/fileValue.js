@@ -13,7 +13,7 @@ import Image from "next/image";
  * This component is the common frame component for the button and the image
  */
 const ImageFrame = ({ children }) => (
-  <div className={fileValueStyles.imageFrame}>
+  <div className={fileValueStyles.imageFrame} id="elframe">
     <Box
       className={fileValueStyles.themeBackground}
       sx={(theme) => ({
@@ -47,11 +47,11 @@ function Value({ file }) {
         {image && (
           <Image
             src={image}
+            fill
             alt="image"
-            width="100"
-            height="100"
-            layout="responsive"
-            objectFit="cover"
+            sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
           />
         )}
       </>

@@ -2,7 +2,7 @@ import { showNotification } from "@mantine/notifications";
 import { useProfile } from "hooksAndLogic/profile.hook";
 import { useRouter } from "next/router";
 import React from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { connect } from "react-redux";
 import { selectToken, selectUsername } from "store/slices/userSlice";
 import { DynamicLoading } from "./dynamicLoading";
@@ -10,10 +10,10 @@ import { Layout } from "./layout";
 import authFormWrapperStyles from "styles/componentsStyles/authFormWrapper.module.scss";
 
 const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {
-  useEffect(() => {
-    console.log("17: token >>>", token);
-    console.log("18: username >>>", username);
-  });
+  // useEffect(() => {
+  //   console.log("17: token >>>", token);
+  //   console.log("18: username >>>", username);
+  // });
   const [errorMessages, setErrorMessages] = React.useState([]);
   const router = useRouter();
   const { checkAlreadyLoggedIn } = useProfile({ token, username, router });
