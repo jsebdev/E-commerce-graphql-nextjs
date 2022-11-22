@@ -19,7 +19,7 @@ const KeyCodes = {
 };
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
-export const TagsInput = ({ tags, setTags }) => {
+export const TagsInput = ({ tags, setTags, displayError }) => {
   const handleAdditionOut = () => {
     const input = document.querySelector(
       "#inputContainer > div > div > div > input"
@@ -69,7 +69,13 @@ export const TagsInput = ({ tags, setTags }) => {
       <Text color="dimmed" size="xs">
         Separate tags with commas, pressing enter or pressing on the button
       </Text>
-      <div className={tagsInputStyles.inputContainer} id="inputContainer">
+      <div
+        className={classNames({
+          [tagsInputStyles.inputContainer]: true,
+          [tagsInputStyles.displayError]: displayError,
+        })}
+        id="inputContainer"
+      >
         <ReactTags
           tags={tags}
           suggestions={suggestions}

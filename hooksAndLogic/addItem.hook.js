@@ -29,9 +29,9 @@ export const useAddItem = (sellerUsername, dispatch, router) => {
 
   const handleAddItem = async (
     mutate,
-    { values, tags, image },
-    itemsFetched
+    { values, tags, image, itemsFetched, error }
   ) => {
+    if (error) return;
     dispatch(setLoading(true));
     const currentTags = tags.filter((tag) => !tag.newTag).map((tag) => tag.id);
     const newTags = tags.filter((tag) => tag.newTag).map((tag) => tag.text);

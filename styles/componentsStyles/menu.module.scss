@@ -1,9 +1,5 @@
 @import "styles/variables";
 
-.menuButtonContainer {
-  position: relative;
-}
-
 .menuWrapper {
   position: absolute;
   right: -4rem;
@@ -48,7 +44,7 @@
   }
   .onTablet {
     display: block;
-    grid-column: 1/5;
+    grid-column: 1/6;
     grid-row: 2;
     width: 100%;
     margin-block-start: 0.3rem;

@@ -7,7 +7,8 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import { notifyFormErrors } from "helpers/utils";
+import { NO_TAGS_MESSAGE } from "helpers/strings";
+import { notifyError, notifyFormErrors } from "helpers/utils";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { selectUserItemsFetched } from "store/slices/userSlice";
@@ -35,20 +36,38 @@ export const ItemForm = connect((state) => ({
     itemsFetched,
   }) => {
     const [showDeleteModal, setShowDeleteModal] = useState();
+    const [tagsError, setTagsError] = useState(false);
+    const submit = (e) => {
+      e.preventDefault();
+      let error;
+      if (tags.length === 0) {
+        setTagsError(true);
+        error = true;
+        notifyError(NO_TAGS_MESSAGE);
+      } else {
+        setTagsError(false);
+        error = false;
+      }
+      const formOnSubmit = form.onSubmit(
+        (values) =>
+          handleSubmit(mutate, {
+            values,
+            tags,
+            image,
+            itemsFetched,
+            error,
+          }),
+        notifyFormErrors
+      );
+      formOnSubmit(e);
+    };
     return (
       <div>
         <Title order={3} mb="lg">
           {editItem ? itemTitle : "Add New product"}
         </Title>
         <div className={itemFormStyles.formContainer}>
-          <form
-            onSubmit={form.onSubmit(
-              (values) =>
-                handleSubmit(mutate, { values, tags, image }, itemsFetched),
-              notifyFormErrors
-            )}
-            className={itemFormStyles.form}
-          >
+          <form onSubmit={submit} className={itemFormStyles.form}>
             <TextInput
               withAsterisk
               id="title"
@@ -62,7 +81,18 @@ export const ItemForm = connect((state) => ({
               label="Sub-title"
               {...form.getInputProps("subtitle")}
             />
-            <TagsInput tags={tags} setTags={setTags} />
+            <div>
+              <TagsInput
+                tags={tags}
+                setTags={setTags}
+                displayError={tagsError}
+              />
+              {tagsError && (
+                <div className={itemFormStyles.noTagsMessage}>
+                  {NO_TAGS_MESSAGE}
+                </div>
+              )}
+            </div>
             <div className={itemFormStyles.imageInputContainer}>
               <FileInput
                 className={itemFormStyles.imageInput}
@@ -115,7 +145,6 @@ export const ItemForm = connect((state) => ({
               mt="md"
             />
             <div className={itemFormStyles.buttonsContainer}>
-              <Button type="submit">Save</Button>
               {editItem && (
                 <Button
                   variant="filled"
@@ -125,6 +154,7 @@ export const ItemForm = connect((state) => ({
                   Delete
                 </Button>
               )}
+              <Button type="submit">Save</Button>
             </div>
           </form>
         </div>

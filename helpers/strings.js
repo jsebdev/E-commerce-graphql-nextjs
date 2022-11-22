@@ -25,3 +25,6 @@ export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
 
 // Errors
 export const NO_ITEM_FOUND_ERROR = "Item matching query does not exist.";
+
+// messages
+export const NO_TAGS_MESSAGE = "You need to add at least one tag";

@@ -7,12 +7,14 @@ export const notifyFormErrors = (errors) => {
 };
 
 export const notifyErrors = (errors) => {
-  errors.forEach((error) => {
-    showNotification({
-      title: "Oh no!",
-      message: error,
-      color: "red",
-    });
+  errors.forEach(notifyError);
+};
+
+export const notifyError = (error) => {
+  showNotification({
+    title: "Oh no!",
+    message: error,
+    color: "red",
   });
 };
 

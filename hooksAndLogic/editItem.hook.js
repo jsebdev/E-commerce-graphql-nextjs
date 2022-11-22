@@ -39,7 +39,8 @@ export const useEditItem = (
 
   const editMutation = EDIT_ITEM;
 
-  const handleEditItem = async (mutate, { values, tags, image }) => {
+  const handleEditItem = async (mutate, { values, tags, image, error }) => {
+    if (error) return;
     dispatch(setLoading(true));
     const currentTags = tags.filter((tag) => !tag.newTag).map((tag) => tag.id);
     const newTags = tags.filter((tag) => tag.newTag).map((tag) => tag.text);
