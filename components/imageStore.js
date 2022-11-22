@@ -10,17 +10,18 @@ export const ImageStore = ({ image, alt = "image" }) => {
   return (
     <div className={imageStoreStyles.imageContainer}>
       {image ? (
-        // <Image src={myImageLoader({ src: image })} fill objectFit="cover" />
-        <Image
-          src={myImageLoader({ src: image })}
-          // objectFit="cover"
-          fill
-          alt={alt}
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-        />
+        <img src={myImageLoader({ src: image })} />
       ) : (
+        // <Image
+        //   src={myImageLoader({ src: image })}
+        //   // objectFit="cover"
+        //   fill
+        //   alt={alt}
+        //   sizes="(max-width: 768px) 100vw,
+        //       (max-width: 1200px) 50vw,
+        //       33vw"
+        // />
+        // <img src="/images/no-photo.png" />
         <Image
           src="/images/no-photo.png"
           sizes="(max-width: 768px) 100vw,
