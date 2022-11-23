@@ -29,8 +29,8 @@ export const LoginForm = ({ displayErrors }) => {
       <form onSubmit={form.onSubmit(login, handleFormErrors)}>
         <TextInput
           id="Username"
-          placeholder="username"
-          label="username"
+          placeholder="username or email"
+          label="Username or Email"
           {...form.getInputProps("username")}
         />
         <PasswordInput

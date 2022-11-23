@@ -48,13 +48,13 @@ export const SignUpForm = ({ displayErrors }) => {
         />
         <PasswordInput
           id="password1"
-          placeholder="password1"
+          placeholder="password"
           label="Password"
           {...form.getInputProps("password1")}
         />
         <PasswordInput
           id="password2"
-          placeholder="password2"
+          placeholder="password"
           label="Repeat password"
           {...form.getInputProps("password2")}
         />

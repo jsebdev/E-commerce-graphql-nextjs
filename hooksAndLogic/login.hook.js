@@ -3,7 +3,7 @@ import { createPath, notifyFormErrors } from "helpers/utils";
 import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 import { PROFILE_PATH } from "helpers/strings";
-import { LOGIN } from "helpers/gqlQueries";
+import { LOGIN_WITH_EMAIL, LOGIN_WITH_USERNAME } from "helpers/gqlQueries";
 
 export const useLogin = (dispatch, router) => {
   const formSettings = {
@@ -16,16 +16,37 @@ export const useLogin = (dispatch, router) => {
       password: (value) => (value.length === 0 ? "Password is missing!" : null),
     },
   };
-  const handleLogin = async (values) => {
+  const handleLogin = (values) => {
     dispatch(setLoading(true));
-    const { data } = await client.mutate({ mutation: LOGIN(values) });
-    const { success, errors, user, token } = data.tokenAuth;
-    if (success) {
-      dispatch(setUser({ token, username: user.username }));
-      router.push(createPath(PROFILE_PATH));
-    }
-    dispatch(setLoading(false));
-    return { success, errors };
+    return new Promise((resolve, reject) => {
+      const loginUsername = client.mutate({
+        mutation: LOGIN_WITH_USERNAME(values),
+      });
+      const loginEmail = client.mutate({
+        mutation: LOGIN_WITH_EMAIL(values),
+      });
+      Promise.all([loginUsername, loginEmail])
+        .then((results) => {
+          const {
+            data: {
+              tokenAuth: { success, errors, user, token },
+            },
+          } = results.reduce((prev, curr) => {
+            if (curr.data.tokenAuth.success) return curr;
+            return prev;
+          });
+          if (success) {
+            dispatch(setUser({ token, username: user.username }));
+            router.push(createPath(PROFILE_PATH));
+          }
+          dispatch(setLoading(false));
+          resolve({ success, errors });
+        })
+        .catch((error) => {
+          dispatch(setLoading(false));
+          reject(error);
+        });
+    });
   };
   return { handleLogin, formSettings, handleFormErrors: notifyFormErrors };
 };

@@ -110,9 +110,24 @@ mutation {
 }
 `;
 
-export const LOGIN = (values) => gql`
+export const LOGIN_WITH_USERNAME = (values) => gql`
 mutation {
   tokenAuth(username: "${values.username}", password: "${values.password}") {
+    token
+    success
+    errors
+    user {
+      username
+    }
+    unarchiving
+    refreshToken
+  }
+}
+`;
+
+export const LOGIN_WITH_EMAIL = (values) => gql`
+mutation {
+  tokenAuth(email: "${values.username}", password: "${values.password}") {
     token
     success
     errors

@@ -3,6 +3,7 @@ import {
   Checkbox,
   FileInput,
   NumberInput,
+  Text,
   Textarea,
   TextInput,
   Title,
@@ -132,18 +133,24 @@ export const ItemForm = connect((state) => ({
               step={0.01}
               {...form.getInputProps("price")}
             />
-            <Checkbox
-              styles={{
-                root: {
-                  display: "flex",
-                  justifyContent: "center",
-                },
-              }}
-              id="published"
-              label="published"
-              {...form.getInputProps("published", { type: "checkbox" })}
-              mt="md"
-            />
+            <div>
+              <Checkbox
+                styles={{
+                  root: {
+                    display: "flex",
+                    justifyContent: "center",
+                  },
+                }}
+                id="published"
+                label="published"
+                {...form.getInputProps("published", { type: "checkbox" })}
+                mt="md"
+              />
+              <Text color="dimmed" size="xs" align="center">
+                If you don&apos;t publish your item, it will no be visible in
+                the store
+              </Text>
+            </div>
             <div className={itemFormStyles.buttonsContainer}>
               {editItem && (
                 <Button

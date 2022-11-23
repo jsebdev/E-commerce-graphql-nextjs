@@ -10,10 +10,10 @@ const AccountCreated = ({ email }) => {
   return (
     <Layout>
       <Title order={4} mb="lg">
-        Your Account was created successfully
+        Just one more task to finish your account creation brave shopper!
       </Title>
       <Text mb="lg">
-        Please activate your account following the activation link sent to{" "}
+        Please activate your account following the link sent to{" "}
         <span className={accountCreatedStyles.email}>{email}</span>.
       </Text>
       <Alert

@@ -25,7 +25,7 @@ function Home({ items, searchText, username }) {
       </Head>
       <div>
         <Title order={1} align="center" my={10}>
-          {username ? `Welcome ${username}` : "The E-commerce"}
+          {username ? `Welcome ${username}!` : "Welcome!"}
         </Title>
         {items.length > 0 ? (
           <ItemsGrid items={items} />
