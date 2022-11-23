@@ -12,7 +12,6 @@ export const notifyErrors = (errors) => {
 
 export const notifyError = (error) => {
   showNotification({
-    title: "Oh no!",
     message: error,
     color: "red",
   });

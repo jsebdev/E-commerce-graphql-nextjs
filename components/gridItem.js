@@ -6,15 +6,11 @@ import Link from "next/link";
 import { createPath } from "helpers/utils";
 import { ITEM_DISPLAY_PATH, OWN_ITEM_PATH } from "helpers/strings";
 import { ImageStore } from "./imageStore";
-import { useEffect } from "react";
 
 export const GridItem = ({ item, inHome = true }) => {
   const itemPath = inHome
     ? createPath(ITEM_DISPLAY_PATH(item.id))
     : createPath(OWN_ITEM_PATH(item.id));
-  useEffect(() => {
-    console.log("16: item >>>", item);
-  }, [item]);
   return (
     <Box className={gridItemStyles.gridItemContainer}>
       <ShadedBox className={gridItemStyles.gridItem}>

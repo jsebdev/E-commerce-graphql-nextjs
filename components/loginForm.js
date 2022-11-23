@@ -4,17 +4,20 @@ import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import React from "react";
+import { useApolloClient } from "@apollo/client";
 
 export const LoginForm = ({ displayErrors }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const client = useApolloClient();
   const { handleLogin, formSettings, handleFormErrors } = useLogin(
     dispatch,
-    router
+    router,
+    client
   );
   const form = useForm(formSettings);
-  const login = async (e) => {
-    const { success, errors } = await handleLogin(e);
+  const login = async (values) => {
+    const { success, errors } = await handleLogin(values);
     if (!success) {
       const errorMessages = errors?.nonFieldErrors?.map(
         (error) => error.message

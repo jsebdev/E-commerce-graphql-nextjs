@@ -6,13 +6,19 @@ export const mutateAnswers = {
   deleteSuccess: "DeleteItemSuccess",
 };
 
+export const userFields = `
+  id
+  username
+  email
+`;
+
 export const itemGraphqlQueryFields = `
   id
   title
   subtitle
   price
   seller {
-    username
+    ${userFields}
   }
   tags {
     name
@@ -117,10 +123,9 @@ mutation {
     success
     errors
     user {
-      username
+      ${userFields}
     }
     unarchiving
-    refreshToken
   }
 }
 `;
@@ -132,10 +137,9 @@ mutation {
     success
     errors
     user {
-      username
+      ${userFields}
     }
     unarchiving
-    refreshToken
   }
 }
 `;
@@ -221,6 +225,29 @@ export const ITEMS_BY_TAGS = gql`
   query ItemsByTags($tagsIds: [ID!]!) {
     itemsByTags(tagsIds: $tagsIds) {
       ${itemGraphqlQueryFields}
+    }
+  }
+`;
+
+export const UPDATE_ACCOUNT = (email, username) => gql`
+  mutation {
+    updateAccount(email:"${email}" , username: "${username}") {
+      success
+      errors
+    }
+  }
+`;
+
+export const CHANGE_PASSWORD = (oldPassword, newPassword1, newPassword2) => gql`
+  mutation {
+    passwordChange(
+      oldPassword: "${oldPassword}"
+      newPassword1: "${newPassword1}"
+      newPassword2: "${newPassword2}"
+    ) {
+      success
+      errors
+      token
     }
   }
 `;

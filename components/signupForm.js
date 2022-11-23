@@ -4,13 +4,16 @@ import { useSignup } from "hooksAndLogic/signup.hook";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import React from "react";
+import { useApolloClient } from "@apollo/client";
 
 export const SignUpForm = ({ displayErrors }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const client = useApolloClient();
   const { handleSignup, formSettings, handleFormErrors } = useSignup(
     dispatch,
-    router
+    router,
+    client
   );
   const form = useForm(formSettings);
   const signUp = async (values) => {

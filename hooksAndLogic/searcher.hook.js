@@ -1,11 +1,10 @@
-import { client } from "apolloClient";
 import { SEARCH_ITEMS } from "helpers/gqlQueries";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setItems, setSearchText } from "store/slices/searchSlice";
 // import { setSearchText } from "store/searchSlice";
 
-export const useSearcher = () => {
+export const useSearcher = (client) => {
   const dispatch = useDispatch();
   const [search, setSearch] = React.useState("");
   const handleSearch = async (event) => {

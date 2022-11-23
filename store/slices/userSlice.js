@@ -5,6 +5,7 @@ const initialState = {
   user: {
     token: null,
     username: null,
+    email: null,
   },
   userItems: {
     userItems: [],
@@ -19,6 +20,9 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
+    },
+    setToken: (state, action) => {
+      state.user.token = action.payload;
     },
     setUserItems: (state, action) => {
       state.userItems.userItems = action.payload;
@@ -70,11 +74,13 @@ export const {
   modifyUserItem,
   setItemsFetched,
   deleteUserItem,
+  setToken,
 } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 export const selectUsername = (state) => state.user.user.username;
 export const selectToken = (state) => state.user.user.token;
+export const selectEmail = (state) => state.user.user.email;
 export const selectActivationEmail = (state) => state.user.activationEmail;
 export const selectUserItems = (state) => state.user.userItems.userItems || [];
 export const selectUserItemsFetched = (state) =>

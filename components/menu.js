@@ -17,12 +17,12 @@ import { useLogout } from "hooksAndLogic/login.hook";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { createPath } from "helpers/utils";
+import { handleLogout } from "hooksAndLogic/signup.hook";
 
 const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
   const theme = useMantineTheme();
   const dispatch = useDispatch();
   const router = useRouter();
-  const { handleLogout } = useLogout(dispatch, router);
   return (
     <div
       className={cn({
@@ -54,7 +54,9 @@ const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
             <Link href={createPath(SEARCH_TAGS_PATH)}>
               <MenuItem>Search Tags</MenuItem>
             </Link>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={() => handleLogout(dispatch, router)}>
+              Logout
+            </MenuItem>
           </>
         ) : (
           <>

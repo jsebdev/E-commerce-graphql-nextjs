@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "components/layout";
 import Head from "next/head";
 
-import { client } from "../apolloClient";
+import { client } from "../apolloClientServer";
 import { ALL_ITEMS } from "helpers/gqlQueries";
 import { wrapper } from "store/store";
 import { connect } from "react-redux";

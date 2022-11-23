@@ -18,19 +18,23 @@ import {
 import { ADD_ITEM_PATH } from "helpers/strings";
 import { DynamicLoading } from "components/dynamicLoading";
 import { createPath } from "helpers/utils";
+import { EditProfileModal } from "components/editProfileModal";
+import { useApolloClient } from "@apollo/client";
 
 const Profile = ({ username, token, userItems, itemsFetched }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [publishedItems, setPublishedItems] = useState([]);
   const [nonPublishedItems, setNonPublishedItems] = useState([]);
+  const [showEditProfileModal, setShowEditProfileModal] = useState(false);
   const { checkUser } = useProfile({ token, username, router });
+  const client = useApolloClient();
   checkUser();
   useEffect(() => {
     (async () => {
       if (!itemsFetched) {
         console.log("fetching items in profile page");
-        await fetchUserItems(username, dispatch);
+        await fetchUserItems(username, dispatch, client);
         dispatch(setItemsFetched(true));
       }
     })();
@@ -42,13 +46,25 @@ const Profile = ({ username, token, userItems, itemsFetched }) => {
   return (
     <Layout>
       <DynamicLoading loading={!token || !username}>
+        <EditProfileModal
+          showModal={showEditProfileModal}
+          setShowModal={setShowEditProfileModal}
+        />
         <Group position="apart" spacing="sm" mb={20}>
           <Title order={1}>Welcome {username}!</Title>
-          {userItems.length > 0 && (
-            <Link href={createPath(ADD_ITEM_PATH)}>
-              <Button>Add new item</Button>
-            </Link>
-          )}
+          <Group spacing={10}>
+            <Button
+              variant="outline"
+              onClick={() => setShowEditProfileModal(true)}
+            >
+              Edit profile
+            </Button>
+            {userItems.length > 0 && (
+              <Link href={createPath(ADD_ITEM_PATH)}>
+                <Button>Add new item</Button>
+              </Link>
+            )}
+          </Group>
         </Group>
         {userItems.length > 0 ? (
           <>

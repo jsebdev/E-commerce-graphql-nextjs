@@ -1,11 +1,10 @@
 import { setUser } from "store/slices/userSlice";
 import { createPath, notifyFormErrors } from "helpers/utils";
-import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 import { PROFILE_PATH } from "helpers/strings";
 import { LOGIN_WITH_EMAIL, LOGIN_WITH_USERNAME } from "helpers/gqlQueries";
 
-export const useLogin = (dispatch, router) => {
+export const useLogin = (dispatch, router, client) => {
   const formSettings = {
     initialValues: {
       username: "",
@@ -36,7 +35,9 @@ export const useLogin = (dispatch, router) => {
             return prev;
           });
           if (success) {
-            dispatch(setUser({ token, username: user.username }));
+            dispatch(
+              setUser({ token, username: user.username, email: user.email })
+            );
             router.push(createPath(PROFILE_PATH));
           }
           dispatch(setLoading(false));

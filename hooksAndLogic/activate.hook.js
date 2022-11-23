@@ -1,8 +1,7 @@
-import { client } from "apolloClient";
 import { VERIFY_ACCOUNT } from "helpers/gqlQueries";
 import { setLoading } from "store/slices/loaderSlice";
 
-export const useActivateAccount = (dispatch) => {
+export const useActivateAccount = (dispatch, client) => {
   const activateAccount = async (token) => {
     dispatch(setLoading(true));
     let retSuccess, retErrors;

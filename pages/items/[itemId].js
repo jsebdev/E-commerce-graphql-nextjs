@@ -1,4 +1,4 @@
-import { client } from "apolloClient";
+import { client } from "apolloClientServer";
 import { ItemDetails } from "components/itemDetails";
 import { Layout } from "components/layout";
 import { ITEM_BY_ID_SERVER } from "helpers/gqlQueries";

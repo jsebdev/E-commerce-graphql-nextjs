@@ -1,9 +1,8 @@
 import { ITEMS_BY_SELLER } from "helpers/gqlQueries";
 import { setUserItems } from "store/slices/userSlice";
-import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 
-export const fetchUserItems = async (username, dispatch) => {
+export const fetchUserItems = async (username, dispatch, client) => {
   dispatch(setLoading(true));
   try {
     const { data } = await client.query({

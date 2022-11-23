@@ -41,7 +41,7 @@ const Cart = ({ token, username, cart, cartTotal }) => {
         {cart.length === 0 ? (
           <Stack align="center">
             <p className={cartStyles.message}>
-              Uh oh! Look&apos;s like your card is empty
+              Uh oh! Look&apos;s like your cart is empty
             </p>
             <Link href="/">
               <Button>Go to Home</Button>

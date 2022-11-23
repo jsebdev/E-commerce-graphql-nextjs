@@ -10,9 +10,11 @@ import { Center, Group, UnstyledButton, useMantineTheme } from "@mantine/core";
 
 import { IconBuildingStore, IconSearch } from "@tabler/icons";
 import { THEMES_NAMES } from "helpers/strings";
+import { useApolloClient } from "@apollo/client";
 
 export const SearcherWithoutConnection = ({ searchText }) => {
-  const { search, handleSearch, changeSearch, setSearch } = useSearcher();
+  const client = useApolloClient();
+  const { search, handleSearch, changeSearch, setSearch } = useSearcher(client);
   useEffect(() => {
     setSearch(searchText);
   }, [searchText]);

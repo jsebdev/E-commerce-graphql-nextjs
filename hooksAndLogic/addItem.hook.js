@@ -6,7 +6,7 @@ import { setLoading } from "store/slices/loaderSlice";
 import { addUserItem, setItemsFetched } from "store/slices/userSlice";
 import { fetchUserItems } from "./user.logic";
 
-export const useAddItem = (sellerUsername, dispatch, router) => {
+export const useAddItem = (sellerUsername, dispatch, router, client) => {
   const formSettings = {
     initialValues: {
       title: "",
@@ -64,7 +64,7 @@ export const useAddItem = (sellerUsername, dispatch, router) => {
           console.log("64: itemsFetched >>>", itemsFetched);
           if (!itemsFetched) {
             console.log("fetching items in add item hook");
-            await fetchUserItems(sellerUsername, dispatch);
+            await fetchUserItems(sellerUsername, dispatch, client);
           }
           dispatch(setItemsFetched(true));
           dispatch(addUserItem(data.createItem.item));

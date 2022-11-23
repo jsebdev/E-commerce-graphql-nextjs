@@ -1,11 +1,10 @@
 import { setActivationEmail, setUser } from "store/slices/userSlice";
 import { createPath, notifyFormErrors } from "helpers/utils";
-import { client } from "apolloClient";
 import { setLoading } from "store/slices/loaderSlice";
 import { ACCOUNT_CREATED_PATH } from "helpers/strings";
 import { SIGN_UP } from "helpers/gqlQueries";
 
-export const useSignup = (dispatch, router) => {
+export const useSignup = (dispatch, router, client) => {
   const formSettings = {
     initialValues: {
       username: "",
@@ -39,12 +38,9 @@ export const useSignup = (dispatch, router) => {
   return { handleSignup, formSettings, handleFormErrors: notifyFormErrors };
 };
 
-export const useLogout = (dispatch, router) => {
-  const handleLogout = () => {
-    dispatch(setLoading(true));
-    dispatch(setUser({ token: null, username: null }));
-    router.push("/");
-    dispatch(setLoading(false));
-  };
-  return { handleLogout };
+export const handleLogout = (dispatch, router) => {
+  dispatch(setLoading(true));
+  dispatch(setUser({ token: null, username: null, email: null }));
+  router.push("/");
+  dispatch(setLoading(false));
 };

@@ -1,3 +1,4 @@
+import { useApolloClient } from "@apollo/client";
 import { Button, Space, Stack, Text, Title } from "@mantine/core";
 import { Layout } from "components/layout";
 import { Loading } from "components/loading";
@@ -17,7 +18,8 @@ const Activate = () => {
   const router = useRouter();
   const { token } = router.query;
   const dispatch = useDispatch();
-  const { activateAccount } = useActivateAccount(dispatch);
+  const client = useApolloClient();
+  const { activateAccount } = useActivateAccount(dispatch, client);
   useEffect(() => {
     (async () => {
       if (!token) return;
