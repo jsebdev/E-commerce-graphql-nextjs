@@ -8,8 +8,6 @@ import { selectToken, selectUsername } from "store/slices/userSlice";
 import { DynamicLoading } from "./dynamicLoading";
 import { Layout } from "./layout";
 import authFormWrapperStyles from "styles/componentsStyles/authFormWrapper.module.scss";
-import { Alert, Box } from "@mantine/core";
-import { IconAlertCircle } from "@tabler/icons";
 import { ErrorMessages } from "./errorMessages";
 
 const AuthFormWrapperNoConnection = ({ token, username, FormComponent }) => {

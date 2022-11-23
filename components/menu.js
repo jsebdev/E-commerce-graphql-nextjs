@@ -13,7 +13,6 @@ import {
   SIGNUP_PATH,
   THEMES_NAMES,
 } from "helpers/strings";
-import { useLogout } from "hooksAndLogic/login.hook";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { createPath } from "helpers/utils";
