@@ -76,12 +76,12 @@ export const ItemForm = connect((state) => ({
               label="Title"
               {...form.getInputProps("title")}
             />
-            <TextInput
+            {/* <TextInput
               id="subtitle"
               placeholder="Sub-title"
               label="Sub-title"
               {...form.getInputProps("subtitle")}
-            />
+            /> */}
             <div>
               <TagsInput
                 tags={tags}

@@ -1,0 +1,17 @@
+.grid {
+  max-width: 600px;
+  padding: 0.5rem;
+  .imageCell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .linkCell{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+  }
+}

@@ -9,6 +9,7 @@ export const PROFILE_PATH = ["profile"];
 export const ADD_ITEM_PATH = [...PROFILE_PATH, "add_item"];
 export const SIGNUP_PATH = ["signup"];
 export const LOGIN_PATH = ["login"];
+export const CREDITS_PATH = ["credits"];
 export const ACCOUNT_CREATED_PATH = ["accountCreated"];
 export const ITEM_DISPLAY_PATH = (itemId) => ["items", itemId];
 export const OWN_ITEM_PATH = (itemId) => [...PROFILE_PATH, "item", itemId];
