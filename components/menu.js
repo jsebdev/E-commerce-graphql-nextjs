@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { createPath } from "helpers/utils";
 import { handleLogout } from "hooksAndLogic/signup.hook";
+import { setShowWelcome } from "store/slices/welcomeSlice";
 
 const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
   const theme = useMantineTheme();
@@ -59,17 +60,20 @@ const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
           </>
         ) : (
           <>
-            <Link href={createPath(SEARCH_TAGS_PATH)}>
-              <MenuItem>Search Tags</MenuItem>
-            </Link>
             <Link href={createPath(LOGIN_PATH)}>
               <MenuItem>Login</MenuItem>
             </Link>
             <Link href={createPath(SIGNUP_PATH)}>
               <MenuItem>Sign up</MenuItem>
             </Link>
+            <Link href={createPath(SEARCH_TAGS_PATH)}>
+              <MenuItem>Search Tags</MenuItem>
+            </Link>
           </>
         )}
+        <MenuItem onClick={() => dispatch(setShowWelcome(true))}>
+          Welcome Message
+        </MenuItem>
       </ul>
     </div>
   );

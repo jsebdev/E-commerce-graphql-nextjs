@@ -13,7 +13,7 @@ html, body {
   box-sizing: border-box;
 }
 
-a {
+a:not(.classic) {
   color: inherit;
   text-decoration: none;
 }

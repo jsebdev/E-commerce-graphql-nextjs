@@ -1,0 +1,9 @@
+.techList {
+  margin-block: 0;
+  li {
+    margin-block: 0.1rem;
+  }
+  li::marker{
+    content: "📌"
+  }
+}

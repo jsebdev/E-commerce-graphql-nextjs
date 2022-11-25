@@ -2,6 +2,7 @@ import { showNotification } from "@mantine/notifications";
 import { UPDATE_ACCOUNT } from "helpers/gqlQueries";
 import { notifyErrors } from "helpers/utils";
 import { setLoading } from "store/slices/loaderSlice";
+import { setUserEmail } from "store/slices/userSlice";
 
 export const useEditEmail = (dispatch, user, client, setErrors, onClose) => {
   const formSettings = {
@@ -28,6 +29,7 @@ export const useEditEmail = (dispatch, user, client, setErrors, onClose) => {
         message: "Your email has been updated successfully!",
         color: "teal",
       });
+      dispatch(setUserEmail(values.email));
       setErrors([]);
       form.reset();
       onClose();

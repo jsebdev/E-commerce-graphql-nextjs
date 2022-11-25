@@ -2,7 +2,7 @@ import { Button, Group, Modal, Space, Stack, Text, Title } from "@mantine/core";
 import { CartRow } from "components/cartRow";
 import { Layout } from "components/layout";
 import NonSsrWrapper from "components/nonSsrWrapper";
-import { NoPaymentMessage } from "components/noPaymentMessage";
+import { EndMessage } from "components/endMessage";
 import { YesNoModal } from "components/yesNoModal";
 import { LOGIN_PATH, SIGNUP_PATH } from "helpers/strings";
 import { createPath, roundPrice } from "helpers/utils";
@@ -108,7 +108,7 @@ const Cart = ({ token, username, cart, cartTotal }) => {
           centered
         >
           {token && username ? (
-            <NoPaymentMessage />
+            <EndMessage />
           ) : (
             <Stack align="center">
               <Title order={3}>Ups!</Title>

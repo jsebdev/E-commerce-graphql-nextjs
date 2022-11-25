@@ -1,7 +1,5 @@
 import React from "react";
 import { Layout } from "components/layout";
-import Head from "next/head";
-
 import { client } from "../apolloClientServer";
 import { ALL_ITEMS } from "helpers/gqlQueries";
 import { wrapper } from "store/store";
@@ -19,10 +17,6 @@ import { NoItemsPublished } from "components/noItemsPublished";
 function Home({ items, searchText, username }) {
   return (
     <Layout home>
-      <Head>
-        <title>Next Django E-commerce baby</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <div>
         <Title order={1} align="center" my={10}>
           {username ? `Welcome ${username}!` : "Welcome!"}

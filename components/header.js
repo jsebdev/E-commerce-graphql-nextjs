@@ -4,7 +4,7 @@ import headerStyles from "styles/componentsStyles/header.module.scss";
 import { Logo } from "./logo";
 import { MenuContainer } from "./menuContainer";
 import { Searcher } from "./searcher";
-import { Container, Paper } from "@mantine/core";
+import { Center, Container, Paper } from "@mantine/core";
 import { ThemeSwitcher } from "./themeSwitcher";
 import { HeaderButton } from "./headerButton";
 import dynamic from "next/dynamic";
@@ -15,9 +15,9 @@ export const Header = () => {
   return (
     <Paper className={headerStyles.headerWrapper}>
       <Container className={headerStyles.header}>
-        <HeaderButton>
+        <Center>
           <Logo />
-        </HeaderButton>
+        </Center>
         <HeaderButton className={headerStyles.menuButtonContainer}>
           <MenuContainer />
         </HeaderButton>
@@ -33,5 +33,3 @@ export const Header = () => {
     </Paper>
   );
 };
-
-// export default Header;

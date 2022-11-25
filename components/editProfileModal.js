@@ -1,10 +1,15 @@
-import { Button, Modal, Stack, Title } from "@mantine/core";
+import { Button, Group, Modal, Stack, Text, Title } from "@mantine/core";
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { selectEmail, selectUsername } from "store/slices/userSlice";
 import { EditEmailModal } from "./editEmailModal";
 import { EditPasswordModal } from "./editPasswordModal";
 import { EditUsernameModal } from "./editUsernameModal";
 
-export const EditProfileModal = ({ showModal, setShowModal }) => {
+export const EditProfileModal = connect((state) => ({
+  username: selectUsername(state),
+  email: selectEmail(state),
+}))(({ showModal, setShowModal, username, email }) => {
   const [showUsernameModal, setShowUsernameModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -32,15 +37,22 @@ export const EditProfileModal = ({ showModal, setShowModal }) => {
             <Title order={3} align="center">
               Edit profile
             </Title>
-            <Button onClick={showSecondModal(setShowUsernameModal)}>
-              Edit username
-            </Button>
-            <Button onClick={showSecondModal(setShowPasswordModal)}>
-              Edit password
-            </Button>
-            <Button onClick={showSecondModal(setShowEmailModal)}>
-              Edit email
-            </Button>
+            <Group position="apart">
+              <Text>Username: {username}</Text>
+              <Button onClick={showSecondModal(setShowUsernameModal)}>
+                Edit
+              </Button>
+            </Group>
+            <Group position="apart">
+              <Text>Password: *********</Text>
+              <Button onClick={showSecondModal(setShowPasswordModal)}>
+                Edit
+              </Button>
+            </Group>
+            <Group position="apart">
+              <Text>Email: {email}</Text>
+              <Button onClick={showSecondModal(setShowEmailModal)}>Edit</Button>
+            </Group>
           </Stack>
         </Stack>
       </Modal>
@@ -58,4 +70,4 @@ export const EditProfileModal = ({ showModal, setShowModal }) => {
       />
     </>
   );
-};
+});

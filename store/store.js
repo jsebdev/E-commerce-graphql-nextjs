@@ -10,6 +10,7 @@ import { loaderSlice } from "./slices/loaderSlice";
 import { themeSlice } from "./slices/themeSlice";
 import { cartSlice } from "./slices/cartSlice";
 import { searchTagsSlice } from "./slices/searchTagsSlice";
+import { welcomeSlice } from "./slices/welcomeSlice";
 
 const makeStore = wrapMakeStore(() =>
   configureStore({
@@ -20,6 +21,7 @@ const makeStore = wrapMakeStore(() =>
       [themeSlice.name]: themeSlice.reducer,
       [cartSlice.name]: cartSlice.reducer,
       [searchTagsSlice.name]: searchTagsSlice.reducer,
+      [welcomeSlice.name]: welcomeSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().prepend(
@@ -30,6 +32,7 @@ const makeStore = wrapMakeStore(() =>
             themeSlice.name,
             cartSlice.name,
             searchTagsSlice.name,
+            welcomeSlice.name,
           ],
         })
       ),

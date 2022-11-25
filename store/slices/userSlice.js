@@ -27,6 +27,9 @@ export const userSlice = createSlice({
     setUserItems: (state, action) => {
       state.userItems.userItems = action.payload;
     },
+    setUserEmail: (state, action) => {
+      state.user.email = action.payload;
+    },
     addUserItem: (state, action) => {
       state.userItems.userItems = [
         action.payload,
@@ -75,6 +78,7 @@ export const {
   setItemsFetched,
   deleteUserItem,
   setToken,
+  setUserEmail,
 } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
