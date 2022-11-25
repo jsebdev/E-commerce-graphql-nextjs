@@ -251,3 +251,12 @@ export const CHANGE_PASSWORD = (oldPassword, newPassword1, newPassword2) => gql`
     }
   }
 `;
+
+export const RESEND_ACTIVATION_EMAIL = gql`
+  mutation ResendActivation($email: String!) {
+    resendActivationEmail(email: $email) {
+      success
+      errors
+    }
+  }
+`;

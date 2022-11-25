@@ -1,7 +1,7 @@
 import { Button, Group, Modal, Space, Stack, Text, Title } from "@mantine/core";
 import { CartRow } from "components/cartRow";
 import { Layout } from "components/layout";
-import NonSsrWrapper from "components/nonSsrWrapper";
+import ClientOnly from "components/ClientOnly";
 import { EndMessage } from "components/endMessage";
 import { YesNoModal } from "components/yesNoModal";
 import { LOGIN_PATH, SIGNUP_PATH } from "helpers/strings";
@@ -34,7 +34,7 @@ const Cart = ({ token, username, cart, cartTotal }) => {
   };
   return (
     <Layout>
-      <NonSsrWrapper>
+      <ClientOnly>
         <Title order={2} mb={10}>
           Your Cart
         </Title>
@@ -121,7 +121,7 @@ const Cart = ({ token, username, cart, cartTotal }) => {
             </Stack>
           )}
         </Modal>
-      </NonSsrWrapper>
+      </ClientOnly>
     </Layout>
   );
 };

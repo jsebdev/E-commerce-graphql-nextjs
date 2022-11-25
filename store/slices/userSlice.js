@@ -6,12 +6,12 @@ const initialState = {
     token: null,
     username: null,
     email: null,
+    activationEmail: null,
   },
   userItems: {
     userItems: [],
     itemsFetched: false,
   },
-  activationEmail: null,
 };
 
 export const userSlice = createSlice({
@@ -53,7 +53,7 @@ export const userSlice = createSlice({
       );
     },
     setActivationEmail: (state, action) => {
-      state.activationEmail = action.payload;
+      state.user.activationEmail = action.payload;
     },
     setItemsFetched: (state, action) => {
       state.userItems.itemsFetched = action.payload;
@@ -85,7 +85,7 @@ export const selectUser = (state) => state.user.user;
 export const selectUsername = (state) => state.user.user.username;
 export const selectToken = (state) => state.user.user.token;
 export const selectEmail = (state) => state.user.user.email;
-export const selectActivationEmail = (state) => state.user.activationEmail;
+export const selectActivationEmail = (state) => state.user.user.activationEmail;
 export const selectUserItems = (state) => state.user.userItems.userItems || [];
 export const selectUserItemsFetched = (state) =>
   state.user.userItems.itemsFetched || false;

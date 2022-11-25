@@ -1,4 +1,4 @@
-import { Box, Center, Grid, Group, Image, Stack, Title } from "@mantine/core";
+import { Box, Grid, Image, Stack, Title } from "@mantine/core";
 import { Layout } from "components/layout";
 import { imagesCreditsLinks } from "helpers/imagesCreditsLinks";
 import React from "react";

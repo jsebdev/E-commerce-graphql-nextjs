@@ -8,7 +8,7 @@ import { selectCartCount } from "store/slices/cartSlice";
 import Link from "next/link";
 import { createPath } from "helpers/utils";
 import { CART_PATH } from "helpers/strings";
-import NonSsrWrapper from "./nonSsrWrapper";
+import ClientOnly from "./clientOnly";
 
 export const CartIcon = () => {
   const cartCount = useSelector(selectCartCount);
@@ -22,9 +22,9 @@ export const CartIcon = () => {
       >
         <Image fill src="/images/cart_128.png" alt="cart" sizes="25vw" />
         {cartCount > 0 && (
-          <NonSsrWrapper>
+          <ClientOnly>
             <div className={cartStyles.cartCounter}>{cartCount}</div>
-          </NonSsrWrapper>
+          </ClientOnly>
         )}
       </div>
     </Link>

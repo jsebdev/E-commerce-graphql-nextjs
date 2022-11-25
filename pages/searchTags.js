@@ -4,7 +4,7 @@ import { AllTagsList } from "components/allTagsList";
 import { ItemsGrid } from "components/itemsGrid";
 import { Layout } from "components/layout";
 import { NoItemsPublished } from "components/noItemsPublished";
-import NonSsrWrapper from "components/nonSsrWrapper";
+import ClientOnly from "components/ClientOnly";
 import { TagsInput } from "components/tagsInput";
 import { ITEMS_BY_TAGS } from "helpers/gqlQueries";
 import React from "react";
@@ -82,7 +82,7 @@ const SearchTag = connect(
       else setLoading(false);
     }, [data, loading, error]);
     return (
-      <NonSsrWrapper>
+      <ClientOnly>
         <Layout>
           <Title order={2} mb="lg">
             Search tags
@@ -116,7 +116,7 @@ const SearchTag = connect(
             <NoItemsPublished />
           )}
         </Layout>
-      </NonSsrWrapper>
+      </ClientOnly>
     );
   }
 );
