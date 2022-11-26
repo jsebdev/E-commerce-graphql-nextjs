@@ -1,7 +1,7 @@
 import { Button, Group, Modal, Space, Stack, Text, Title } from "@mantine/core";
 import { CartRow } from "components/cartRow";
 import { Layout } from "components/layout";
-import ClientOnly from "components/ClientOnly";
+import ClientOnly from "components/clientOnly";
 import { EndMessage } from "components/endMessage";
 import { YesNoModal } from "components/yesNoModal";
 import { LOGIN_PATH, SIGNUP_PATH } from "helpers/strings";

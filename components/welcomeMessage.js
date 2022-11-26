@@ -13,11 +13,13 @@ export const WelcomeMessage = connect(
   })
 )(({ showWelcome, closeWelcome }) => {
   return (
-    <Modal opened={showWelcome} onClose={closeWelcome} withCloseButton={false}>
+    <Modal
+      opened={showWelcome}
+      onClose={closeWelcome}
+      title={<Title order={2}>I&apos;m glad you&apos;re here! 👋</Title>}
+      withCloseButton={true}
+    >
       <Stack>
-        <Title order={2} align="center">
-          I&apos;m glad you&apos;re here! 👋
-        </Title>
         <Text>
           Welcome to this e-commerce website made by{" "}
           <a href="https://jseb.dev" target="_blank" rel="noreferrer">
@@ -35,9 +37,9 @@ export const WelcomeMessage = connect(
         <Text>The main technologies used in this project are:</Text>
         <ul className={welcomeMessageStyles.techList}>
           <li>
-            <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
+            <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
               <Button py={0} variant="subtle">
-                React with Next.js
+                React
               </Button>
             </a>
           </li>
@@ -49,6 +51,13 @@ export const WelcomeMessage = connect(
             >
               <Button py={0} variant="subtle">
                 Python with Django
+              </Button>
+            </a>
+          </li>
+          <li>
+            <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
+              <Button py={0} variant="subtle">
+                Server side rendering with Next.js
               </Button>
             </a>
           </li>

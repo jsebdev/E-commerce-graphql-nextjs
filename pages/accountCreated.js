@@ -9,9 +9,6 @@ import { RESEND_ACTIVATION_EMAIL } from "helpers/gqlQueries";
 import { useMutation } from "@apollo/client";
 import { setLoading } from "store/slices/loaderSlice";
 import { IconAlertCircle } from "@tabler/icons";
-import { useRouter } from "next/router";
-import { createPath } from "helpers/utils";
-import { LOGIN_PATH } from "helpers/strings";
 import { ClientOnly2 } from "components/clientOnly2";
 
 const AccountCreated = ({ email, setLoading }) => {
@@ -22,16 +19,9 @@ const AccountCreated = ({ email, setLoading }) => {
       onError: (error) => console.log("el handler error", error),
     }
   );
-  const router = useRouter();
   React.useEffect(() => {
-    if (!email) {
-      router.push(createPath(LOGIN_PATH));
-    }
-  }, [email]);
-  React.useEffect(() => {
-    console.log("17: data,loading,error >>>", data, loading, error);
     setLoading(loading);
-  }, [data, loading, error]);
+  }, [loading]);
   return (
     <Layout>
       <ClientOnly2>

@@ -260,3 +260,29 @@ export const RESEND_ACTIVATION_EMAIL = gql`
     }
   }
 `;
+
+export const SEND_RESET_PASSWORD_EMAIL = gql`
+  mutation ResetPasswordEmail($email: String!) {
+    sendPasswordResetEmail(email: $email) {
+      success
+      errors
+    }
+  }
+`;
+
+export const RESET_PASSWORD_MUTATION = gql`
+  mutation ResetPassword(
+    $token: String!
+    $password1: String!
+    $password2: String!
+  ) {
+    passwordReset(
+      token: $token
+      newPassword1: $password1
+      newPassword2: $password2
+    ) {
+      success
+      errors
+    }
+  }
+`;

@@ -29,10 +29,6 @@ export const EditItem = connect((state) => ({
   const [deleteMutate] = useMutation(deleteMutation);
   const form = useForm(formSettings);
 
-  // useEffect(() => {
-  //   console.log("27: item >>>", item);
-  // }, []);
-
   return (
     <ItemForm
       form={form}

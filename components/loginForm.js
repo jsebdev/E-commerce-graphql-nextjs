@@ -1,10 +1,13 @@
 import { useLogin } from "hooksAndLogic/login.hook";
-import { Button, PasswordInput, TextInput } from "@mantine/core";
+import { Button, PasswordInput, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import React from "react";
 import { useApolloClient } from "@apollo/client";
+import { createPath } from "helpers/utils";
+import { SEND_RESET_PASSWORD_EMAIL_PATH } from "helpers/strings";
+import Link from "next/link";
 
 export const LoginForm = ({ displayErrors }) => {
   const dispatch = useDispatch();
@@ -30,21 +33,29 @@ export const LoginForm = ({ displayErrors }) => {
     <>
       <h3>Log in</h3>
       <form onSubmit={form.onSubmit(login, handleFormErrors)}>
-        <TextInput
-          id="Username"
-          placeholder="username or email"
-          label="Username or Email"
-          {...form.getInputProps("username")}
-        />
-        <PasswordInput
-          id="Password"
-          placeholder="password"
-          label="password"
-          {...form.getInputProps("password")}
-        />
-        <Button type="submit" mt="lg">
-          Log In
-        </Button>
+        <Stack spacing={10}>
+          <TextInput
+            id="Username"
+            placeholder="username or email"
+            label="Username or Email"
+            {...form.getInputProps("username")}
+          />
+          <PasswordInput
+            id="Password"
+            placeholder="password"
+            label="password"
+            {...form.getInputProps("password")}
+          />
+          <div>
+            <Button type="submit">Log In</Button>
+          </div>
+          <Link
+            href={createPath(SEND_RESET_PASSWORD_EMAIL_PATH)}
+            className="normalColor classic"
+          >
+            forgot password?
+          </Link>
+        </Stack>
       </form>
     </>
   );

@@ -30,7 +30,6 @@ export const AllTagsList = ({ selectedTags, setSelectedTags }) => {
     if (data) setAllTags(data.tags.map(tagB2F));
     else {
       console.log("no tags found");
-      console.log("45: allTags >>>", data);
     }
   }, [data, error]);
   return (
