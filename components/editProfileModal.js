@@ -1,4 +1,4 @@
-import { Button, Group, Modal, Stack, Text, Title } from "@mantine/core";
+import { Button, Modal, Space, Stack, Text, Title } from "@mantine/core";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { selectEmail, selectUsername } from "store/slices/userSlice";
@@ -33,26 +33,23 @@ export const EditProfileModal = connect((state) => ({
         centered
       >
         <Stack align="center">
-          <Stack>
+          <Stack align="flex-start" spacing={2}>
             <Title order={3} align="center">
               Edit profile
             </Title>
-            <Group position="apart">
-              <Text>Username: {username}</Text>
-              <Button onClick={showSecondModal(setShowUsernameModal)}>
-                Edit
-              </Button>
-            </Group>
-            <Group position="apart">
-              <Text>Password: *********</Text>
-              <Button onClick={showSecondModal(setShowPasswordModal)}>
-                Edit
-              </Button>
-            </Group>
-            <Group position="apart">
-              <Text>Email: {email}</Text>
-              <Button onClick={showSecondModal(setShowEmailModal)}>Edit</Button>
-            </Group>
+            <Space h="md" />
+            <Text>Username: {username}</Text>
+            <Button onClick={showSecondModal(setShowUsernameModal)}>
+              Edit
+            </Button>
+            <Space h="md" />
+            <Text>Password: *********</Text>
+            <Button onClick={showSecondModal(setShowPasswordModal)}>
+              Edit
+            </Button>
+            <Space h="md" />
+            <Text>Email: {email}</Text>
+            <Button onClick={showSecondModal(setShowEmailModal)}>Edit</Button>
           </Stack>
         </Stack>
       </Modal>
