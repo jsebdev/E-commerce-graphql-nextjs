@@ -84,8 +84,7 @@ export const FilePlaceholder = ({ savedImage = null }) => {
         })}
       >
         {savedImage ? (
-          // <img src={itemImageSource(savedImage)} />
-          <ImageStore image={savedImage} />
+          <ImageStore image={savedImage} changeMessage={true} />
         ) : (
           <>
             <Text>Upload Image</Text>
