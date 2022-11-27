@@ -19,7 +19,10 @@ export const useLogin = (dispatch, router, client) => {
     dispatch(setLoading(true));
     return new Promise((resolve, reject) => {
       const loginUsername = client.mutate({
-        mutation: LOGIN_WITH_USERNAME(values),
+        mutation: LOGIN_WITH_USERNAME({
+          ...values,
+          username: values.username.trim(),
+        }),
       });
       const loginEmail = client.mutate({
         mutation: LOGIN_WITH_EMAIL(values),

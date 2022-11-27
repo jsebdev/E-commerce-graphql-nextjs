@@ -116,9 +116,9 @@ mutation {
 }
 `;
 
-export const LOGIN_WITH_USERNAME = (values) => gql`
+export const LOGIN_WITH_USERNAME = ({ username, password }) => gql`
 mutation {
-  tokenAuth(username: "${values.username}", password: "${values.password}") {
+  tokenAuth(username: "${username}", password: "${password}") {
     token
     success
     errors

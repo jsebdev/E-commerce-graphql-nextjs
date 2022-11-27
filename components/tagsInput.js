@@ -24,9 +24,9 @@ export const TagsInput = ({ tags, setTags, displayError }) => {
     const input = document.querySelector(
       "#inputContainer > div > div > div > input"
     );
+    if (input.value.length === 0) return;
     handleTagAddition(createRawTag(input.value), tags, setTags, suggestions);
     input.value = "";
-    // debugger;
   };
   const handleDelete = (i) => {
     setTags(tags.filter((tag, index) => index !== i));

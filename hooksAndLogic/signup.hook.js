@@ -23,7 +23,12 @@ export const useSignup = (dispatch, router, client) => {
   };
   const handleSignup = async (values) => {
     dispatch(setLoading(true));
-    const { data } = await client.mutate({ mutation: SIGN_UP(values) });
+    const { data } = await client.mutate({
+      mutation: SIGN_UP({
+        ...values,
+        username: values.username.trim(),
+      }),
+    });
     const { success, errors } = data.register;
     let errorMessages = [];
     if (success) {
