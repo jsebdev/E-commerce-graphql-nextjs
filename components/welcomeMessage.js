@@ -37,9 +37,9 @@ export const WelcomeMessage = connect(
         <Text>The main technologies used in this project are:</Text>
         <ul className={welcomeMessageStyles.techList}>
           <li>
-            <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
+            <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
               <Button py={0} variant="subtle">
-                React
+                Server side rendering with Next.js
               </Button>
             </a>
           </li>
@@ -55,9 +55,9 @@ export const WelcomeMessage = connect(
             </a>
           </li>
           <li>
-            <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
+            <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
               <Button py={0} variant="subtle">
-                Server side rendering with Next.js
+                React
               </Button>
             </a>
           </li>

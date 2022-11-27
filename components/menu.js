@@ -19,7 +19,7 @@ import { createPath } from "helpers/utils";
 import { handleLogout } from "hooksAndLogic/signup.hook";
 import { setShowWelcome } from "store/slices/welcomeSlice";
 
-const MenuNotConnected = ({ showMenu = false, token, onTablet }) => {
+const MenuNotConnected = ({ showMenu = false, token, onTablet = false }) => {
   const theme = useMantineTheme();
   const dispatch = useDispatch();
   const router = useRouter();

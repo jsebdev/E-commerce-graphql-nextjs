@@ -18,15 +18,15 @@ export const Header = () => {
         <Center>
           <Logo />
         </Center>
-        <HeaderButton className={headerStyles.menuButtonContainer}>
-          <MenuContainer />
-        </HeaderButton>
         <Searcher />
         <HeaderButton className={headerStyles.cartIconContainer}>
           <CartIcon />
         </HeaderButton>
-        <HeaderButton>
+        <HeaderButton className={headerStyles.themeIconContainer}>
           <ThemeSwitcher />
+        </HeaderButton>
+        <HeaderButton className={headerStyles.menuButtonContainer}>
+          <MenuContainer />
         </HeaderButton>
         <DynamicMenu onTablet={true} />
       </Container>

@@ -5,7 +5,7 @@
 }
 .header {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   padding-inline: 1rem;
   align-items: center;
   justify-items: center;
@@ -36,15 +36,20 @@ $button-size: 2rem;
 }
 
 
-.menuButtonContainer {
-  position: relative;
-  @media screen and (min-width: $tablet-width) {
-    display: none;
-  }
+.cartIconContainer {
+  // @media screen and (min-width: $tablet-width) {
+    grid-column: 4;
+  // }
 }
 
-.cartIconContainer {
+.themeIconContainer {
+  grid-column: 5;
+}
+
+.menuButtonContainer {
+  position: relative;
+  grid-column: 6;
   @media screen and (min-width: $tablet-width) {
-    grid-column: 4/5;
+    display: none;
   }
 }
