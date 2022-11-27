@@ -79,7 +79,7 @@ export const WelcomeMessage = connect(
               rel="noreferrer"
             >
               <Button py={0} variant="subtle">
-                Apollo
+                Apollo Client
               </Button>
             </a>
           </li>
