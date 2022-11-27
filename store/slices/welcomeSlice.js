@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
-  showWelcome: true,
+  showWelcome: false,
+  welcomed: false,
 };
 
 // Actual Slice
@@ -12,6 +13,9 @@ export const welcomeSlice = createSlice({
   reducers: {
     setShowWelcome: (state, action) => {
       state.showWelcome = action.payload;
+    },
+    setWelcomed: (state, action) => {
+      state.welcomed = action.payload;
     },
   },
   extraReducers: {
@@ -24,7 +28,8 @@ export const welcomeSlice = createSlice({
   },
 });
 
-export const { setShowWelcome } = welcomeSlice.actions;
+export const { setShowWelcome, setWelcomed } = welcomeSlice.actions;
 
 export const selectShowWelcome = (state) =>
   state[welcomeSlice.name].showWelcome;
+export const selectWelcomed = (state) => state[welcomeSlice.name].welcomed;

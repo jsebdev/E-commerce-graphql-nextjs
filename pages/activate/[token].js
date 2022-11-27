@@ -10,9 +10,12 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { setShowWelcome } from "store/slices/welcomeSlice";
 
-const Activate = () => {
+const Activate = connect(null, (dispatch) => ({
+  hideWelcome: () => dispatch(setShowWelcome(false)),
+}))(({ hideWelcome }) => {
   const [errors, setErrors] = useState(null);
   const [fetched, setFetched] = useState(false);
   const router = useRouter();
@@ -21,6 +24,7 @@ const Activate = () => {
   const client = useApolloClient();
   const { activateAccount } = useActivateAccount(dispatch, client);
   useEffect(() => {
+    hideWelcome();
     (async () => {
       if (!token) return;
       const { errors } = await activateAccount(token);
@@ -58,6 +62,6 @@ const Activate = () => {
       )}
     </Layout>
   );
-};
+});
 
 export default Activate;

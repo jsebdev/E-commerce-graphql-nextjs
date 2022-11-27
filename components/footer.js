@@ -10,7 +10,7 @@ export const Footer = () => {
     <Box className={footerStyles.footer}>
       <Container>
         <Link href={createPath(CREDITS_PATH)}>
-          <Button variant="white">Free content attributes</Button>
+          <Button variant="outline">Free content attributes</Button>
         </Link>
       </Container>
     </Box>

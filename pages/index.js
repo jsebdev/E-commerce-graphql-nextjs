@@ -13,8 +13,27 @@ import { selectUsername } from "store/slices/userSlice";
 import { Stack, Text, Title } from "@mantine/core";
 import { ItemsGrid } from "components/itemsGrid";
 import { NoItemsPublished } from "components/noItemsPublished";
+import {
+  selectWelcomed,
+  setShowWelcome,
+  setWelcomed,
+} from "store/slices/welcomeSlice";
+import { useState } from "react";
 
-function Home({ items, searchText, username }) {
+function Home({
+  items,
+  searchText,
+  username,
+  welcomed,
+  sShowWelcome,
+  sWelcomed,
+}) {
+  useState(() => {
+    if (!welcomed) {
+      sShowWelcome(true);
+      sWelcomed(true);
+    }
+  }, []);
   return (
     <Layout home>
       <div>
@@ -58,8 +77,15 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-export default connect((state) => ({
-  items: selectSearchItems(state),
-  searchText: selectSearchText(state),
-  username: selectUsername(state),
-}))(Home);
+export default connect(
+  (state) => ({
+    items: selectSearchItems(state),
+    searchText: selectSearchText(state),
+    username: selectUsername(state),
+    welcomed: selectWelcomed(state),
+  }),
+  (dispatch) => ({
+    sWelcomed: (value) => dispatch(setWelcomed(value)),
+    sShowWelcome: (value) => dispatch(setShowWelcome(value)),
+  })
+)(Home);
