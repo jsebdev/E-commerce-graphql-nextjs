@@ -34,7 +34,7 @@ export const highlightedTextShaded = (theme) =>
   theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[1];
 
 export const fullImagePath = (imagePath) =>
-  `${BACKEND_URL}/${BACKEND_MEDIA_URL}/${imagePath}`;
+  `${BACKEND_URL}/${BACKEND_MEDIA_URL}/${imagePath}?${new Date().getTime()}`;
 
 export const myImageLoader = ({ src, width, quality }) => {
   return src ? fullImagePath(src) : "/images/no-photo.png";
