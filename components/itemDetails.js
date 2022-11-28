@@ -72,7 +72,13 @@ export const ItemDetails = connect((state) => ({
           className={itemDetailsStyles.rowContainer}
         >
           <Box className={itemDetailsStyles.leftContainer}>
-            <Center mb="1rem" onClick={() => setShowFullScreenImage(true)}>
+            <Center
+              mb="1rem"
+              onClick={() => {
+                if (item.image) setShowFullScreenImage(true);
+              }}
+              style={{ cursor: item.image ? "pointer" : "default" }}
+            >
               <ShadedBox className={itemDetailsStyles.imagesContainer}>
                 <ImageStore image={item.image} />
               </ShadedBox>
