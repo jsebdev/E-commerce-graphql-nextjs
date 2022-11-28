@@ -12,29 +12,26 @@ export const GridItem = ({ item, inHome = true }) => {
     ? createPath(ITEM_DISPLAY_PATH(item.id))
     : createPath(OWN_ITEM_PATH(item.id));
   return (
-    <Box className={gridItemStyles.gridItemContainer}>
-      <ShadedBox className={gridItemStyles.gridItem}>
-        <Link key={item.id} href={itemPath} legacyBehavior scroll={true}>
-          <a className={gridItemStyles.imageContainer}>
-            {/* <img
-              src={itemImageSource(item.image)}
-            /> */}
+    <Link key={item.id} href={itemPath} scroll={true}>
+      <Box className={gridItemStyles.gridItemContainer}>
+        <ShadedBox className={gridItemStyles.gridItem}>
+          <div className={gridItemStyles.imageContainer}>
             <ImageStore image={item.image} />
-          </a>
-        </Link>
-        <Group position="apart" align="self-start">
-          <Box className={gridItemStyles.titlesBox}>
-            <h3>{item.title}</h3>
-            {item.subtitle && <h4>{item.subtitle}</h4>}
-          </Box>
-          <Title order={5} color="grape.9">
-            ${item.price}
-          </Title>
-        </Group>
-        <div className={gridItemStyles.descriptionContainer}>
-          <p>{item.description}</p>
-        </div>
-      </ShadedBox>
-    </Box>
+          </div>
+          <Group position="apart" align="self-start">
+            <Box className={gridItemStyles.titlesBox}>
+              <h3>{item.title}</h3>
+              {item.subtitle && <h4>{item.subtitle}</h4>}
+            </Box>
+            <Title order={5} color="grape.9">
+              ${item.price}
+            </Title>
+          </Group>
+          <div className={gridItemStyles.descriptionContainer}>
+            <p>{item.description}</p>
+          </div>
+        </ShadedBox>
+      </Box>
+    </Link>
   );
 };

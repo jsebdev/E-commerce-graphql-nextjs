@@ -20,6 +20,7 @@ import { selectUsername } from "store/slices/userSlice";
 import Link from "next/link";
 import { OWN_ITEM_PATH } from "helpers/strings";
 import { FullScreenImage } from "./fullScreenImage";
+import classNames from "classnames";
 
 export const ItemDetails = connect((state) => ({
   username: selectUsername(state),
@@ -88,7 +89,11 @@ export const ItemDetails = connect((state) => ({
                 This item is yours! want to{" "}
                 <Link
                   href={createPath(OWN_ITEM_PATH(item.id))}
-                  className={itemDetailsStyles.editLink}
+                  className={classNames(
+                    itemDetailsStyles.editLink,
+                    "classic",
+                    "normalColor"
+                  )}
                 >
                   edit it?
                 </Link>
