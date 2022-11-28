@@ -5,7 +5,7 @@ import { Header } from "./header";
 import { Footer } from "./footer";
 import { Container } from "@mantine/core";
 
-export const siteTitle = "Awesome Website";
+export const siteTitle = "Awesome Port-Ecommerce";
 
 export const Layout = ({ children }) => {
   return (
@@ -13,12 +13,7 @@ export const Layout = ({ children }) => {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Awesome E-commerce website" />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
+        <meta property="og:image" content="/favicon.ico" />
         <meta name="og:title" content={siteTitle} />
       </Head>
       <Header />
