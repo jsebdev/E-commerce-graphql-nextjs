@@ -1,17 +1,10 @@
-import { gql } from "@apollo/client";
 import { showNotification } from "@mantine/notifications";
-import {
-  DELETE_ITEM,
-  EDIT_ITEM,
-  itemGraphqlQueryFields,
-  mutateAnswers,
-} from "helpers/gqlQueries";
+import { DELETE_ITEM, EDIT_ITEM, mutateAnswers } from "helpers/gqlQueries";
 import { PROFILE_PATH } from "helpers/strings";
 import { createPath, customErrorMessage } from "helpers/utils";
 import { removeCartItem, updateCartItem } from "store/slices/cartSlice";
 import { setLoading } from "store/slices/loaderSlice";
 import {
-  addUserItem,
   deleteUserItem,
   modifyUserItem,
   setItemsFetched,
@@ -81,7 +74,11 @@ export const useEditItem = (
         dispatch(setLoading(false));
       },
       onError: (error) => {
-        console.log("There is an error in the mutation", error);
+        showNotification({
+          title: "Error",
+          message: customErrorMessage(error.message),
+          color: "red",
+        });
         dispatch(setLoading(false));
       },
     });

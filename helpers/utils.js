@@ -44,7 +44,11 @@ export const itemImageSource = (image) =>
   image ? fullImagePath(image) : "/images/no-photo.png";
 
 export const customErrorMessage = (errorMessage) => {
-  if (errorMessage === "UNIQUE constraint failed: shop_item.title") {
+  if (
+    errorMessage.includes("UNIQUE constraint failed: shop_item.title") ||
+    (errorMessage.includes("duplicate key value violates unique constraint") &&
+      errorMessage.includes("title"))
+  ) {
     return "There is already an item with this title";
   }
   return errorMessage;

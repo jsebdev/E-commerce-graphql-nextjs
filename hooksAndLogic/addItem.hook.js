@@ -1,3 +1,5 @@
+import { useMutation } from "@apollo/client";
+import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import { CREATE_ITEM, mutateAnswers } from "helpers/gqlQueries";
 import { PROFILE_PATH } from "helpers/strings";
@@ -24,8 +26,9 @@ export const useAddItem = (sellerUsername, dispatch, router, client) => {
         value.length < 1 || value < 0 ? "Price is too low" : null,
     },
   };
+  const form = useForm(formSettings);
 
-  const mutation = CREATE_ITEM;
+  const [mutate] = useMutation(CREATE_ITEM);
 
   const handleAddItem = async (
     mutate,
@@ -49,6 +52,10 @@ export const useAddItem = (sellerUsername, dispatch, router, client) => {
       },
       onCompleted: async (data) => {
         if (data.createItem.__typename === mutateAnswers.error) {
+          console.log(
+            "55: data.createItem.errorMessage >>>",
+            data.createItem.errorMessage
+          );
           showNotification({
             title: "Error",
             message: customErrorMessage(data.createItem.errorMessage),
@@ -80,8 +87,8 @@ export const useAddItem = (sellerUsername, dispatch, router, client) => {
   };
 
   return {
-    mutation,
-    formSettings,
+    mutate,
+    form,
     handleAddItem,
   };
 };

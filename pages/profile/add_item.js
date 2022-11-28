@@ -9,9 +9,8 @@ import { connect, useDispatch } from "react-redux";
 import { useProfile } from "hooksAndLogic/profile.hook";
 import { Layout } from "components/layout";
 import { DynamicLoading } from "components/dynamicLoading";
-import { useForm } from "@mantine/form";
 import { useAddItem } from "hooksAndLogic/addItem.hook";
-import { useApolloClient, useMutation } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
 import { ItemForm } from "components/itemForm";
 
 const AddProduct = ({ token, username }) => {
@@ -21,14 +20,12 @@ const AddProduct = ({ token, username }) => {
   const [image, setImage] = React.useState(null);
   const [tags, setTags] = React.useState([]);
   const client = useApolloClient();
-  const { mutation, formSettings, handleAddItem } = useAddItem(
+  const { mutate, form, handleAddItem } = useAddItem(
     username,
     useDispatch(),
     useRouter(),
     client
   );
-  const [mutate] = useMutation(mutation);
-  const form = useForm(formSettings);
   return (
     <Layout>
       <DynamicLoading loading={!token || !username}>
