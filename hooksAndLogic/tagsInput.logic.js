@@ -1,3 +1,11 @@
+export const toggleTag = (tag, tags, setTags) => {
+  if (tags.map((tag) => tag.text).includes(tag.text)) {
+    setTags(tags.filter((t) => t.text !== tag.text));
+    return;
+  }
+  setTags([...tags, tag]);
+};
+
 export const handleTagAddition = (tag, tags, setTags, suggestions) => {
   tag = { ...tag, text: tag.text.toLowerCase() };
   // check if tag already exists.

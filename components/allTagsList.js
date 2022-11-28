@@ -8,7 +8,7 @@ import {
 import { useWindowSize } from "hooksAndLogic/global.hooks";
 import React, { useEffect } from "react";
 import allTagsListStyles from "styles/componentsStyles/allTagsList.module.scss";
-import { handleTagAddition, tagB2F } from "hooksAndLogic/tagsInput.logic";
+import { tagB2F, toggleTag } from "hooksAndLogic/tagsInput.logic";
 import { useFetchTags } from "hooksAndLogic/fetchTags.hook";
 
 export const AllTagsList = ({ selectedTags, setSelectedTags }) => {
@@ -52,7 +52,7 @@ export const AllTagsList = ({ selectedTags, setSelectedTags }) => {
         {allTags.map((tag) => (
           <Text
             onClick={() =>
-              handleTagAddition(tag, selectedTags, setSelectedTags, allTags)
+              toggleTag(tag, selectedTags, setSelectedTags, allTags)
             }
             sx={(theme) => ({
               backgroundColor: selectedTagsIds.includes(tag.id)

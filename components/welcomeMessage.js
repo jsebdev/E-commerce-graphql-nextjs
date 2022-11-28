@@ -1,4 +1,4 @@
-import { Button, Modal, Stack, Text, Title } from "@mantine/core";
+import { Button, Group, Modal, Stack, Text, Title } from "@mantine/core";
 import React from "react";
 import { connect } from "react-redux";
 import { selectShowWelcome, setShowWelcome } from "store/slices/welcomeSlice";
@@ -120,6 +120,9 @@ export const WelcomeMessage = connect(
         <Text>
           Have fun, enjoy life and don&apos;t forget to brush your teeth! 🤟
         </Text>
+        <Group position="center">
+          <Button onClick={closeWelcome}>Close this message</Button>
+        </Group>
       </Stack>
     </Modal>
   );

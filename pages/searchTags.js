@@ -46,17 +46,14 @@ const SearchTag = connect(
     searchOnRender,
     unsetSearchOnRender,
   }) => {
-    const [getItemsByTags, { loading, error, data }] = useLazyQuery(
-      ITEMS_BY_TAGS,
-      {
-        ssr: false,
-        variables: {
-          tagsIds: searchTags
-            .filter((tag) => tag.newTag === false)
-            .map((tag) => tag.id),
-        },
-      }
-    );
+    const [getItemsByTags, { loading, data }] = useLazyQuery(ITEMS_BY_TAGS, {
+      ssr: false,
+      variables: {
+        tagsIds: searchTags
+          .filter((tag) => tag.newTag === false)
+          .map((tag) => tag.id),
+      },
+    });
     const getItems = () => {
       getItemsByTags({
         variables: {
@@ -78,9 +75,8 @@ const SearchTag = connect(
         console.log("setting items by tags");
         setItems(data.itemsByTags);
       }
-      if (loading) setLoading(true);
-      else setLoading(false);
-    }, [data, loading, error]);
+      setLoading(loading);
+    }, [data, loading]);
     return (
       <ClientOnly>
         <Layout>
@@ -94,16 +90,6 @@ const SearchTag = connect(
           <AllTagsList selectedTags={searchTags} setSelectedTags={setTags} />
           <TagsInput tags={searchTags} setTags={setTags} />
           <Space h="lg"></Space>
-          <div className={searchTagsStyles.buttonContainer}>
-            <Button
-              variant="outline"
-              onClick={() => {
-                getItems();
-              }}
-            >
-              Search
-            </Button>
-          </div>
           {data ? (
             itemsByTags.length > 0 ? (
               <ItemsGrid items={itemsByTags} />
