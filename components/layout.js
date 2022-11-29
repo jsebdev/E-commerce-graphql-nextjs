@@ -9,7 +9,6 @@ export const Layout = ({ children }) => {
   return (
     <div className={styles.containerLayout}>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Awesome E-commerce website" />
         <meta
           property="og:image"
