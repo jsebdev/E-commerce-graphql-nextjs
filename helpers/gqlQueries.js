@@ -31,13 +31,20 @@ export const itemGraphqlQueryFields = `
   image
 `;
 
-export const ALL_ITEMS = gql`
+export const ALL_ITEMS_SERVER = gql`
   query {
     items (filter:true, published:true) {
       ${itemGraphqlQueryFields}
     }
   }
 `;
+
+export const PUBLISHED_ITEMS = gql`
+query {
+  items (filter:true, published:true) {
+    ${itemGraphqlQueryFields}
+    }
+}`;
 
 export const CREATE_ITEM = gql`
 mutation CreateItem($title: String!,

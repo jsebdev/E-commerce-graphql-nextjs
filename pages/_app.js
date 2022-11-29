@@ -1,7 +1,6 @@
 import React from "react";
 import { wrapper } from "store/store";
 import { Provider } from "react-redux";
-import { MyLoader } from "components/myLoader";
 import { MantineController } from "components/mantineController";
 
 import "styles/tagInputStyles.scss";
@@ -20,7 +19,6 @@ export default function App({ Component, ...rest }) {
             <title>Port Ecommerce</title>
           </Head>
           <Component {...props.pageProps} />
-          <MyLoader />
           <WelcomeMessage />
         </MantineController>
       </ApolloController>

@@ -1,10 +1,9 @@
-import { Loader, Paper } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectLoading } from "store/slices/loaderSlice";
-import myLoaderStyles from "styles/componentsStyles/myLoader.module.scss";
+import { Spinner } from "./spinner";
 
 // const printRoutes = (url, pathname) => {
 //   console.log("las rutas son:");
@@ -33,10 +32,7 @@ export const MyLoader = () => {
       router.events.off("routeChangeError", handleComplete);
     };
   }, []);
+
   if (!loading && !changingUrl) return null;
-  return (
-    <Paper className={myLoaderStyles.loaderContainer}>
-      <Loader variant="oval" size="xl" />
-    </Paper>
-  );
+  return <Spinner></Spinner>;
 };

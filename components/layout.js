@@ -4,6 +4,7 @@ import styles from "styles/componentsStyles/layout.module.scss";
 import { Header } from "./header";
 import { Footer } from "./footer";
 import { Container } from "@mantine/core";
+import { MyLoader } from "./myLoader";
 
 export const Layout = ({ children }) => {
   return (
@@ -20,7 +21,8 @@ export const Layout = ({ children }) => {
       <main className={styles.main}>
         <Container pt="1rem">{children}</Container>
       </main>
-      <Footer></Footer>
+      <Footer />
+      <MyLoader />
     </div>
   );
 };
