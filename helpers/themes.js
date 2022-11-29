@@ -1,5 +1,11 @@
 import { THEMES_NAMES } from "./strings";
 
+const fontOptions = {
+  fontFamily: "Poppins, sans-serif",
+  fontFamilyMonospace: "Poppins, monospace",
+  headings: { fontFamily: "Poppins, sans-serif" },
+};
+
 export const lightTheme = {
   colorScheme: THEMES_NAMES.light,
   colors: {
@@ -16,6 +22,7 @@ export const lightTheme = {
       "#00ffff",
     ],
   },
+  ...fontOptions,
 };
 
 export const darkTheme = {
@@ -34,4 +41,5 @@ export const darkTheme = {
       "#ff0000",
     ],
   },
+  ...fontOptions,
 };
