@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import headerStyles from "styles/componentsStyles/header.module.scss";
-import cartStyles from "styles/componentsStyles/cartIcon.module.scss";
+import cartIconStyles from "styles/componentsStyles/cartIcon.module.scss";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
 import { selectCartCount } from "store/slices/cartSlice";
@@ -17,13 +17,13 @@ export const CartIcon = () => {
       <div
         className={classNames(
           headerStyles.smallHeaderButton,
-          cartStyles.cartIcon
+          cartIconStyles.cartIcon
         )}
       >
         <Image fill src="/images/cart_128.png" alt="cart" sizes="25vw" />
         {cartCount > 0 && (
           <ClientOnly>
-            <div className={cartStyles.cartCounter}>{cartCount}</div>
+            <div className={cartIconStyles.cartCounter}>{cartCount}</div>
           </ClientOnly>
         )}
       </div>
