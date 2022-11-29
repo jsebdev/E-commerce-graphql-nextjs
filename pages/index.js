@@ -91,6 +91,9 @@ export default connect(
     return (
       <Layout home>
         <ClientOnly>
+          <Title order={1} align="center" my={10}>
+            {username ? `Welcome ${username}!` : "Welcome!"}
+          </Title>
           {data.items.length > 0 ? (
             <ItemsGrid items={data.items} />
           ) : (
