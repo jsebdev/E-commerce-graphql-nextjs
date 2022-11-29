@@ -17,16 +17,16 @@ export const searchSlice = createSlice({
     setSearchText: (state, action) => {
       state.searchText = action.payload;
     },
-
-    // Special reducer for hydrating the state. Special case for next-redux-wrapper
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      // console.log("HYDRATE action called in items");
-      // console.log("25: action >>>", action);
-      // console.log("26: state.items >>>", state.items);
-      // console.log("26: state.searchText >>>", state.searchText);
-      if (state.searchText !== "") return;
+      if (
+        state.searchText !== "" &&
+        state.searchText !== null &&
+        state.searchText !== undefined
+      ) {
+        return;
+      }
       return {
         ...state,
         ...action.payload.search,

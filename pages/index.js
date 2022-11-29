@@ -20,14 +20,41 @@ import {
 } from "store/slices/welcomeSlice";
 import { useState } from "react";
 
-function Home({
-  items,
-  searchText,
-  username,
-  welcomed,
-  sShowWelcome,
-  sWelcomed,
-}) {
+export const getServerSideProps = wrapper.getServerSideProps(
+  // export const getStaticProps = wrapper.getStaticProps(
+  (store) => async () => {
+    const searchText = selectSearchText(store.getState());
+    if (searchText !== "" && searchText !== null && searchText !== undefined) {
+      return;
+    }
+    try {
+      const { data } = await client.query({
+        query: ALL_ITEMS,
+        fetchPolicy: "no-cache",
+      });
+      store.dispatch(setItems(data.items));
+    } catch (e) {
+      console.log("Error: ", e);
+      console.log("Error: ", e?.networkError?.result?.errors);
+    }
+    return {
+      props: {},
+    };
+  }
+);
+
+export default connect(
+  (state) => ({
+    items: selectSearchItems(state),
+    searchText: selectSearchText(state),
+    username: selectUsername(state),
+    welcomed: selectWelcomed(state),
+  }),
+  (dispatch) => ({
+    sWelcomed: (value) => dispatch(setWelcomed(value)),
+    sShowWelcome: (value) => dispatch(setShowWelcome(value)),
+  })
+)(({ items, searchText, username, welcomed, sShowWelcome, sWelcomed }) => {
   useState(() => {
     if (!welcomed) {
       sShowWelcome(true);
@@ -54,38 +81,4 @@ function Home({
       </div>
     </Layout>
   );
-}
-
-export const getServerSideProps = wrapper.getServerSideProps(
-  // export const getStaticProps = wrapper.getStaticProps(
-  (store) => async () => {
-    try {
-      const { data } = await client.query({
-        query: ALL_ITEMS,
-        fetchPolicy: "no-cache",
-      });
-      // console.log(new Date());
-      // console.log("the first 3 items: ", data.items.slice(0, 3));
-      store.dispatch(setItems(data.items));
-    } catch (e) {
-      console.log("Error: ", e);
-      console.log("Error: ", e?.networkError?.result?.errors);
-    }
-    return {
-      props: {},
-    };
-  }
-);
-
-export default connect(
-  (state) => ({
-    items: selectSearchItems(state),
-    searchText: selectSearchText(state),
-    username: selectUsername(state),
-    welcomed: selectWelcomed(state),
-  }),
-  (dispatch) => ({
-    sWelcomed: (value) => dispatch(setWelcomed(value)),
-    sShowWelcome: (value) => dispatch(setShowWelcome(value)),
-  })
-)(Home);
+});

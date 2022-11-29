@@ -1,5 +1,5 @@
 import { useLazyQuery } from "@apollo/client";
-import { Button, Space, Text, Title } from "@mantine/core";
+import { Space, Text, Title } from "@mantine/core";
 import { AllTagsList } from "components/allTagsList";
 import { ItemsGrid } from "components/itemsGrid";
 import { Layout } from "components/layout";
@@ -20,7 +20,6 @@ import {
   setSearchOnRender,
   setSearchTags,
 } from "store/slices/searchTagsSlice";
-import searchTagsStyles from "styles/componentsStyles/searchTags.module.scss";
 
 const SearchTag = connect(
   (state) => ({
