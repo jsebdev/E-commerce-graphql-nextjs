@@ -69,7 +69,7 @@ const Cart = ({ token, username, cart, cartTotal }) => {
               ))}
             </div>
             <Group position="center" mt={20}>
-              <Title order={3}>Total: {roundPrice(cartTotal)}</Title>
+              <Title order={3}>Total: ${roundPrice(cartTotal)}</Title>
             </Group>
             <Group my={10} position="center">
               <Button onClick={() => setShowPayModal(true)}>Go pay</Button>
