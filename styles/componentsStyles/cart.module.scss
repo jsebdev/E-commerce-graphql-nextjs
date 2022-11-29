@@ -1,6 +1,7 @@
 .table {
   display: grid;
-  grid-template-columns: 50px minmax(150px, 1fr) 100px 100px 80px 60px;
+  // grid-template-columns: 50px minmax(150px, 1fr) 100px 100px min-content 60px;
+  grid-template-columns: 50px minmax(150px, 1fr) 100px 100px min-content 60px;
   border: 1px solid gray;
   overflow-x: auto;
   .checkboxContainer {
@@ -10,8 +11,15 @@
       height: 25px;
     }
   }
+  .titleContainer {
+    padding: 0.5rem;
+  }
   .deleteButtonContainer {
-    padding-inline-end: 2rem;
+    padding-inline: 2rem;
+  }
+  .priceContainer {
+    min-width: fit-content;
+    padding: 0.5rem;
   }
   &>div {
     display: flex;

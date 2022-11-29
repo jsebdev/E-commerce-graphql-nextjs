@@ -48,7 +48,7 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
       <RowCell className={cartStyles.checkboxContainer}>
         <input type="checkbox" onChange={handleSelect} checked={selected} />
       </RowCell>
-      <RowCell>
+      <RowCell className={cartStyles.titleContainer}>
         <Link href={createPath(ITEM_DISPLAY_PATH(item.id))} scroll>
           <Title order={5}>{item.title}</Title>
         </Link>
@@ -68,7 +68,9 @@ export const CartRow = ({ item, index, setSelectedItems, selected }) => {
           min={0}
         ></QuantityInput>
       </RowCell>
-      <RowCell>${roundPrice(item.price * item.quantity)}</RowCell>
+      <RowCell className={cartStyles.priceContainer}>
+        ${roundPrice(item.price * item.quantity)}
+      </RowCell>
       <RowCell className={cartStyles.deleteButtonContainer}>
         <ActionIcon
           size={30}
