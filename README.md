@@ -17,7 +17,7 @@ Make sure to first run the [backend](https://github.com/jsebdev/E-commerce-graph
 Then clone the repository
 
 ```
-https://github.com/jsebdev/E-commerce-graphql-nextjs.git
+git clone https://github.com/jsebdev/E-commerce-graphql-nextjs.git
 cd E-commerce-graphql-nextjs
 ```
 
