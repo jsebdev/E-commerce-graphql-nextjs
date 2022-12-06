@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { selectShowWelcome, setShowWelcome } from "store/slices/welcomeSlice";
 import welcomeMessageStyles from "styles/componentsStyles/welcomeMessage.module.scss";
+import { InlineButton } from "./themedComponents/inlineButton";
 
 export const WelcomeMessage = connect(
   (state) => ({
@@ -23,9 +24,7 @@ export const WelcomeMessage = connect(
         <Text>
           Welcome to this e-commerce website made by{" "}
           <a href="https://jseb.dev" target="_blank" rel="noreferrer">
-            <Button p={0} variant="subtle">
-              this guy
-            </Button>
+            <InlineButton>this guy</InlineButton>
           </a>{" "}
           that refuses to use a CMS for his projects and his hair does it to
           stay combed.
@@ -38,9 +37,7 @@ export const WelcomeMessage = connect(
         <ul className={welcomeMessageStyles.techList}>
           <li>
             <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-              <Button py={0} variant="subtle">
-                Server side rendering with Next.js
-              </Button>
+              <InlineButton>Server side rendering with Next.js</InlineButton>
             </a>
           </li>
           <li>
@@ -49,16 +46,12 @@ export const WelcomeMessage = connect(
               target="_blank"
               rel="noreferrer"
             >
-              <Button py={0} variant="subtle">
-                Python with Django
-              </Button>
+              <InlineButton>Python with Django</InlineButton>
             </a>
           </li>
           <li>
             <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
-              <Button py={0} variant="subtle">
-                React
-              </Button>
+              <InlineButton>React</InlineButton>
             </a>
           </li>
           <li>
@@ -67,9 +60,9 @@ export const WelcomeMessage = connect(
               target="_blank"
               rel="noreferrer"
             >
-              <Button py={0} variant="subtle">
+              <InlineButton py={0} variant="subtle">
                 Redux-toolkit
-              </Button>
+              </InlineButton>
             </a>
           </li>
           <li>
@@ -78,9 +71,7 @@ export const WelcomeMessage = connect(
               target="_blank"
               rel="noreferrer"
             >
-              <Button py={0} variant="subtle">
-                Apollo Client
-              </Button>
+              <InlineButton>Apollo Client</InlineButton>
             </a>
           </li>
           <li>
@@ -89,32 +80,43 @@ export const WelcomeMessage = connect(
               target="_blank"
               rel="noreferrer"
             >
-              <Button py={0} variant="subtle">
-                Graphql_auth with JWT
-              </Button>
+              <InlineButton>Graphql_auth with JWT</InlineButton>
             </a>
           </li>
           <li>
             <a href="https://www.docker.com/" target="_blank" rel="noreferrer">
-              <Button py={0} variant="subtle">
-                Docker
-              </Button>
+              <InlineButton>Docker</InlineButton>
             </a>
           </li>
         </ul>
         <Text>
-          Please Feel free to create an account, publish some products ot try to
-          &quot;buy&quot; some products as well. Give it a try and let me know
-          what you think! 🧐
+          Please Feel free to create an account, publish some products and try
+          to &quot;buy&quot; some products as well. Give it a try and give me
+          your valuable feedback! 🧐
+        </Text>
+        <Text>
+          You can also see the code of this project here:{" "}
+          <a
+            href="https://github.com/jsebdev/E-commerce-graphql-nextjs"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <InlineButton>Frontend</InlineButton>
+          </a>{" "}
+          and here:{" "}
+          <a
+            href="https://github.com/jsebdev/E-commerce-graphql-django"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <InlineButton>Backend</InlineButton>.
+          </a>{" "}
         </Text>
         <Text>
           And if you want to contact me for work or for whatever reason you can
           do it{" "}
           <a href="https://jseb.dev/contact" target="_blank" rel="noreferrer">
-            <Button p={0} variant="subtle">
-              here
-            </Button>
-            .
+            <InlineButton>here</InlineButton>.
           </a>
         </Text>
         <Text>
