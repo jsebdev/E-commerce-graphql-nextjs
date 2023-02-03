@@ -3,7 +3,7 @@ import { THEMES_NAMES } from "helpers/strings";
 import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
-  themeName: THEMES_NAMES.light,
+  themeName: THEMES_NAMES.dark,
 };
 
 // Actual Slice
